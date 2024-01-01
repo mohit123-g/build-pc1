@@ -1,0 +1,144 @@
+
+
+/* .App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}  */
+#drop{background-color: black;}
+
+#DropItem {font-weight: 300; background-color: black;
+
+}
+
+
+@media (max-width: 768px) {
+  /* Define your responsive styles here */
+}@media (min-width: 769px) and (max-width: 1024px) {
+  /* Define your responsive styles here */
+}
+
+
+.App{
+  background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
+   /* height: 1%; */
+/*width: auto; */
+text-align: center;
+overflow: hidden;/*exp*/
+}
+
+.but1{
+  align-items: center;
+  border: solid ;
+  height: 50%;
+  width: 50%;
+  padding: 0.2%;
+}
+#but2{
+  align-content: center;
+  height: 140px;
+  width: 140px;
+}
+body {
+  /* background-color: #e5e5e5; */
+  background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
+
+}
+
+#title{color:white;}
+.App1{
+  text-align: center;
+  height: 20px;
+}
+
+
+.my-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Responsive grid with 200px columns */
+  grid-gap: 16px; /* Adjust the gap between grid items */
+}
+
+.my-grid-item {
+  background-color: transparent;
+  padding: 10px;
+  height: auto;
+  width: auto;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .my-grid-item:hover {
+    transform: scale(1.10);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+
+.buy{color: black;
+  /* border: 100px; */
+  border-radius: 10%;
+  background-color: #57c517;
+  margin-left: 10px;
+  align-content: center;
+}
+
+
+
+/*dashboard*/
+/* Dashboard.css */
+.dashboard-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.dashboard {
+  
+margin-top: 120%;
+margin-left: 480%;
+  width: 300px;
+  min-height: 40vh;
+  max-height: 40vh; /* Ensure the dashboard doesn't exceed screen height */
+  background-color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  position: absolute;
+  top: 0;
+  z-index: 1; 
+
+}
+.dashboard.active {
+  /* left: 0;Slide the dashboard in when 'active' class is present */
+  transform: translateX(0);
+
+}
+
+

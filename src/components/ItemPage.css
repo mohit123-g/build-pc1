@@ -1,0 +1,82 @@
+/* Apply styles for different screen sizes using media queries */
+
+/* For screens with a maximum width of 768px (adjust as needed) */
+@media (max-width: 768px) {
+    /* Define your responsive styles here */
+  }
+  
+  /* For screens with a width between 769px and 1024px (adjust as needed) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Define your responsive styles here */
+  }
+  
+  /* Add more media queries as needed for other screen sizes */
+  
+
+  
+  #but3{
+    align-content: center;
+    height: 120px;
+    width: 120px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  } 
+
+  #but3:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .clicked {
+    background-color: green; /* Change the background color when clicked */
+    color: white; /* Change the text color when clicked */
+  }
+ 
+  .page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 26vh;
+    background-color: transparent;
+
+  }
+  
+  .centered-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .item {
+    margin: 10px;
+    min-width: auto; /* Minimum width for the items */
+    min-height: auto; /* Minimum height for the items */
+    background-color: #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .item:hover {
+    transform: scale(1.10);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (max-width: 768px)  {
+    .centered-items {
+      flex-direction: row;
+       /* Stack items vertically on small screens */
+      text-align: center; /* Center text within items */
+    }
+    .App1{
+        flex-direction: row; /* Stack items vertically on small screens */
+        /* text-align: center;   */
+    }
+    
+    .item {
+      margin: 5px; /* Reduce margin on small screens */
+      min-width: 90%; /* Full width on small screens */
+    }
+  }
+  
+
+  
+  
+  
