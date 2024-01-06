@@ -22,7 +22,7 @@
   .cart-title {
     font-size: 48px;
     margin-bottom: 20px;
-    color: #007bff;
+    color: black;
     text-align: center;
   }
   
@@ -167,3 +167,104 @@
     border-radius: 15px;
   }
   
+
+
+
+  /* Default styles */
+
+/* Add your default styles here */
+
+/* Mobile Devices (up to 767px) */
+@media (max-width: 767px) {
+  .cart-container {
+    /* Adjustments for mobile devices */
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .cart-title {
+    /* Adjustments for mobile devices */
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .cart-item {
+    /* Adjustments for mobile devices */
+    flex-direction: column;
+    border: 1px solid #007bff;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .cart-item-image {
+    /* Adjustments for mobile devices */
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    margin-right: 0;
+  }
+
+  .cart-item-details {
+    /* Adjustments for mobile devices */
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* Add other styles for mobile devices */
+}
+
+/* Tablets (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cart-title {
+    /* Adjustments for tablets */
+    font-size: 42px;
+  }
+
+  .cart-item {
+    /* Adjustments for tablets */
+    padding: 10px;
+  }
+
+  .cart-item-details {
+    /* Adjustments for tablets */
+    margin-top: 20px;
+  }
+
+  /* Add other styles for tablets */
+}
+
+/* Desktops (1024px and above) */
+@media (min-width: 1024px) {
+  .cart-container {
+    /* Adjustments for desktops */
+    width: 70%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .cart-title {
+    /* Adjustments for desktops */
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .cart-item {
+    /* Adjustments for desktops */
+    padding: 15px;
+  }
+
+  .cart-item-image {
+    /* Adjustments for desktops */
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+  }
+
+  .cart-item-details {
+    /* Adjustments for desktops */
+    margin-top: 0;
+  }
+
+  /* Add other styles for desktops */
+}

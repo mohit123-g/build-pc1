@@ -80,3 +80,114 @@
   
   
   
+  /* Default styles */
+
+/* Add your default styles here */
+
+/* Mobile Devices (up to 767px) */
+@media (max-width: 767px) {
+  #but3 {
+    /* Adjustments for mobile devices */
+    align-content: center;
+    height: 80px;
+    width: 80px;
+  }
+
+  .clicked {
+    /* Adjustments for mobile devices */
+    background-color: green;
+    color: white;
+  }
+
+  .page-container {
+    /* Adjustments for mobile devices */
+    height: 20vh;
+  }
+
+  .centered-items {
+    /* Adjustments for mobile devices */
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .item {
+    /* Adjustments for mobile devices */
+    margin: 5px;
+    min-width: 90%;
+    min-height: auto;
+  }
+
+  /* Add other styles for mobile devices */
+}
+
+/* Tablets (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #but3 {
+    /* Adjustments for tablets */
+    align-content: center;
+    height: 100px;
+    width: 100px;
+  }
+
+  .clicked {
+    /* Adjustments for tablets */
+    background-color: green;
+    color: white;
+  }
+
+  .page-container {
+    /* Adjustments for tablets */
+    height: 22vh;
+  }
+
+  .centered-items {
+    /* Adjustments for tablets */
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .item {
+    /* Adjustments for tablets */
+    margin: 10px;
+    min-width: auto;
+    min-height: auto;
+  }
+
+  /* Add other styles for tablets */
+}
+
+/* Desktops (1024px and above) */
+@media (min-width: 1024px) {
+  #but3 {
+    /* Adjustments for desktops */
+    align-content: center;
+    height: 120px;
+    width: 120px;
+  }
+
+  .clicked {
+    /* Adjustments for desktops */
+    background-color: green;
+    color: white;
+  }
+
+  .page-container {
+    /* Adjustments for desktops */
+    height: 26vh;
+  }
+
+  .centered-items {
+    /* Adjustments for desktops */
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .item {
+    /* Adjustments for desktops */
+    margin: 10px;
+    min-width: auto;
+    min-height: auto;
+  }
+
+  /* Add other styles for desktops */
+}

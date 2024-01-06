@@ -39,3 +39,26 @@
   /* Modal Content Styles */
   /* You can define additional styles for the modal content here */
   
+
+
+  /* Tablet (Portrait) - up to 768px */
+@media (max-width: 768px) {
+  .modal {
+    max-width: 90%; /* Adjust the maximum width for smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Tablet (Landscape) - 769px to 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .modal {
+    max-width: 70%; /* Adjust the maximum width for larger tablets */
+  }
+}
+
+/* Desktop - 1025px and above */
+@media (min-width: 1025px) {
+  .modal {
+    max-width: 50%; /* Adjust the maximum width for desktops */
+  }
+}

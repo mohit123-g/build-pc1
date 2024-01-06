@@ -26,27 +26,38 @@ const Ecom=(props)=>{
     itemid:0,
     // Add any other properties for the new JSON object
   });
+  var t=Number(props.userid1);
+
+
 
   useEffect(() => {
     fetchData(); // Fetch the existing JSON data when component mounts
+    // setExistingData(props.cartdata[1].citem);
   }, []);
 
 
   const fetchData = async () => {
+    // let rowNo=-1;
+ 
     try {
+     
       // Fetch the existing JSON data from Supabase
       const { data, error } = await supabase
         .from('Cart') // Replace with your actual table name
-        .select('citem'); // Replace with the actual column name
-
+        .select('citem') // Replace with the actual column name
+       .eq("uid",localStorage.getItem('userid'));
       if (error) {
         throw error;
       }
-
-      if (data && data.length > 0) {
+      
+ 
+         if (data && data.length >0) {
+        //  console.log("fatch"+props.rowno)
         // Set the existing JSON data to state
         setExistingData(data[0].citem);
       }
+          // break;
+       
     } catch (error) {
       console.error('Error fetching data:', error.message);
     }
@@ -55,12 +66,17 @@ const Ecom=(props)=>{
 
   const insertJsonObject = async () => {
    let flag=0;
+   
+  //  for(let k=0;k<props.cartdata.length;k++){
+  //   if(props.cartdata[k].uid===t){
     for (let i = 0; i < props.cartdata[0].citem.length; i++) {
       var cidtemp = Number(props.cartdata[0].citem[i].itemid);
       var idtemp = Number(newObject.itemid );
-      console.log(cidtemp,"",idtemp);
+      console.log(cidtemp,"",idtemp,"  ",t);
+      console.log(typeof props.cartdata[0].uid);
     if(idtemp=== cidtemp){flag=1;}
     }
+  // }}
       if (flag===0) {
         // Add the new object to the existing JSON data
         const updatedData = [...existingData, newObject];
@@ -69,7 +85,8 @@ const Ecom=(props)=>{
       const { error } = await supabase
         .from('Cart') // Replace with your actual table name
         .update({ citem: updatedData })
-        .eq('uid', 11 ); // Replace 'id' with your unique identifier column and 'rowId' with the actual ID
+       
+        .eq('uid',localStorage.getItem('userid')); // Replace 'id' with your unique identifier column and 'rowId' with the actual ID
         // .insert(
         //   {
         //     citem: updatedData,

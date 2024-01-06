@@ -1,0 +1,53 @@
+/* .log-Container{
+    position: fixed;
+    top: 10%;
+    left: 35%;
+    width: 350px;
+    height: 500px;
+    background:white;
+    display: flex;
+    justify-content: center; */
+    /* align-items: center; */
+    /* z-index: 1000;
+
+}*/
+
+.inputbox{
+    width: 280px;
+    height: 50px;
+} 
+.log-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Add a class to the button container to style them horizontally */
+  .button-container {
+    display: flex;
+    justify-content: space-around; /* Adjust the spacing between buttons */
+    width: 100%; /* Ensure the buttons take the full width */
+  }
+  
+  .inputbox {
+    /* Add your input box styles here */
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .button {
+    /* Add your button styles here */
+    padding: 10px 20px;
+    margin-top: 10px;
+    
+    cursor: pointer;
+    border: none;
+    border-radius: 40px;
+  }
+  
+  
+
+
+
+
+  

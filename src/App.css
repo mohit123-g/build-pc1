@@ -41,11 +41,7 @@
 }
 
 
-@media (max-width: 768px) {
-  /* Define your responsive styles here */
-}@media (min-width: 769px) and (max-width: 1024px) {
-  /* Define your responsive styles here */
-}
+
 
 
 .App{
@@ -141,4 +137,91 @@ margin-left: 480%;
 
 }
 
+
+
+
+
+/* Default styles */
+/* Add your default styles here */
+
+/* Mobile Devices (up to 767px) */
+@media (max-width: 767px) {
+  .App {
+    /* Adjustments for mobile devices */
+    background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .but1 {
+    /* Adjustments for mobile devices */
+    align-items: center;
+    height: 30%;
+    width: 80%;
+    padding: 5%;
+  }
+
+  #but2 {
+    /* Adjustments for mobile devices */
+    align-content: center;
+    height: 100px;
+    width: 100px;
+  }
+
+  /* Add other styles for mobile devices */
+}
+
+/* Tablets (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .App {
+    /* Adjustments for tablets */
+    background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .but1 {
+    /* Adjustments for tablets */
+    align-items: center;
+    height: 40%;
+    width: 60%;
+    padding: 3%;
+  }
+
+  #but2 {
+    /* Adjustments for tablets */
+    align-content: center;
+    height: 120px;
+    width: 120px;
+  }
+
+  /* Add other styles for tablets */
+}
+
+/* Desktops (1024px and above) */
+@media (min-width: 1024px) {
+  .App {
+    /* Adjustments for desktops */
+    background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .but1 {
+    /* Adjustments for desktops */
+    align-items: center;
+    height: 50%;
+    width: 50%;
+    padding: 2%;
+  }
+
+  #but2 {
+    /* Adjustments for desktops */
+    align-content: center;
+    height: 140px;
+    width: 140px;
+  }
+
+  /* Add other styles for desktops */
+}
 

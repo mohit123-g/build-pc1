@@ -97,6 +97,16 @@ function App(props) {
   const [cartData, setCartData] = useState(
     JSON.parse(localStorage.getItem("cartData")) || []
   );
+
+  const [userId1, setUserId1] = useState(
+  0
+  );
+  const [userProfile, setUserProfile] = useState(
+    JSON.parse(localStorage.getItem("userProfile")) ||'');
+
+ 
+
+
   const [fatchError, setFetchError] = useState(null);
   const [showDashboard, setShowDashboard] = useState(false);
 
@@ -121,6 +131,18 @@ function App(props) {
   useEffect(() => {
     localStorage.setItem("lapData", JSON.stringify(lapData));
   }, [lapData]);
+  useEffect(() => {
+    // if (props.userid) {
+      setUserId1(props.userid);
+    // }
+  }, [props.userid]);
+
+  useEffect(() => {
+    localStorage.setItem("userProfile", JSON.stringify(userProfile));
+  }, [userProfile]);
+ 
+  let t=Number(userId1);
+ 
 
   //  console.log(SelectData)
   // const axiosFatchData=async (processing)=>{
@@ -228,38 +250,48 @@ function App(props) {
 
   useEffect(() => {
     const fetchData = async () => {
+     
       try {
         const pcDataResult = await supabase.from("PC").select();
         const laptopDataResult = await supabase.from("Laptop").select();
-        const cartDataResult = await supabase.from("Cart").select();
+        const cartDataResult = await supabase.from("Cart").select().eq('uid',localStorage.getItem('userid') );
+        const userProfileResult = await supabase.from("Users").select().eq('id',localStorage.getItem('userid') );
 
         if (
           pcDataResult.error ||
           laptopDataResult.error ||
-          cartDataResult.error
+          cartDataResult.error ||
+          userProfileResult.error
         ) {
           let errorMessage = "";
           if (pcDataResult.error) errorMessage += "Error in PC Fetch\n";
           if (laptopDataResult.error) errorMessage += "Error in Laptop Fetch\n";
           if (cartDataResult.error) errorMessage += "Error in Cart Fetch\n";
-
+          if (userProfileResult.error) errorMessage += "Error in userProfile Fetch\n";
           setFetchError(errorMessage);
           setPcData(null);
           setLapData(null);
           setCartData(null);
+          setUserProfile(null);
 
           console.error(
-            pcDataResult.error || laptopDataResult.error || cartDataResult.error
+            pcDataResult.error || laptopDataResult.error || cartDataResult.error ||userProfileResult.error
           );
         } else {
           setPcData(pcDataResult.data || null);
           setLapData(laptopDataResult.data || null);
           setCartData(cartDataResult.data || null);
+          setUserProfile( userProfileResult.data||null);
           setFetchError(null);
 
           if (cartDataResult.data && cartDataResult.data.length > 0) {
             console.log(cartDataResult.data[0].uid);
             console.log(cartDataResult.data[0].citem);
+            console.log(typeof Number(userId1));
+            console.log(typeof localStorage.getItem('userid'));
+
+            
+            console.log("check first",typeof t,t)
           }
         }
       } catch (error) {
@@ -267,6 +299,7 @@ function App(props) {
         setPcData(null);
         setLapData(null);
         setCartData(null);
+        setUserProfile(null);
         console.error(error);
       }
     };
@@ -277,6 +310,7 @@ function App(props) {
   return (
     <div className="App">
       {/* {connectDB()} */}
+    
       <AppBar>
         <Toolbar sx={{ backgroundColor: "black" }}>
           {/* <a href="/Dashboard"> */}
@@ -314,7 +348,15 @@ function App(props) {
             <div className={`dashboard ${showDashboard ? "active" : ""}`}>
               {/* Your dashboard content */}
               
-              <h4 style={{ textAlign: "center" }}>PROFILE  </h4><hr />   
+              <h4 style={{ textAlign: "center" }}>PROFILE  </h4>
+              <pre> 
+                <img  
+              src={userProfile[0].img}
+              alt="Icon"
+              style={{ width: '35px', height: '35px' }}
+              /> {userProfile[0].UserN}
+              </pre>
+              <hr />   
               <h5 style={{ textAlign: "left" }}>ORDERS        </h5>   <br />
               <h5 style={{ textAlign: "left" }}>ORDER HISTORY  </h5>   <br />
               <h5 style={{ textAlign: "left" }}>ACCOUNT SETTING   </h5>   <br />
@@ -376,7 +418,12 @@ function App(props) {
               aria-label="menu"
               sx={{ mr: 2 }}
             >
-              <AccountCircleIcon style={{ color: "white" }} />
+              {/* <AccountCircleIcon style={{ color: "white" }} /> */}
+              <img  
+              src={userProfile[0].img}
+              alt="Icon"
+              style={{ width: '35px', height: '35px' }}
+              />
             </IconButton>
           </a>
           <Button
@@ -407,6 +454,9 @@ function App(props) {
         setselitem={setSelitem}
         cartdata={cartData}
         setcartdata={setCartData}
+        userid1={userId1}
+        setuserid1={setUserId1}
+      
       />
       <BrowserRouter>
         <Routes>
@@ -448,6 +498,9 @@ function App(props) {
                 setselitem={setSelitem}
                 cartdata={cartData}
                 setcartdata={setCartData}
+                userid1={userId1}
+                setuserid1={setUserId1}
+                
               />
             }
           ></Route>
@@ -471,6 +524,9 @@ function App(props) {
                 setselitem={setSelitem}
                 cartdata={cartData}
                 setcartdata={setCartData}
+                userid1={userId1}
+                setuserid1={setUserId1}
+                
               />
             }
           ></Route>
@@ -494,6 +550,9 @@ function App(props) {
                 setsel={setSel}
                 check1={Check1}
                 setcheck1={setCheck}
+                userid1={userId1}
+                setuserid1={setUserId1}
+                
               />
             }
           ></Route>
@@ -516,7 +575,9 @@ function App(props) {
                 setselitem={setSelitem}
                 cartdata={cartData}
                 setcartdata={setCartData}
-              />
+                userid1={userId1}
+                setuserid1={setUserId1}
+                             />
             }
           ></Route>
 

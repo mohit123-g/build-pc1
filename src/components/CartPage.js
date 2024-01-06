@@ -20,7 +20,8 @@ const CartPage = (props) => {
   const [i, setI] = useState(useParams()["id"]);
 
   const [cartItems, setCartItems] = useState([ ]);
-  
+ let t=Number(props.userid1);
+  // const [rowNo,setRowNo]=useState(-1);
   
 // useEffect(()=>{
 //   localStorage.setItem('cartItems',JSON.stringify(cartItems));
@@ -51,12 +52,17 @@ const CartPage = (props) => {
 
 
 useEffect(() => {
+  // for(let k=0;k<props.cartdata.length;k++){
+  //   if(props.cartdata[k].uid===t){
+  //     rowNo=k;
+  //     // break;
+  //   }
+  //  }
   const updatedCartItems = [];
-  for (let i = 0; i < props.cartdata.length; i++) {
-    console.log(i);
-    for (let j = 0; j < props.cartdata[i].citem.length; j++) {
+ 
+          for (let j = 0; j < props.cartdata[0].citem.length; j++) {
       console.log(j);
-      var cidtemp = Number(props.cartdata[i].citem[j].itemid);
+      var cidtemp = Number(props.cartdata[0].citem[j].itemid);
       
       for(let k=0;k<props.pcdata.length;k++){
       if (cidtemp === props.pcdata[k].id) {
@@ -66,7 +72,7 @@ useEffect(() => {
           id: props.pcdata[k].id,
           name: props.pcdata[k].name,
           price: props.pcdata[k].price,
-          quantity: props.cartdata[i].citem[j].q,
+          quantity: props.cartdata[0].citem[j].q,
           image: props.pcdata[k].img,
           details: props.pcdata[k].desc,
         });
@@ -78,14 +84,14 @@ useEffect(() => {
           id: props.lapdata[k].id,
           name: props.lapdata[k].name,
           price: props.lapdata[k].price,
-          quantity: props.cartdata[i].citem[j].q,
+          quantity: props.cartdata[0].citem[j].q,
           image: props.lapdata[k].img,
           details: props.lapdata[k].desc,
         });
       }
     }
     }
-  }
+ 
   setCartItems(updatedCartItems);
   console.log('Cart items updated for user with UID:', props.cartdata[0].uid);
 }, [props.cartdata, props.pcdata]);
@@ -96,8 +102,8 @@ const deleteJsonObject = async (itemIdToDelete) => {
     // Fetch the existing JSON data from Supabase
     const { data, error } = await supabase
       .from('Cart') // Replace with your actual table name
-      .select('citem'); // Replace with the actual column name
-
+      .select('citem') // Replace with the actual column name
+       .eq('uid',localStorage.getItem('userid'));
     if (error) {
       throw error;
     }
@@ -119,7 +125,7 @@ const deleteJsonObject = async (itemIdToDelete) => {
         const { error } = await supabase
           .from('Cart') // Replace with your actual table name
           .update({ citem: existingData })
-          .eq('uid', 11); // Replace 'uid' with your unique identifier column and '11' with the actual UID
+          .eq('uid', localStorage.getItem('userid')); // Replace 'uid' with your unique identifier column and '11' with the actual UID
 
         if (error) {
           throw error;
@@ -145,7 +151,7 @@ const updateJsonColumn = async (itemId, newQuantity) => {
     const { data: cartData, error: cartError } = await supabase
       .from('Cart')
       .select('citem')
-      .eq('uid', 11); // Replace 'cid' and '11' with your actual identifier
+      .eq('uid', localStorage.getItem('userid')); // Replace 'cid' and '11' with your actual identifier
 
     if (cartError) {
       throw cartError;
@@ -166,7 +172,7 @@ const updateJsonColumn = async (itemId, newQuantity) => {
         const { error: updateError } = await supabase
           .from('Cart')
           .update({ citem: existingCitem })
-          .eq('uid', 11); // Replace 'cid' and '11' with your actual identifier
+          .eq('uid', localStorage.getItem('userid')); // Replace 'cid' and '11' with your actual identifier
 
         if (updateError) {
           throw updateError;
