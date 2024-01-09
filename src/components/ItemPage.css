@@ -2,192 +2,280 @@
 
 /* For screens with a maximum width of 768px (adjust as needed) */
 @media (max-width: 768px) {
-    /* Define your responsive styles here */
-  }
-  
-  /* For screens with a width between 769px and 1024px (adjust as needed) */
-  @media (min-width: 769px) and (max-width: 1024px) {
-    /* Define your responsive styles here */
-  }
-  
-  /* Add more media queries as needed for other screen sizes */
-  
-
-  
-  #but3{
-    align-content: center;
-    height: 120px;
-    width: 120px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  } 
-
-  #but3:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  }
-
-  .clicked {
-    background-color: green; /* Change the background color when clicked */
-    color: white; /* Change the text color when clicked */
-  }
- 
-  .page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 26vh;
-    background-color: transparent;
-
-  }
-  
-  .centered-items {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .item {
-    margin: 10px;
-    min-width: auto; /* Minimum width for the items */
-    min-height: auto; /* Minimum height for the items */
-    background-color: #eee;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .item:hover {
-    transform: scale(1.10);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  @media (max-width: 768px)  {
-    .centered-items {
-      flex-direction: row;
-       /* Stack items vertically on small screens */
-      text-align: center; /* Center text within items */
-    }
-    .App1{
-        flex-direction: row; /* Stack items vertically on small screens */
-        /* text-align: center;   */
-    }
-    
-    .item {
-      margin: 5px; /* Reduce margin on small screens */
-      min-width: 90%; /* Full width on small screens */
-    }
-  }
-  
-
-  
-  
-  
-  /* Default styles */
-
-/* Add your default styles here */
-
-/* Mobile Devices (up to 767px) */
-@media (max-width: 767px) {
-  #but3 {
-    /* Adjustments for mobile devices */
-    align-content: center;
-    height: 80px;
-    width: 80px;
-  }
-
-  .clicked {
-    /* Adjustments for mobile devices */
-    background-color: green;
-    color: white;
-  }
-
-  .page-container {
-    /* Adjustments for mobile devices */
-    height: 20vh;
-  }
-
-  .centered-items {
-    /* Adjustments for mobile devices */
-    flex-direction: row;
-    text-align: center;
-  }
-
-  .item {
-    /* Adjustments for mobile devices */
-    margin: 5px;
-    min-width: 90%;
-    min-height: auto;
-  }
-
-  /* Add other styles for mobile devices */
+  /* Define your responsive styles here */
 }
 
-/* Tablets (768px to 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-  #but3 {
-    /* Adjustments for tablets */
-    align-content: center;
-    height: 100px;
-    width: 100px;
-  }
-
-  .clicked {
-    /* Adjustments for tablets */
-    background-color: green;
-    color: white;
-  }
-
-  .page-container {
-    /* Adjustments for tablets */
-    height: 22vh;
-  }
-
-  .centered-items {
-    /* Adjustments for tablets */
-    flex-direction: row;
-    text-align: center;
-  }
-
-  .item {
-    /* Adjustments for tablets */
-    margin: 10px;
-    min-width: auto;
-    min-height: auto;
-  }
-
-  /* Add other styles for tablets */
+/* For screens with a width between 769px and 1024px (adjust as needed) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Define your responsive styles here */
 }
 
-/* Desktops (1024px and above) */
-@media (min-width: 1024px) {
-  #but3 {
-    /* Adjustments for desktops */
-    align-content: center;
-    height: 120px;
-    width: 120px;
-  }
+/* Add more media queries as needed for other screen sizes */
 
-  .clicked {
-    /* Adjustments for desktops */
-    background-color: green;
-    color: white;
-  }
 
-  .page-container {
-    /* Adjustments for desktops */
-    height: 26vh;
-  }
+/* Your existing CSS styles here */
 
-  .centered-items {
-    /* Adjustments for desktops */
-    flex-direction: row;
-    text-align: center;
-  }
+/* Position the dropdown */
+/* .dropdown-container {
+  position: relative;
+  display: inline-block;
+} */
 
-  .item {
-    /* Adjustments for desktops */
-    margin: 10px;
-    min-width: auto;
-    min-height: auto;
-  }
+/* .dashboard,.centered-content{ */
+  /* position: absolute;  */
+  /* width: auto;
+  height: auto; */
+  /* background-color: lightblue; */
+/* }  */
 
-  /* Add other styles for desktops */
+
+#but3{
+  align-content: center;
+  height: 120px;
+  width: 120px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+} 
+
+#but3:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
+
+
+.clicked {
+  background-color: green; /* Change the background color when clicked */
+  color: white; /* Change the text color when clicked */
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26vh;
+  background-color: transparent;
+
+}
+
+.centered-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.item {
+  margin: 10px;
+  min-width: auto; /* Minimum width for the items */
+  min-height: auto; /* Minimum height for the items */
+  background-color: #eee;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.item:hover {
+  transform: scale(1.10);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.centered-tabs {
+  width: 10%;
+  height: 40%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+}
+.page-container1 {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height:370px;
+  width:700px;
+  background-color: transparent;
+
+}
+.centered-content {
+  /* display: flex; */
+  /* position: relative; */
+  /* height:200px;
+  width: 200px; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: transparent;
+  /* margin: 1px; Adjust the margin as needed */
+}
+
+@media (max-width: 768px)  {
+  .centered-items {
+    flex-direction: row;
+     /* Stack items vertically on small screens */
+    text-align: center; /* Center text within items */
+  }
+  .App1{
+      flex-direction: row; /* Stack items vertically on small screens */
+      /* text-align: center;   */
+  }
+  
+  .item {
+    margin: 5px; /* Reduce margin on small screens */
+    min-width: 90%; /* Full width on small screens */
+  }
+}
+
+
+
+
+/*dropdown*/
+
+
+.top-image{
+  margin-top: 5%;
+  width:  80%;
+  height: 80%;
+}
+/* General styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* .container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.specification-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.specification-tab {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #4285f4;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.specification-tab:hover {
+  background-color: #2c5aa0;
+}
+
+.details {
+  display: none;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.close-button {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #999;
+} */
+
+/* Hollow tab styles */
+.hollow-tab {
+  
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 500px 210px;  
+  margin-top: -60%;
+  margin-left: -1%;
+  
+
+  /* bottom: 10px; */
+  background-color:transparent;
+  border-bottom: 2px solid #000;
+}
+
+.hollow-tab img {
+  width: 100px;
+  height: 50px;
+  object-fit: cover;
+  border: 2px solid #000;
+  border-radius: 20%;
+  margin-right: 10px;
+}
+
+.arrow-down {
+  font-size: 20px;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  top: 55%;
+  /* margin-top: 70%; */
+  left: 6%;
+  width:88%;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  z-index: 1;
+  padding: 10px;
+}
+ .options a {
+  display: block;
+  padding: 15px;
+  color: #000;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+}
+
+/* .options a:hover {
+  background-color: #000;
+  color: white;
+}  */
+
+.options img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 5px;
+}
+
+.hollow-tab .options {
+  display: block;
+  /* transition: display 0.3s; */
+}
+
+/* #dropdown{ */
+  /* position:relative; */
+  /* width: 100%; */
+  /* max-height: 100%; */
+  /* justify-content: center; */
+  /* background-color: transparent; */
+  /* margin-top: 10%; */
+/* } */

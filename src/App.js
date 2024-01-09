@@ -311,14 +311,15 @@ function App(props) {
     <div className="App">
       {/* {connectDB()} */}
     
-      <AppBar>
+      <AppBar className="AppBar">
         <Toolbar sx={{ backgroundColor: "black" }}>
           {/* <a href="/Dashboard"> */}
+        
           <IconButton
             onClick={toggleDashboard}
             size="large"
             edge="start"
-            color="inherit"
+            // color="inherit"
             aria-label="menu"
             sx={{ mr: 1 }}
           >
@@ -344,8 +345,10 @@ function App(props) {
                      <Dropdown  id="drop" title={'More'}></Dropdown>
                 </Dropdown.Item>
             </Dropdown> */}
-        
-            <div className={`dashboard ${showDashboard ? "active" : ""}`}>
+            
+            <div className={`dashboard ${showDashboard ? "active" : ""}`}
+            style={{ background: "black" ,color:"white"}}
+            >
               {/* Your dashboard content */}
               
               <h4 style={{ textAlign: "center" }}>PROFILE  </h4>
@@ -357,7 +360,7 @@ function App(props) {
               /> {userProfile[0].UserN}
               </pre>
               <hr />   
-              <h5 style={{ textAlign: "left" }}>ORDERS        </h5>   <br />
+              <h5 style={{ textAlign: "left" }}> ORDERS        </h5>   <br />
               <h5 style={{ textAlign: "left" }}>ORDER HISTORY  </h5>   <br />
               <h5 style={{ textAlign: "left" }}>ACCOUNT SETTING   </h5>   <br />
               <h5 style={{ textAlign: "left" }}  onClick={() => {  props.setlog(false); }}>LOGOUT </h5>   <br />
@@ -367,6 +370,7 @@ function App(props) {
 
             <DashboardIcon style={{ color: "white" }} />
           </IconButton>
+        
           {/* </a> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <a href="/">
@@ -381,12 +385,15 @@ function App(props) {
               </button>
             </a>
           </Typography>
+          {/* <a> */}
+         
           <IconButton
             size="medium"
             edge="start"
-            color="inherit"
+            // color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+
           >
             <input
               style={{
@@ -397,8 +404,11 @@ function App(props) {
               }}
             />
 
-            <SearchIcon style={{ background: "black" }} />
+            <SearchIcon style={{ background: "black" ,color:"white"}} />
           </IconButton>
+        <h5 style={{color:'black'}}>s</h5>
+          
+          {/* </a> */}
           <a href="/cart">
             <IconButton
               size="medium"
@@ -410,11 +420,12 @@ function App(props) {
               <ShoppingCartIcon style={{ color: "white" }} />
             </IconButton>
           </a>
+          <h5 style={{color:'black'}}>s</h5>
           <a href="/Account">
             <IconButton
               size="medium"
               edge="start"
-              color="inherit"
+              // color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
             >
@@ -422,18 +433,22 @@ function App(props) {
               <img  
               src={userProfile[0].img}
               alt="Icon"
-              style={{ width: '35px', height: '35px' }}
+              style={{ width: '35px', height: '35px',color:'white' }}
               />
             </IconButton>
           </a>
-          <Button
-            color="inherit"
+          <h5 style={{color:'black'}}>s</h5>
+          {/* <a> */}
+          <Button 
+            // color="inherit"
             onClick={() => {
               props.setlog(false);
             }}
+            style={{ background: "black", color: "white" }}
           >
             Logout
           </Button>
+          {/* </a> */}
         </Toolbar>
       </AppBar>
 
