@@ -44,12 +44,18 @@
 
 
 
-.App{
-  background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
-   /* height: 1%; */
+.App{ 
+  /* background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d"); */
+  background-color: transparent;
+  margin-top: -5%;
 /*width: auto; */
 text-align: center;
 overflow: hidden;/*exp*/
+display: grid;
+grid-template-columns: 1fr;
+grid-template-rows: 1fr;
+place-items: center;
+z-index: 2;
 }
 
 .but1{
@@ -72,12 +78,16 @@ body {
 
 #title{color:white;}
 .App1{
+  background-color: transparent;
   text-align: center;
   height: 20px;
 }
 
 
 .my-grid-container {
+  background-color: transparent;
+ position: relative;
+ /* margin-top: 20%; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Responsive grid with 200px columns */
   grid-gap: 16px; /* Adjust the gap between grid items */
@@ -106,6 +116,12 @@ body {
 }
 
 
+.AppBar{
+position: absolute;
+z-index: 1;
+
+}
+
 
 /*dashboard*/
 /* Dashboard.css */
@@ -113,12 +129,13 @@ body {
   position: relative;
   height: 100vh;
   overflow: hidden;
+  z-index: 10;
 }
 
 .dashboard {
   
 margin-top: 120%;
-margin-left: 480%;
+margin-left: 250px;
   width: 300px;
   min-height: 40vh;
   max-height: 40vh; /* Ensure the dashboard doesn't exceed screen height */
@@ -151,8 +168,12 @@ margin-left: 480%;
     background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
     text-align: center;
     overflow: hidden;
+   z-index: 2;
   }
 
+  .my-grid-container{
+    margin-top: 75%;
+  }
   .but1 {
     /* Adjustments for mobile devices */
     align-items: center;
@@ -178,6 +199,7 @@ margin-left: 480%;
     background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
     text-align: center;
     overflow: hidden;
+    z-index: 2;
   }
 
   .but1 {
@@ -205,6 +227,7 @@ margin-left: 480%;
     background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
     text-align: center;
     overflow: hidden;
+    z-index: 2;
   }
 
   .but1 {

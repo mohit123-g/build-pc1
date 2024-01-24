@@ -8,6 +8,51 @@ import ItemPage from "./ItemPage";
 import { checkboxClasses } from "@mui/material";
 import supabase from "../SupabaseClient";
 
+export const insertJsonObject = async (cartdataex,newobjectex,existingdataex) => {
+  let flag=0;
+  
+ //  for(let k=0;k<props.cartdata.length;k++){
+ //   if(props.cartdata[k].uid===t){
+   for (let i = 0; i < cartdataex[0].citem.length; i++) {
+     var cidtemp = Number(cartdataex[0].citem[i].itemid);
+     var idtemp = Number(newobjectex.itemid );
+     console.log(cidtemp,"",idtemp,"  ");
+     console.log(typeof cartdataex[0].uid);
+   if(idtemp=== cidtemp){flag=1;}
+   }
+ // }}
+     if (flag===0) {
+       // Add the new object to the existing JSON data
+       const updatedData = [...existingdataex, newobjectex];
+     try {
+     // Update the Supabase table with the modified JSON data
+     const { error } = await supabase
+       .from('Cart') // Replace with your actual table name
+       .update({ citem: updatedData })
+      
+       .eq('uid',localStorage.getItem('userid')); // Replace 'id' with your unique identifier column and 'rowId' with the actual ID
+       // .insert(
+       //   {
+       //     citem: updatedData,
+       //     // ... other columns and their values
+       //   },
+       // );
+ 
+
+     if (error) {
+       throw error;
+     }
+   
+     console.log('New object added to JSON:', newobjectex);
+     window.location.reload();
+
+     // Perform any actions after successful insertion
+   } catch (error) {
+     console.error('Error inserting object:', error.message);
+   }}
+ };
+
+
 const Ecom=(props)=>{
    
     // const [SelectData,setSelectData]=useState([]);
@@ -20,15 +65,16 @@ const Ecom=(props)=>{
   var [budget,setbudget]=useState(20000)
   var [Work,setWork]=useState("")
   
-  const [existingData, setExistingData] = useState([]);
-  const [newObject, setNewObject] = useState({
-    q:1,
-    itemid:0,
+//    const [existingData, setExistingData] = useState([]);
+// const [newObject, setNewObject] = useState({
+//     q:1,
+//     itemid:0,
     // Add any other properties for the new JSON object
-  });
+  // });
+
   var t=Number(props.userid1);
 
-
+ 
 
   useEffect(() => {
     fetchData(); // Fetch the existing JSON data when component mounts
@@ -54,7 +100,7 @@ const Ecom=(props)=>{
          if (data && data.length >0) {
         //  console.log("fatch"+props.rowno)
         // Set the existing JSON data to state
-        setExistingData(data[0].citem);
+        props.setexistingdata(data[0].citem);
       }
           // break;
        
@@ -64,50 +110,7 @@ const Ecom=(props)=>{
   };
 
 
-  const insertJsonObject = async () => {
-   let flag=0;
    
-  //  for(let k=0;k<props.cartdata.length;k++){
-  //   if(props.cartdata[k].uid===t){
-    for (let i = 0; i < props.cartdata[0].citem.length; i++) {
-      var cidtemp = Number(props.cartdata[0].citem[i].itemid);
-      var idtemp = Number(newObject.itemid );
-      console.log(cidtemp,"",idtemp,"  ",t);
-      console.log(typeof props.cartdata[0].uid);
-    if(idtemp=== cidtemp){flag=1;}
-    }
-  // }}
-      if (flag===0) {
-        // Add the new object to the existing JSON data
-        const updatedData = [...existingData, newObject];
-      try {
-      // Update the Supabase table with the modified JSON data
-      const { error } = await supabase
-        .from('Cart') // Replace with your actual table name
-        .update({ citem: updatedData })
-       
-        .eq('uid',localStorage.getItem('userid')); // Replace 'id' with your unique identifier column and 'rowId' with the actual ID
-        // .insert(
-        //   {
-        //     citem: updatedData,
-        //     // ... other columns and their values
-        //   },
-        // );
-  
-
-      if (error) {
-        throw error;
-      }
-    
-      console.log('New object added to JSON:', newObject);
-      window.location.reload();
-
-      // Perform any actions after successful insertion
-    } catch (error) {
-      console.error('Error inserting object:', error.message);
-    }}
-  };
-
 
     const itemsLap=()=>{
     const item = []; //array of buttons
@@ -118,14 +121,14 @@ const Ecom=(props)=>{
             <h6 style={{color:'white'}}>{props.lapdata[i].name}</h6>
             <h6  style={{color:'white'}}>${props.lapdata[i].price}</h6>
             <h6 ><button className="buy" >Buy Now</button>
-            <button className="buy"   onClick={()=>{setNewObject({
+            <button className="buy"   onClick={()=>{props.setnewobject({
                           
-                          ...newObject,itemid:Number(props.lapdata[i].id) // Assuming you want to update the 'itemid' in newObject
+                          ...props.newobject,itemid:Number(props.lapdata[i].id) // Assuming you want to update the 'itemid' in newObject
                        
                         });
-                        console.log(newObject)
+                        console.log(props.newobject)
                       
-                        insertJsonObject();
+                        insertJsonObject(props.cartdata,props.newobject,props.existingdata);
                         }}>Add to Cart</button></h6>
            <a href={"/IPage/"+i} ><img   id='but2' src={props.lapdata[i].img}  />
             <h6  style={{color:'white'}}>{props.lapdata[i].desc}</h6></a> 
@@ -149,13 +152,13 @@ const Ecom=(props)=>{
             <h6  style={{color:'white'}}>{props.pcdata[i].name}</h6>
             <h6  style={{color:'white'}}>${props.pcdata[i].price}</h6>
             <h6 ><button className="buy" >Buy Now</button>
-            <button className="buy" onClick={()=>{setNewObject({
+            <button className="buy" onClick={()=>{props.setnewobject({
                           
-                  ...newObject,itemid:Number(props.pcdata[i].id) // Assuming you want to update the 'itemid' in newObject
+                  ...props.newobject,itemid:Number(props.pcdata[i].id) // Assuming you want to update the 'itemid' in newObject
                
                 });
-                console.log(newObject)
-                insertJsonObject();
+                console.log(props.newobject)
+                insertJsonObject(props.cartdata,props.newobject,props.existingdata);
                 }}>Add to Cart</button></h6><div>
             <a href={"/IPage/"+i}>  <img  id='but2' src={props.pcdata[i].img}  />
             <h6  style={{color:'white'}}>{props.pcdata[i].desc}</h6>
@@ -311,13 +314,14 @@ return(
        <div className="App1"><h3 style={{color:"white"}}>Select What You Want To See</h3></div>
     <div className="page-container ">
     <div  className="centered-items">   
-   <div  className="item" >
-       <h4  style={{color:"black"}}>Custum PC</h4>
-       <button  onClick={()=>{props.setsel("PC"); setbudget(300000) }}> <img id="but3"  src="https://themvp.in/catalog/view/assets/img/PC-Avinash-Singh.webp"/></button>                                   
-   </div>
+  
    <div  className="item">
        <h4  style={{color:"black"}}>PreBuild PC</h4>
       <button  onClick={()=>{setb(1); openModal(); props.setsel("o")}}> <img id="but3" src="https://nzxt.com/assets/cms/34299/1658894006-prebuilt-pcs-path-primary.png?auto=format&fit=max&h=900&w=672"/> </button>                                  
+   </div>
+   <div  className="item" >
+       <h4  style={{color:"black"}}>Custum PC</h4>
+       <button  onClick={()=>{props.setsel("PC"); setbudget(300000) }}> <img id="but3"  src="https://themvp.in/catalog/view/assets/img/PC-Avinash-Singh.webp"/></button>                                   
    </div>
    <div  className="item">
        <h4  style={{color:"black"}}>Laptop</h4>
@@ -338,6 +342,7 @@ return(
         <div className="App">
         <br></br><br></br><br></br><br></br>
         {/* <SelectDropdown/> */}
+        {}
         <div>{Budget()}</div>
         <div>{Choos()}</div>
           
@@ -348,4 +353,5 @@ return(
         </div>
     );
     }
+  
 export default Ecom;

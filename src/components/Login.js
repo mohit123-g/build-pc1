@@ -2,380 +2,202 @@ import App from "../App";
 import React, { useState, useEffect } from "react";
 import "./Login.css"; // Import your CSS file
 import supabase from "../SupabaseClient";
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 const Login = (props) => {
-  const [Log, setLog] = useState(
-    JSON.parse(localStorage.getItem("L")) || false
+  var [Log, setLog] = useState( JSON.parse(localStorage.getItem("L")) ||false
   );
-  var [userId,setUserId]=useState(JSON.parse(localStorage.getItem("userid"))|| 0);
-  // var [rowNo,setRowNo]=useState(JSON.parse(localStorage.getItem("rowNo"))||0);
-  const [userProfile, setUserProfile] = useState(
-    JSON.parse(localStorage.getItem("userProfile")) ||[]);
-  const [Sign, setSign] = useState("in");
-  // const myemail = 'r';
-  // const myPass = '123';
-  // let e = "";
-  // let p = "";
-  // let n="";
-  let flag = false;
-  let t=0;
+  var [userId, setUserId] = useState(
+    JSON.parse(localStorage.getItem("userid")) || 0
+  );
+  const [userProfile2, setUserProfile2] = useState(JSON.parse(localStorage.getItem("userProfile2")) ||
+""
+  );
   const [userDate, setUserData] = useState([]);
-
   const [fetchError, setFetchError] = useState(null);
-  const [inputN,setInputN]=useState('');
-  const [inputE,setInputE]=useState('');
-  const [pimg,setPimg]=useState('');
-  const [LinputE,setLInputE]=useState('');
-  const [LinputP,setLInputP]=useState('');
-  
+  const [flag, setFlag] = useState(false);
 
-  const [password, setPassword] = useState(0);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handlePasswordChange = (event) => setPassword(event.target.value);
-  const togglePasswordVisibility = () => setShowPassword(!showPassword);
-
-
-  // useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase.from("Users").select();
-
-        if (error) {
-          setFetchError("Error in Fetch");
-          setUserData(null);
-          console.error(error);
-        }
-
-        if (data) {
-          setUserData(data);
-          setUserProfile(data);
-          setFetchError(null);
-          // console.log(userDate);
-          // window.location.reload();
-
-        }
-      } finally {
-      }
-    };
-
-
-    
-
-  //   fetchData();
-  // }, []);
-
-const GoogleSignIn=()=>{
-  return(<div>  <GoogleOAuthProvider clientId="614067921294-kniaho3so0lts0gju5b3h7pq2idjq794.apps.googleusercontent.com">
-  <GoogleLogin
-onSuccess={(credentialResponse) => {
-  var decoded=jwtDecode(credentialResponse.credential);
-  console.log(decoded);
-
-  setInputN(decoded.name);
-  setInputE(decoded.email);
-  setPimg(decoded.picture);
-
-  // setInputP(decoded.email);
-}}
-onError={() => {
-  console.log('Login Failed');
-}}
-/>;
-    </GoogleOAuthProvider></div>
-)
-
-}
-
-  const performTask = () => {
-    // fetchData();
-    // console.log(inputE,inputP);
-    if (LinputE === "" || LinputP === "") {
-      alert("Please enter email & password");
-    } else {
-      for (let i = 0; i < userDate.length; i++) {
-        if (LinputE === userDate[i].Email && LinputP === userDate[i].Password) {
-          flag = true;
-         
-           t=Number(userDate[i].id);
-          setUserId(userDate[i].id);
-          setUserProfile(userDate =>userDate.filter(item => item.id !== userDate[i].id)); 
-          insertNewRow('Cart', { uid: userDate[i].id, citem: [{ "q": 1, "itemid": 0 }] });
-    
-          // break;
-        }
-      }
-      if (flag === true) {
-        // for(let k=0;k<cartData1.length;k++){
-        //   if(cartData1[k].uid===t){
-        //    setRowNo(k);
-        //    break;
-        //   }}
-        alert("WELCOME! ENJOY SHOPPING😁");
-        // insertNewRow('Cart', { uid: userId, citem: [{ "q": 1, "itemid": 0 }] });
-        setLog(true);
-
-        // console.log(userId);
-      } else {
-        alert("LOGIN FAILED");
-      }
-    }
-  };
-
-  useEffect(() => {
-    localStorage.setItem("L", JSON.stringify(Log));
-  }, [Log]);
-  useEffect(() => {
-    localStorage.setItem("userid", JSON.stringify(userId));
-  }, [userId]);
- 
-  useEffect(() => {
-    localStorage.setItem("userProfile", JSON.stringify(userProfile));
-  }, [userProfile]);
-  
-
-  const login1 = () => {
-    fetchData();
-    // setLInputE(""); setLInputP("CB "); 
-    return (
-      <div>
-        <br />
-        <br />
-        <h2 style={{ color: "white", textAlign: "center", fontSize: "50px" }}>
-          {" "}
-          Login{" "}
-        </h2>
-        <br />
-        <br />
-        <input
-          className="inputbox"
-          placeholder="Email"
-          value={LinputE}
-          onChange={(event) => {
-            setLInputE( event.target.value);
-          }}
-        />
-        <br />
-        <br />
-        <OutlinedInput
-      type={showPassword ? 'text' : 'password'}
-      value={LinputP}
-      style={{ backgroundColor: 'white', color:"black" }}      className="inputbox"
-     onChange={(e)=>{setLInputP(e.target.value)}}
-      placeholder="Password"
-      endAdornment={
-        <InputAdornment position="end">
-          <IconButton onClick={togglePasswordVisibility} edge="end">
-            {showPassword ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>}/>
-        <br />
-      </div>
-    );
-  };
-
-  const register = () => {
-    fetchData();
-    return (
-      <div>
-        <br />
-        <br />
-        <h2 style={{ color: "white", textAlign: "center", fontSize: "50px" }}>
-          {" "}
-          Sign Up{" "}
-        </h2>
-        <br />
-        <br />
-
-        <input  value={inputN} onChange={(e)=>setInputN(e.target.value)} className="inputbox" placeholder="User Name" />
-        <br />
-        <br />
-        <input  value={inputE} onChange={(e)=>setInputE(e.target.value)} className="inputbox" type="Email" placeholder="Email" />
-        <br />
-        <br />
-        <OutlinedInput
-      type={showPassword ? 'text' : 'password'}
-      value={password}
-      style={{ backgroundColor: 'white', color:"black" }}      className="inputbox"
-     onChange={
-      handlePasswordChange
-    // setPassword(e.target.value);
-    }
-      placeholder="Enter password"
-      endAdornment={
-        <InputAdornment position="end">
-          <IconButton onClick={togglePasswordVisibility} edge="end">
-            {showPassword ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>}/>
-        <br />
-        {GoogleSignIn()}
-      </div>
-    );
-  };
-
-  const isGoogleEmail = (email) => {
-    const googleEmailRegex = /^[a-zA-Z0-9._-]+@gmail\.com$/;
-    return googleEmailRegex.test(email);
-  };
-
-  const insertNewRow = async (table,obj) => {
+  const insertNewRow = async (table, obj) => {
     try {
       const { data, error } = await supabase
-        .from(table) // Replace 'your_table_name' with your table's name
-        .insert([obj]);
+        .from(table)
+        .insert([obj])
+        .single();
 
       if (error) {
-        console.error('Error inserting row:', error);
-        return;
+        console.error("Error inserting row:", error);
+        return null;
       }
-      window.location.reload();
 
-      console.log('Row inserted successfully:', data);
-      // Optionally, you can perform additional actions upon successful insertion
+      if (data) {
+        console.log("Row inserted successfully:", data);
+        return data.id;
+      } else {
+        console.error("Error inserting row: Data is null");
+        return null;
+      }
     } catch (error) {
-      console.error('Error inserting row:', error.message);
+      console.error("Error inserting row:", error.message);
+      return null;
     }
   };
 
+  const fetchData = async () => {
+    try {
+      console.log("Fetching data...");
+      const { data, error } = await supabase.from("Users1").select();
 
+      if (error) {
+        setFetchError("Error in Fetch");
+        setUserData(null);
+        console.error(error);
+      }
+
+      if (data) {
+        setUserData(data);
+        setFetchError(null);
+        console.log("Data fetched successfully:", data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      setFetchError("Error fetching data");
+    }
+  };
+
+  const cartinsert = () => {
+    console.log("userDate length:", userDate.length);
+    for (let i = 0; i < userDate.length; i++) {
+      console.log("Iterating over userDate:", i);
+
+      if (userDate[i].email === userProfile2.email) {
+        console.log("User found with matching email:", userProfile2.email);
+
+        setUserId(userDate[i].id);
+
+        insertNewRow("Cart", {
+          uid: userDate[i].id,
+          citem: [{ q: 1, itemid: 0 }],
+        });
+
+        setFlag(true);
+
+        return;
+      } else {
+        console.log("User not found with email:", userProfile2.email);
+      }
+    }
+  };
 
   const choos = () => {
     if (!Log) {
-      if (Sign === "in") {
-        // setLInputE(""); setLInputP(""); 
-        return (<div>
-          
-         { login1()}
-          <br />
-       <pre>   <button
-            className="button"
-            style={{
-              backgroundColor: "black",
-              color: "white",
-              fontSize: "20px",
-            }}
-            onClick={() =>{ 
-              if (Sign==="in") {
-                setInputN(""); setInputE(""); setPassword("");
-                setSign("up");
-              } else if(inputN === "" || password === ""||inputE==="") 
-              { alert("Please enter email & password");}
-              else if(!isGoogleEmail(inputE)){alert('Not a valid Google email');}
-              else
-              {insertNewRow('Users',{UserN:inputN,Email:inputE,Password:password,img:pimg})
-              alert("Registration successfull");
-              }
-            }}
-             
-          >
-            Sign Up
-          </button>    <button
-            className="button"
-            style={{
-              backgroundColor: "black",
-              color: "white",
-              fontSize: "20px",
-            }}
-            onClick={() => {
-              if (Sign === "up") {
-                        setLInputE(""); setLInputP(""); 
-
-                setSign("in");
-                window.location.reload();
-
-                console.log("in");
-              } else {
-                console.log("Task");
-                performTask();
-              }
-            }}
-          >
-            Login
-          </button></pre>
-        </div>) 
-      }
-
-      if (Sign === "up") {
-      //  setInputN(""); setInputE(""); setInputP("");
-        return (<div>
-          
-          { register()}
-           <br />
-          <pre> <button
-             className="button"
-             style={{
-               backgroundColor: "black",
-               color: "white",
-               fontSize: "20px",
-             }}
-             onClick={() =>{ 
-              if (Sign==="in") {
-                      setInputN(""); setInputE(""); setPassword("");
-
-                setSign("up");
-              } else if(inputN === "" || password === ""||inputE==="") 
-              { alert("Please enter email & password");} 
-              else if(!isGoogleEmail(inputE)){alert('Not a valid Google email');}
-              else
-              {insertNewRow('Users',{UserN:inputN,Email:inputE,Password:password,img:pimg})
-              alert("Registration successfull");
-              }
-             }}
-              
-           >
-             Sign Up
-           </button>    <button
-             className="button"
-             style={{
-               backgroundColor: "black",
-               color: "white",
-               fontSize: "20px",
-             }}
-             onClick={() => {
-               if (Sign === "up") {
-                setLInputE(""); setLInputP(""); 
-                 setSign("in");
-                 window.location.reload();
-
-                 console.log("in");
-               } else {
-                 console.log("Task");
-                 performTask();
-               }
-             }}
-           >
-             Login
-           </button></pre>
-         </div>) 
-      }
-  
+      return (
+        <div className="log-Container">
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            theme="dark"
+            providers={["google"]}
+          />
+        </div>
+      );
     } else {
       return (
-        <div>
-          {" "}
-          <App log={Log} setlog={setLog} userid={userId} setuserid={setUserId} />
-        </div>
+        <App
+          log={Log}
+          setlog={setLog}
+          userid={userId}
+          setuserid={setUserId}
+          userprofile2={userProfile2}
+        />
       );
     }
   };
 
+  const getUserData = async () => {
+    try {
+      const { data, error } = await supabase.auth.getUser();
+
+      if (error) {
+        console.error("Error fetching user data:", error.message);
+        return;
+      }
+
+      if (data?.user) {
+        setUserProfile2((prevProfile) => ({
+          ...prevProfile,
+          pimg: data.user.user_metadata.avatar_url,
+          name: data.user.user_metadata.name,
+          email: data.user.email,
+        }));
+
+        console.log(userProfile2.name);
+
+        const id = await insertNewRow("Users1", {
+          uname: userProfile2.name,
+          img: userProfile2.pimg,
+          email: userProfile2.email,
+        });
+
+        console.log("User ID:", id);
+
+        cartinsert();
+
+        setLog(true);
+        fetchData(); // Trigger fetchData after a successful login
+      }
+    } catch (error) {
+      console.error("Error in getUserData:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = supabase.auth.onAuthStateChange(handleAuthStateChange);
+    return () => unsubscribe;
+  }, []);
+
+  const handleAuthStateChange = (event) => {
+    if (event !== "SIGNED_OUT") {
+      console.log("success");
+      getUserData();
+    } else {
+      setLog(false);
+      setUserProfile2("")
+      console.log("unsuccess");
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    cartinsert();
+  }, [userProfile2]);
+
+  useEffect(() => {
+
+    fetchData();
+    cartinsert();
+  }, [Log]);
+
+  // useEffect(() => {
+  //   handleAuthStateChange()
+    // localStorage.setItem("L", JSON.stringify(Log));
+  // }, [Log===true]);  
+
+  useEffect(() => {
+    localStorage.setItem("L", JSON.stringify(Log));
+  }, [Log]);
+
+  useEffect(() => {
+    localStorage.setItem("userid", JSON.stringify(userId));
+  }, [userId]);
+
+  useEffect(() => {
+    localStorage.setItem("userProfile2", JSON.stringify(userProfile2));
+  }, [userProfile2]);
+
   return (
     <div>
-      <div className="log-Container">
-        <div>
-          {fetchData}
-          
-          {choos()}</div>
-        
-      </div>
+      <div>{choos()}</div>
     </div>
   );
 };

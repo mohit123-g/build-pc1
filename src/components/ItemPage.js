@@ -4,17 +4,26 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import "../App.css";
 import { red } from "@material-ui/core/colors";
-import { border, color } from "@mui/system";
+import { border, color, display, fontSize } from "@mui/system";
 import Dropdown from "rsuite/Dropdown";
 import App from "../App";
 import "./ItemPage.css";
 import { useParams } from "react-router-dom";
 import DropdownItem from "rsuite/esm/Dropdown/DropdownItem";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { insertJsonObject } from "./Ecom";
+
 // import { Select } from "@mui/material";
 const ItemPage = (props) => {
   const [value, setValue] = useState(0);
   const [i, setI] = useState(useParams()["id"]);
-
+  const [build, setBuild] = useState([
+    [false, false],
+    [false, false],
+    [false, false],
+    [false, false]
+  ]);
   // const [selectedTab, setSelectedTab] = useState('');
   const [optionsVisible, setOptionsVisible] = useState(false);
 
@@ -67,6 +76,21 @@ const ItemPage = (props) => {
       }
     });
     setDropdowns(updatedDropdowns);
+  };
+
+  const toggleDropdownspec = () => {
+    setFirstDropdownOpen((prevIsOpen) => !prevIsOpen);
+  };
+
+  const updateBooleanValue = (rowIndex, columnIndex, newValue) => {
+    setBuild(prevBuild => {
+      // Create a new array to ensure immutability
+      const newBuild = [...prevBuild];
+      // Update the specified boolean value
+      newBuild[rowIndex][columnIndex] = newValue;
+      // Return the updated array
+      return newBuild;
+    });
   };
 
   // const toggleOptions = () => {
@@ -133,42 +157,432 @@ const ItemPage = (props) => {
   const ChoosPC = () => {
     if (props.sel == "PC") {
       return (
-        <div className="App1">
-          <div>
-            <h2>Which Type of PC You Want:</h2>
-          </div>
-          {/* <div className="App1"> */}
-          <div className="my-grid-container1">
-            <div className="my-grid-item1">
-              <h3>Custum PC</h3>
+        <div>
+          <pre>
+            {" "}
+            <h1 style={{ color: "white" }}>
+              {props.pcdata[i].name}
+              {"$"+props.pcdata[i].price}
+            </h1>
+            {/* <h2>{props.lapdata[i].price}</h2> */}
+          </pre>
+          <h2 style={{ color: "black" }}>
+            <button>Buy Now</button>{" "}
+            <button
+              onClick={() => {
+                props.setnewobject({
+                  ...props.newobject,
+                  itemid: Number(props.pcdata[i].id), // Assuming you want to update the 'itemid' in newObject
+                });
+                console.log(props.newobject);
+                insertJsonObject(
+                  props.cartdata,
+                  props.newobject,
+                  props.existingdata
+                );
+              }}
+            >
+              Add to Cart
+            </button>
+          </h2>
+          {/* <div className="centered-container"> */}
+          <div className="centered-content">
+            {props.pcdata && props.pcdata.length > i ? (
               <img
-                id="but3"
-                src="https://themvp.in/catalog/view/assets/img/PC-Avinash-Singh.webp"
+                className="top-image" // Add a class for styling the image
+                src={props.pcdata[i].img}
               />
-            </div>
-            <div className="my-grid-item1">
-              <h3>PreBuild PC</h3>
-              <img
-                id="but3"
-                src="https://nzxt.com/assets/cms/34299/1658894006-prebuilt-pcs-path-primary.png?auto=format&fit=max&h=900&w=672"
-              />
-            </div>
-            <div className="my-grid-item1">
-              <h3>Laptop</h3>
-              <img
-                id="but3"
-                src="https://cdn.originpc.com/opc/product/opc-blob-b21e30ad-cbca-4fe3-886e-37f6292bd0f4.png"
-              />
-            </div>
+            ) : (
+              <div>No image available</div>
+            )}
           </div>
           {/* </div> */}
+          <br />
+          {/* <div>   */}
+          {/* <div >
+              <Select style={{color:'black' ,backgroundColor:'white', fontSize:'2'}} 
+              name="OPERATING SYSTEM">
+         
+                                       
+                {console.log(i)}
+                <Paper className="page-container1">
+                  <Tabs style={{color:'white', backgroundColor:'black'}}
+                    className="centered-tabs" 
+                    value={value}
+                    textColor="red"
+                    indicatorColor="primary"
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  >
+                   <Tab label="Features" />
+                    <Tab label="Size" />
+                    <Tab label="Ports" />
+                    <Tab label="Power" /> 
+                  </Tabs>
+                  {Detail(value)}
+                </Paper>
+              
+                </Select>
+                </div> */}
+          {/* </div> */}
+
+          {/* 
+          <div className="hollow-tab" style={{ marginBottom: firstDropdownOpen ? '50px' : '0' }}>
+      <button
+        style={{ width: '99%', display: 'flex' }}
+        onClick={toggleDropdownspec}
+        // className="dropbtn"
+      >
+        <img
+           className="w-100"
+           src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
+           onClick={() => {
+             setFirstDropdownOpen(!firstDropdownOpen);
+           }}
+        />
+      </button>
+      <h2
+              style={{ color: "white" }}
+              onClick={() => {
+                setFirstDropdownOpen(!firstDropdownOpen);
+              }}
+            >
+               SPECIFICATIONS
+            </h2>
+      <br />
+      <br />
+      {firstDropdownOpen && (
+              <div className="options" id="options">
+                <Paper className="page-container1">
+                  <Tabs
+                    style={{ color: "white", backgroundColor: "black" }}
+                    value={value}
+                  
+                    indicatorColor="primary"
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  >
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Features"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Size"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Ports"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Power"
+                    />
+                  </Tabs>
+                  {Detail(value)}
+                </Paper>
+            
+              </div>
+            )}
+    </div> */}
+
+          <div className="hollow-tab">
+            {/* <img
+              className="w-100"
+              src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
+              onClick={() => {
+                setOptionsVisible(!optionsVisible);
+              }}
+            /> */}
+            <h2
+              style={{ color: "white" }}
+              onClick={() => {
+                setOptionsVisible(!optionsVisible);
+              }}
+            >
+              SPECIFICATIONS
+            </h2>
+            <div
+              onClick={() => {
+                setOptionsVisible(!optionsVisible);
+              }}
+              className="arrow-down"
+            >
+              ▼
+            </div>
+            {optionsVisible && (
+              <div className="options" id="options">
+                {/* <Paper className="page-container1"> */}
+                {/* <Tabs 
+                    style={{ color: "white", backgroundColor: "black"  }}
+                    value={value}
+                  
+                    indicatorColor="primary"
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  >
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Features"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Size"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Ports"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Power"
+                      />
+                  </Tabs> */}
+
+                <div
+                  style={{
+                    color: "white",
+                    backgroundColor: "black",
+                    height: "50px",
+                  }}
+                  value={value}
+                  indicatorColor="primary"
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                >
+                  {/* Your custom styling */}
+
+                  <div
+                    // className="centered-tabs"
+                    style={{
+                      alignitems: "center",
+                      display: "flex",
+                      justifycontent: "center",
+                      fontSize: 30,
+                    }}
+                  >
+                    <div className="centered-tabs" onClick={() => setValue(0)}>
+                      Features
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(1)}>
+                      Size
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(2)}>
+                      Ports
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(3)}>
+                      Power
+                    </div>
+                  </div>
+                </div>
+                {Detail(value)}
+                {/* </Paper> */}
+              </div>
+            )}
+          </div>
+
+          {/* <div className="dropdown" style={{ marginBottom: secondDropdownOpen ? '10px' : '0' }}>
+        <button    style={{width:'99%',display:'flex'}}
+        onClick={() => {
+          setFirstDropdownOpen(!firstDropdownOpen);
+          setSecondDropdownOpen(false);
+        }} className="dropbtn">
+          <img  style={{height:'50px'}}  src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
+         /> <h2>CORE CONFIG</h2>
+        </button>
+        {firstDropdownOpen && (
+          <div className="dropdown-content">
+           <img src={"https://cdn.originpc.com/opc/product/opc-blob-3b1a63f7-10b4-44ac-abe7-9ea964d335a9.png"}    />
+          </div>
+        )}
+      </div>
+
+      <div className="dropdown" 
+      style={{ marginBottom:firstDropdownOpen ? '50px' : '0' }}>
+        <button  style={{width:'99%',display:'flex'}}
+        onClick={() => {
+          setSecondDropdownOpen(!secondDropdownOpen);
+          setFirstDropdownOpen(false);
+        }} 
+        className="dropbtn">
+             <img  style={{height:'50px'}} src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png" />
+             <h2>MEMORY</h2>
+
+
+        </button>
+        {secondDropdownOpen && (
+          <div className="dropdown-content">
+          <img src={"https://cdn.originpc.com/opc/product/opc-blob-21ee87e0-5de2-4731-ba3d-462b14377019.png"}    />
+          </div>
+        )}
+      </div> */}
+          <div>
+            <h2 style={{ color: "white" }}>Build</h2>
+            {dropdowns.map((dropdown, index) => (
+              <div
+                key={index}
+                className="dropdown"
+                style={{
+                  marginBottom: dropdown.isOpen && index !== 0 ? "50px" : "0",
+                }}
+              >
+                <button
+                  style={{ width: "800px", display: "flex" }}
+                  onClick={() => toggleDropdown(index)}
+                  className="dropbtn"
+                >
+                  <img
+                    style={{ height: "50px" }}
+                    src={dropdown.imgSrc}
+                    alt={dropdown.title}
+                  />
+                  <h2>{dropdown.title}</h2>
+                </button>{" "}
+                <br />
+                <br />
+                {dropdown.isOpen && (
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: "10px",
+                    }}
+                  >{console.log(build[0][1])}
+                    <div > 
+                      <img 
+                        // style={{ width: '300px', border:'5px solid white' }}
+                        className="dropdown-content"
+                        src={dropdown.contentSrc}
+                        alt={`Content for ${dropdown.title}`}
+                        onClick={() => {
+                         if(build[index][1]===false) {
+                          if(build[index][0]===false){
+                            updateBooleanValue(index, 0, true);
+                         }else
+                          {
+                            updateBooleanValue(index, 0, false);
+                          }
+                        }else{
+                          updateBooleanValue(index, 1, false);
+
+
+                          updateBooleanValue(index, 0, true);
+                        }
+                        
+                        }}                      />
+
+                     {build[index][0]? 
+                    ( <AddCircleIcon
+                     style={{
+                       color: "green",
+                       fontSize: 30,
+                       marginLeft: "-45px",
+                       marginBottom: "160px",
+                     }}
+                   />):(
+                     <AddCircleOutlineIcon
+                     style={{
+                      color: "white",
+                      fontSize: 30,
+                      marginLeft: "-45px",
+                      marginBottom: "160px",
+                    }}
+                     />)
+                     }
+                    </div>
+                    <div>
+                      <img
+                        // style={{ width: '300px', backgroundColor: 'white' }}
+                        className="dropdown-content"
+                        src={dropdown.contentSrc}
+                        alt={`Content for ${dropdown.title}`}
+                        onClick={() => {
+                          if(build[index][0]===false) {
+
+                          if(build[index][1]===false){
+                            updateBooleanValue(index, 1, true);
+                         }else
+                          {
+                            updateBooleanValue(index, 1, false);
+                          }
+                        }else{
+                          updateBooleanValue(index, 0, false);
+                          updateBooleanValue(index, 1, true);
+                        }}}                      />
+
+                     {build[index][1]? 
+                    ( <AddCircleIcon
+                    
+                     style={{
+                       color: "green",
+                       fontSize: 30,
+                       marginLeft: "-45px",
+                       marginBottom: "160px",
+                     }}
+                   />):(
+                     <AddCircleOutlineIcon
+                     style={{
+                      color: "white",
+                      fontSize: 30,
+                      marginLeft: "-45px",
+                      marginBottom: "160px",
+                    }}
+                     />)
+                     }
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <br />
+          <br />
+          <br />
+          <div></div>
         </div>
       );
     } else {
       return (
         <div>
-          <h1 style={{color:'white'}}>{props.lapdata[i].name}</h1>
-          <h2 style={{color:'black'}}><button>Buy Now</button>{" "} <button>Add to Cart</button></h2>
+          <pre>
+            {" "}
+            <h1 style={{ color: "white" }}>
+              {props.lapdata[i].name}
+              {props.lapdata[i].price}
+            </h1>
+            {/* <h2>{props.lapdata[i].price}</h2> */}
+          </pre>
+          <h2 style={{ color: "black" }}>
+            <button>Buy Now</button>{" "}
+            <button
+              onClick={() => {
+                props.setnewobject({
+                  ...props.newobject,
+                  itemid: Number(props.lapdata[i].id), // Assuming you want to update the 'itemid' in newObject
+                });
+                console.log(props.newobject);
+                insertJsonObject(
+                  props.cartdata,
+                  props.newobject,
+                  props.existingdata
+                );
+              }}
+            >
+              Add to Cart
+            </button>
+          </h2>
           {/* <div className="centered-container"> */}
           <div className="centered-content">
             {props.lapdata && props.lapdata.length > i ? (
@@ -210,38 +624,39 @@ const ItemPage = (props) => {
                 </Select>
                 </div> */}
           {/* </div> */}
-          <div className="hollow-tab">
-            <img
-              className="w-100"
-              src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
-              onClick={() => {
-                setOptionsVisible(!optionsVisible);
-              }}
-            />
-            <h2
+
+          {/* 
+          <div className="hollow-tab" style={{ marginBottom: firstDropdownOpen ? '50px' : '0' }}>
+      <button
+        style={{ width: '99%', display: 'flex' }}
+        onClick={toggleDropdownspec}
+        // className="dropbtn"
+      >
+        <img
+           className="w-100"
+           src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
+           onClick={() => {
+             setFirstDropdownOpen(!firstDropdownOpen);
+           }}
+        />
+      </button>
+      <h2
               style={{ color: "white" }}
               onClick={() => {
-                setOptionsVisible(!optionsVisible);
+                setFirstDropdownOpen(!firstDropdownOpen);
               }}
             >
-              Operating System
+               SPECIFICATIONS
             </h2>
-            <div
-              onClick={() => {
-                setOptionsVisible(!optionsVisible);
-              }}
-              className="arrow-down"
-            >
-              ▼
-            </div>
-            {optionsVisible && (
+      <br />
+      <br />
+      {firstDropdownOpen && (
               <div className="options" id="options">
                 <Paper className="page-container1">
                   <Tabs
                     style={{ color: "white", backgroundColor: "black" }}
-                    // className="centered-tabs" // Add a class for styling the tabs
                     value={value}
-                    // textColor="green"
+                  
                     indicatorColor="primary"
                     onChange={(event, newValue) => {
                       setValue(newValue);
@@ -270,12 +685,112 @@ const ItemPage = (props) => {
                   </Tabs>
                   {Detail(value)}
                 </Paper>
-                {/* </DropdownItem> */}
+            
+              </div>
+            )}
+    </div> */}
 
-                {/* Add more options as needed */}
+          <div className="hollow-tab">
+            {/* <img
+              className="w-100"
+              src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
+              onClick={() => {
+                setOptionsVisible(!optionsVisible);
+              }}
+            /> */}
+            <h2
+              style={{ color: "white" }}
+              onClick={() => {
+                setOptionsVisible(!optionsVisible);
+              }}
+            >
+              SPECIFICATIONS
+            </h2>
+            <div
+              onClick={() => {
+                setOptionsVisible(!optionsVisible);
+              }}
+              className="arrow-down"
+            >
+              ▼
+            </div>
+            {optionsVisible && (
+              <div className="options" id="options">
+                {/* <Paper className="page-container1"> */}
+                {/* <Tabs 
+                    style={{ color: "white", backgroundColor: "black"  }}
+                    value={value}
+                  
+                    indicatorColor="primary"
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  >
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Features"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Size"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Ports"
+                    />
+                    <Tab
+                      className="centered-tabs"
+                      style={{ fontSize: 12 }}
+                      label="Power"
+                      />
+                  </Tabs> */}
+
+                <div
+                  style={{
+                    color: "white",
+                    backgroundColor: "black",
+                    height: "50px",
+                  }}
+                  value={value}
+                  indicatorColor="primary"
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                >
+                  {/* Your custom styling */}
+
+                  <div
+                    // className="centered-tabs"
+                    style={{
+                      alignitems: "center",
+                      display: "flex",
+                      justifycontent: "center",
+                      fontSize: 30,
+                    }}
+                  >
+                    <div className="centered-tabs" onClick={() => setValue(0)}>
+                      Features
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(1)}>
+                      Size
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(2)}>
+                      Ports
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(3)}>
+                      Power
+                    </div>
+                  </div>
+                </div>
+                {Detail(value)}
+                {/* </Paper> */}
               </div>
             )}
           </div>
+
           {/* <div className="dropdown" style={{ marginBottom: secondDropdownOpen ? '10px' : '0' }}>
         <button    style={{width:'99%',display:'flex'}}
         onClick={() => {
@@ -312,7 +827,7 @@ const ItemPage = (props) => {
         )}
       </div> */}
           <div>
-            <h2>Build</h2>
+            <h2 style={{ color: "white" }}>Build</h2>
             {dropdowns.map((dropdown, index) => (
               <div
                 key={index}
@@ -322,7 +837,7 @@ const ItemPage = (props) => {
                 }}
               >
                 <button
-                  style={{ width: "99%", display: "flex" }}
+                  style={{ width: "800px", display: "flex" }}
                   onClick={() => toggleDropdown(index)}
                   className="dropbtn"
                 >
@@ -332,28 +847,125 @@ const ItemPage = (props) => {
                     alt={dropdown.title}
                   />
                   <h2>{dropdown.title}</h2>
-                </button> <br/><br/>
+                </button>{" "}
+                <br />
+                <br />
                 {dropdown.isOpen && (
-                  <div className="dropdown-content">
-                    <img
-                      src={dropdown.contentSrc}
-                      alt={`Content for ${dropdown.title}`}
-                    />
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: "10px",
+                    }}
+                  >{console.log(build[0][1])}
+                    <div > 
+                      <img 
+                        // style={{ width: '300px', border:'5px solid white' }}
+                        className="dropdown-content"
+                        src={dropdown.contentSrc}
+                        alt={`Content for ${dropdown.title}`}
+                        onClick={() => {
+                         if(build[index][1]===false) {
+                          if(build[index][0]===false){
+                            updateBooleanValue(index, 0, true);
+                         }else
+                          {
+                            updateBooleanValue(index, 0, false);
+                          }
+                        }else{
+                          updateBooleanValue(index, 1, false);
+
+
+                          updateBooleanValue(index, 0, true);
+                        }
+                        
+                        }}                      />
+
+                     {build[index][0]? 
+                    ( <AddCircleIcon
+                     style={{
+                       color: "green",
+                       fontSize: 30,
+                       marginLeft: "-45px",
+                       marginBottom: "160px",
+                     }}
+                   />):(
+                     <AddCircleOutlineIcon
+                     style={{
+                      color: "white",
+                      fontSize: 30,
+                      marginLeft: "-45px",
+                      marginBottom: "160px",
+                    }}
+                     />)
+                     }
+                    </div>
+                    <div>
+                      <img
+                        // style={{ width: '300px', backgroundColor: 'white' }}
+                        className="dropdown-content"
+                        src={dropdown.contentSrc}
+                        alt={`Content for ${dropdown.title}`}
+                        onClick={() => {
+                          if(build[index][0]===false) {
+
+                          if(build[index][1]===false){
+                            updateBooleanValue(index, 1, true);
+                         }else
+                          {
+                            updateBooleanValue(index, 1, false);
+                          }
+                        }else{
+                          updateBooleanValue(index, 0, false);
+                          updateBooleanValue(index, 1, true);
+                        }}}                      />
+
+                     {build[index][1]? 
+                    ( <AddCircleIcon
+                    
+                     style={{
+                       color: "green",
+                       fontSize: 30,
+                       marginLeft: "-45px",
+                       marginBottom: "160px",
+                     }}
+                   />):(
+                     <AddCircleOutlineIcon
+                     style={{
+                      color: "white",
+                      fontSize: 30,
+                      marginLeft: "-45px",
+                      marginBottom: "160px",
+                    }}
+                     />)
+                     }
+                    </div>
                   </div>
                 )}
               </div>
             ))}
           </div>
+          <br />
+          <br />
+          <br />
+          <div></div>
         </div>
       );
     }
   };
   return (
     <div className="App">
+      {/* <Toolbar sx={{ backgroundColor: "black" }}> */}
+
       {props.setcheck1(true)}
       {props.setselitem(i)}
       {props.setcheck(1)}
       {ChoosPC()}
+      {/* </Toolbar> */}
+      {/* <AppBar className="bottom">
+      <Toolbar sx={{ backgroundColor: "WHITE" }}>
+        </Toolbar>
+      </AppBar> */}
     </div>
   );
 };

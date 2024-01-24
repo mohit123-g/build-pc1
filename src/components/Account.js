@@ -5,11 +5,41 @@ import Tabs from "@material-ui/core/Tabs";
 import "../App.css";
 import { red } from "@material-ui/core/colors";
 import { border, color } from "@mui/system";
-import "./ItemPage.css";
+// import "./ItemPage.css";
+import "./Account.css";
 import { useParams } from "react-router-dom";
+import { Select } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+
+
+// const useStyles = makeStyles((theme) => ({
+//     select: {
+//       "&:before": {
+//         borderBottom: "none",
+//       },
+//       "&:after": {
+//         borderBottom: "none",
+//       },
+//       "& .MuiSelect-icon": {
+//         color: "black",
+//       },
+//     },
+//   }));
+  
+
+
 const Account=(props)=>{
     const [value, setValue] = useState(2)
     const [i,setI]=useState(useParams()['id'])
+//     const classes = useStyles();
+//     const handleChange = (event, newValue) => {
+//         setValue(newValue);
+//       };
+    
+//       const handleSelectChange = (event) => {
+//         // handle select menu change here
+//       };
 
 //     const Detail=(c)=>{
 //        if( props.selectdata && props.selectdata.length > i ){
@@ -115,18 +145,96 @@ const Account=(props)=>{
 
 //        }
 //     }
-    return(
-        <div className="App" >
+// const Detail=(c)=>{
+//     if( props.lapdata && props.lapdata.length > i ){
+//       if(c==0){
+//          return(<div style={{textAlign:'left'}}>
+//            <h3 >Technology</h3> 
+//               <h5>{props.lapdata[0].spec.features.Technology}</h5> 
+//               <h3>Display</h3>
+//               <h5>{props.lapdata[0].spec.features.Display}</h5>
+//               <h3>Special</h3>
+//               <h5>{props.lapdata[0].spec.features.Special}</h5>
+//          </div>)
+//       }
+//       if(c==1){
+//          return(<div style={{textAlign:'left'}} >
+//            <h3>Dimensions & Weight</h3> 
+//               <h5>{props.lapdata[0].spec.size.Dimensions}</h5> 
+              
+//          </div>)
+//       }
+//       if(c==2){
+//          return(<div style={{textAlign:'left'}}>
+//            <h3>Bays</h3> 
+//               <h5>{props.lapdata[0].spec.ports.Bays}</h5> 
+//               <h3>USB</h3>
+//               <h5>{props.lapdata[0].spec.ports.USB}</h5>
+//               <h3>Ports</h3>
+//               <h5>{props.lapdata[0].spec.ports.Port}</h5>
+//          </div>)
+//       }
+//       if(c==3){
+//          return(<div style={{textAlign:'left'}}>
+//            <h3>Power & Battery</h3> 
+//               <h4>{props.lapdata[0].spec.power}</h4> 
+              
+//          </div>)
+//       }
+//      }else{
+//         return( <div>No image available</div>);}
+       
+//  }
+ return (
+    <div className="App">
+      {/* <div className="hollow-tab"> */}
+        {/* <img
+          className="w-100"
+          src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
+          alt="Product"
+        />
+        <h2 style={{ color: "black" }}>Operating System</h2> */}
+
+        {/* <Select
+          className={classes.select}
+          value={value}
+          onChange={handleSelectChange}
+          displayEmpty
+          inputProps={{ "aria-label": "Select" }}
+        >
+          <option value="" disabled>
+            Choose an option
+          </option>
+          <option value={0}>Features</option>
+          <option value={1}>Size</option>
+          <option value={2}>Ports</option>
+          <option value={3}>Power</option>
+        </Select>
+      </div>
+
+      <Paper>
+        <Tabs
+          value={value}
+          indicatorColor="primary"
+          textColor="primary"
+          onChange={handleChange}
+        >
+          <Tab label="Features" />
+          <Tab label="Size" />
+          <Tab label="Ports" />
+          <Tab label="Power" />
+        </Tabs>
+        {Detail(value)}
+      </Paper> */}
+    
            {/* {props.setcheck(true)} */}
             {/* {props.setselitem(i)} */}
             {props.setcheck(1)}
             {/* {ChoosPC()} */}
             <h1>Account</h1>
-            </div>
-
             
-
-    )
+    </div>
+  );
 }
 
 export default Account;
