@@ -23,7 +23,8 @@ import { mainListItems, secondaryListItems } from './components/listItems';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
-
+import HistoryIcon from '@mui/icons-material/History';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -37,6 +38,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CallIcon from '@mui/icons-material/Call';
 import LoginIcon from '@mui/icons-material/Login';
 
 
@@ -45,6 +47,7 @@ import Ecom from "./components/Ecom";
 import ItemPage from "./components/ItemPage";
 import CartPage from "./components/CartPage";
 import Account from "./components/Account";
+import Custum from "./components/Custum"
 import { useState, useEffect } from "react";
 import { blue } from "@mui/material/colors";
 import supabase from "./SupabaseClient";
@@ -54,10 +57,10 @@ import { Auth } from "@supabase/auth-ui-react";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="red" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Mohit Gupta
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -544,17 +547,43 @@ function App(props) {
     <ListItemButton>
     <a href="/Account">
       <ListItemIcon>
-   <AccountCircleIcon  />
+   <CallIcon  />
 
       </ListItemIcon>
       </a>
-      <ListItemText primary="Account" />
+      <ListItemText primary="Contact us
+      " />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Reports" />
+    </ListItemButton>
+    
+  </React.Fragment>
+
+
+
+            <Divider sx={{ my: 1 }} />
+            {/* {secondaryListItems} */}
+            <React.Fragment>
+    {/* <ListSubheader component="div" inset>
+      Saved reports
+    </ListSubheader> */}
+    <ListItemButton>
+      <ListItemIcon>
+        {/* <AssignmentIcon /> */}
+        <InventoryIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Orders" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        {/* <AssignmentIcon /> */}
+        <HistoryIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Order History" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -563,12 +592,8 @@ function App(props) {
       </ListItemIcon>
       <ListItemText primary="Logout" />
     </ListItemButton>
+    
   </React.Fragment>
-
-
-
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
           </List>
         </Drawer>
         <Box  style={{ backgroundImage: "url('https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d')" }}
@@ -751,6 +776,36 @@ function App(props) {
                 />
             }
           ></Route>
+           <Route
+            path="/Custum"
+            index
+            element={
+              <Custum
+                check={Check}
+                setcheck={setCheck}
+                sel={Sel}
+                setsel={setSel}
+                check1={Check1}
+                setcheck1={setCheck}
+                pcdata={pcData}
+                setpcdata={setPcData}
+                lapdata={lapData}
+                setlapdata={setLapData}
+                selitem={Selitem}
+                setselitem={setSelitem}
+                cartdata={cartData}
+                setcartdata={setCartData}
+                userid1={userId1}
+                setuserid1={setUserId1}
+                   
+                newobject={newObject}
+                setnewobject={setNewObject}
+                existingdata={existingData}
+                setexistingdata={setExistingData}
+                />
+            }
+          ></Route>
+          
 
           {/* <Route
       path="/Dashboard"

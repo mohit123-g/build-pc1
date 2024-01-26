@@ -126,8 +126,26 @@ display: flex;
   /* position: relative; */
   /* height:200px;
   width: 200px; */
+  margin-left: 150px;
+  /* margin-right: 500px; */
   justify-content: center;
   align-items: center;
+  
+  flex-direction: column;
+  background-color: transparent;
+  /* margin: 1px; Adjust the margin as needed */
+}
+
+.centered-contentpc {
+  /* display: flex; */
+  /* position: relative; */
+  /* height:200px;
+  width: 200px; */
+  margin-left: 20px;
+  /* margin-right: 500px; */
+  justify-content: center;
+  align-items: center;
+  
   flex-direction: column;
   background-color: transparent;
   /* margin: 1px; Adjust the margin as needed */
@@ -245,15 +263,16 @@ h1 {
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 500px 210px;  
-  margin-top: -470px;
-  margin-left: 90px;
+  padding: 250px 110px;  
+  margin-top: 80px;
+  margin-left: 170px;
   z-index: 0;  
 
   /* bottom: 10px; */
   background-color:transparent;
   border-bottom: 2px solid #000;
 }
+
 
 .hollow-tab img {
   width: 100px;
@@ -265,13 +284,28 @@ h1 {
 }
 
 
+.hollow-tabpc {
+  
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 250px 110px;  
+  margin-top: -1px;
+  margin-left: 70px;
+  z-index: 0;  
+
+  /* bottom: 10px; */
+  background-color:transparent;
+  border-bottom: 2px solid #000;
+}
 
 .options {
   display: none;
   position: absolute;
-  top: 600px;
+  top: 20px;
   /* margin-top: 70%; */
-  left: -90px;
+  left: -160px;
   width:800px;
   max-height: 400px;
   overflow-y: auto;
@@ -306,6 +340,46 @@ h1 {
   /* transition: display 0.3s; */
 }
 
+.optionspc {
+  display: none;
+  position: absolute;
+  top: 80px;
+  /* margin-top: 70%; */
+  left: -160px;
+  width:800px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  z-index: 0;
+  padding: 10px;
+}
+
+.optionspc a {
+  display: block;
+  padding: 15px;
+  color: #000;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+}
+
+/* .options a:hover {
+  background-color: #000;
+  color: white;
+}  */
+
+.optionspc img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 5px;
+}
+
+.hollow-tabpc .optionspc {
+  display: block;
+  /* transition: display 0.3s; */
+}
 /* #dropdown{ */
   /* position:relative; */
   /* width: 100%; */
@@ -314,3 +388,28 @@ h1 {
   /* background-color: transparent; */
   /* margin-top: 10%; */
 /* } */
+.app-container {
+  display: flex;
+  align-items: center;
+  /* left: -10px; */
+
+}
+
+.thumbnail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.thumbnail-image {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.selected-image {
+  max-width: 400px;
+  max-height: 400px;
+}

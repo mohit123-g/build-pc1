@@ -7,6 +7,7 @@ import axios from "axios";
 import ItemPage from "./ItemPage";
 import { checkboxClasses } from "@mui/material";
 import supabase from "../SupabaseClient";
+import { json } from "react-router-dom";
 
 export const insertJsonObject = async (cartdataex,newobjectex,existingdataex) => {
   let flag=0;
@@ -62,7 +63,7 @@ const Ecom=(props)=>{
     // //     },[Check1]);
    
        
-  var [budget,setbudget]=useState(20000)
+  var [budget,setbudget]=useState(JSON.parse(localStorage.getItem("Budget")) ||0)
   var [Work,setWork]=useState("")
   
 //    const [existingData, setExistingData] = useState([]);
@@ -81,7 +82,9 @@ const Ecom=(props)=>{
     // setExistingData(props.cartdata[1].citem);
   }, []);
 
-
+  useEffect(() => {
+    localStorage.setItem("Budget", JSON.stringify(budget));
+  }, [budget]);
   const fetchData = async () => {
     // let rowNo=-1;
  
@@ -130,7 +133,7 @@ const Ecom=(props)=>{
                       
                         insertJsonObject(props.cartdata,props.newobject,props.existingdata);
                         }}>Add to Cart</button></h6>
-           <a href={"/IPage/"+i} ><img   id='but2' src={props.lapdata[i].img}  />
+           <a href={"/IPage/"+i} ><img   id='but2' src={props.lapdata[i].img[0]}  />
             <h6  style={{color:'white'}}>{props.lapdata[i].desc}</h6></a> 
             
             </div>
@@ -160,7 +163,7 @@ const Ecom=(props)=>{
                 console.log(props.newobject)
                 insertJsonObject(props.cartdata,props.newobject,props.existingdata);
                 }}>Add to Cart</button></h6><div>
-            <a href={"/IPage/"+i}>  <img  id='but2' src={props.pcdata[i].img}  />
+            <a href={"/IPage/"+i}>  <img  id='but2' src={props.pcdata[i].img[0]}  />
             <h6  style={{color:'white'}}>{props.pcdata[i].desc}</h6>
             
             </a></div>
@@ -273,7 +276,7 @@ const openModal = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-    var bs=20000;
+    var bs=20;
       return(
          <div>
             {/* <button onClick={openModal}>Open Modal</button> */}
@@ -319,9 +322,14 @@ return(
        <h4  style={{color:"black"}}>PreBuild PC</h4>
       <button  onClick={()=>{setb(1); openModal(); props.setsel("o")}}> <img id="but3" src="https://nzxt.com/assets/cms/34299/1658894006-prebuilt-pcs-path-primary.png?auto=format&fit=max&h=900&w=672"/> </button>                                  
    </div>
-   <div  className="item" >
+  <div  className="item" >
        <h4  style={{color:"black"}}>Custum PC</h4>
-       <button  onClick={()=>{props.setsel("PC"); setbudget(300000) }}> <img id="but3"  src="https://themvp.in/catalog/view/assets/img/PC-Avinash-Singh.webp"/></button>                                   
+       <a href="/Custum">    <button  onClick={()=>{
+        // props.setsel("PC"); 
+      //  setbudget(300000)
+        }}> <img id="but3" 
+         src="https://themvp.in/catalog/view/assets/img/PC-Avinash-Singh.webp"/>
+         </button> </a>                                  
    </div>
    <div  className="item">
        <h4  style={{color:"black"}}>Laptop</h4>

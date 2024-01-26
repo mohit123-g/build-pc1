@@ -4,7 +4,7 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import "../App.css";
 import { red } from "@material-ui/core/colors";
-import { border, color, display, fontSize } from "@mui/system";
+import { border, color, display, fontSize, width } from "@mui/system";
 import Dropdown from "rsuite/Dropdown";
 import App from "../App";
 import "./ItemPage.css";
@@ -92,6 +92,32 @@ const ItemPage = (props) => {
       return newBuild;
     });
   };
+
+  const [selectedImageL, setSelectedImageL] = useState(
+    // 'https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/71NkSeJt6zL._SL1500_.jpg'
+        props.lapdata[i].img[0]
+    );
+  const handleImageClickL = (image) => {
+    setSelectedImageL(image);
+  };
+
+
+  const [selectedImagePC, setSelectedImagePC] = useState(
+    // 'https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/71NkSeJt6zL._SL1500_.jpg'
+        props.pcdata[i].img[0]
+    );
+  const handleImageClickPC = (image) => {
+    setSelectedImagePC(image);
+  };
+  // const images = [
+  //   "https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/61mqsMjGJlL._SL1500_.jpg",
+  //   "https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/51PiiqxZ7NL._SL1500_.jpg",
+  //   "https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/61NgS936-eL._SL1500_.jpg",
+  //   "https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/61qkmgJBLaL._SL1500_.jpg",
+  //   "https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/81VImoKsWAL._SL1500_.jpg"
+  // ];
+
+
 
   // const toggleOptions = () => {
   //   setOptionsVisible(!optionsVisible);
@@ -186,15 +212,39 @@ const ItemPage = (props) => {
             </button>
           </h2>
           {/* <div className="centered-container"> */}
-          <div className="centered-content">
-            {props.pcdata && props.pcdata.length > i ? (
+          <div className="centered-contentpc">
+            {/* {props.pcdata && props.pcdata.length > i ? (
               <img
                 className="top-image" // Add a class for styling the image
                 src={props.pcdata[i].img}
               />
             ) : (
               <div>No image available</div>
-            )}
+            )} */}
+
+<div className="app-container">
+      <div className="thumbnail-container">
+        {props.pcdata[i].img.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`Thumbnail ${index + 1}`}
+            className="thumbnail-image"
+            onClick={() => handleImageClickPC(image)}
+          />
+        ))}
+      </div>
+      <div>
+        {selectedImagePC && (
+          <img
+            src={selectedImagePC}
+            alt="Selected Image"
+            className="selected-image"
+            // style={{width:'700px'}}
+          />
+        )}
+      </div>
+    </div>
           </div>
           {/* </div> */}
           <br />
@@ -292,8 +342,8 @@ const ItemPage = (props) => {
             )}
     </div> */}
 
-          <div className="hollow-tab">
-            {/* <img
+          <div className="hollow-tabpc">
+               {/* <img
               className="w-100"
               src="https://cdn.originpc.com/opc/product/opc-blob-ddbeb457-efde-4a15-a6b1-2a8bc5749b63.png"
               onClick={() => {
@@ -301,23 +351,23 @@ const ItemPage = (props) => {
               }}
             /> */}
             <h2
-              style={{ color: "white" }}
+              style={{ color: "white" ,marginTop:'-410px'}}
               onClick={() => {
                 setOptionsVisible(!optionsVisible);
               }}
             >
-              SPECIFICATIONS
+              SPECIFICATIONS ▼
             </h2>
-            <div
+            {/* <div
               onClick={() => {
                 setOptionsVisible(!optionsVisible);
               }}
               className="arrow-down"
             >
               ▼
-            </div>
+            </div> */}
             {optionsVisible && (
-              <div className="options" id="options">
+              <div className="optionspc" >
                 {/* <Paper className="page-container1"> */}
                 {/* <Tabs 
                     style={{ color: "white", backgroundColor: "black"  }}
@@ -428,7 +478,7 @@ const ItemPage = (props) => {
           </div>
         )}
       </div> */}
-          <div>
+          {/* <div >
             <h2 style={{ color: "white" }}>Build</h2>
             {dropdowns.map((dropdown, index) => (
               <div
@@ -546,7 +596,7 @@ const ItemPage = (props) => {
                 )}
               </div>
             ))}
-          </div>
+          </div> */}
           <br />
           <br />
           <br />
@@ -585,14 +635,40 @@ const ItemPage = (props) => {
           </h2>
           {/* <div className="centered-container"> */}
           <div className="centered-content">
-            {props.lapdata && props.lapdata.length > i ? (
+            {/* {props.lapdata && props.lapdata.length > i ? (
               <img
                 className="top-image" // Add a class for styling the image
                 src={props.lapdata[i].img}
               />
             ) : (
               <div>No image available</div>
-            )}
+            )} */}
+            {/* <div className="top-image"> */}
+            <div className="app-container">
+      <div className="thumbnail-container">
+        {props.lapdata[i].img.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`Thumbnail ${index + 1}`}
+            className="thumbnail-image"
+            onClick={() => handleImageClickL(image)}
+          />
+        ))}
+      </div>
+      <div>
+        {selectedImageL && (
+          <img
+            src={selectedImageL}
+            alt="Selected Image"
+            className="selected-image"
+            // style={{width:'700px'}}
+          />
+        )}
+      </div>
+    </div>
+            {/* </div> */}
+
           </div>
           {/* </div> */}
           <br />
@@ -699,21 +775,21 @@ const ItemPage = (props) => {
               }}
             /> */}
             <h2
-              style={{ color: "white" }}
+              style={{ color: "white" ,marginTop:'-520px'}}
               onClick={() => {
                 setOptionsVisible(!optionsVisible);
               }}
             >
-              SPECIFICATIONS
+              SPECIFICATIONS ▼
             </h2>
-            <div
+            {/* <div
               onClick={() => {
                 setOptionsVisible(!optionsVisible);
               }}
               className="arrow-down"
             >
               ▼
-            </div>
+            </div> */}
             {optionsVisible && (
               <div className="options" id="options">
                 {/* <Paper className="page-container1"> */}

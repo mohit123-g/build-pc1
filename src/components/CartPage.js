@@ -73,7 +73,7 @@ useEffect(() => {
           name: props.pcdata[k].name,
           price: props.pcdata[k].price,
           quantity: props.cartdata[0].citem[j].q,
-          image: props.pcdata[k].img,
+          image: props.pcdata[k].img[0],
           details: props.pcdata[k].desc,
         });
       }
@@ -85,7 +85,7 @@ useEffect(() => {
           name: props.lapdata[k].name,
           price: props.lapdata[k].price,
           quantity: props.cartdata[0].citem[j].q,
-          image: props.lapdata[k].img,
+          image: props.lapdata[k].img[0],
           details: props.lapdata[k].desc,
         });
       }
