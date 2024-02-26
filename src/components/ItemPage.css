@@ -1,15 +1,106 @@
 /* Apply styles for different screen sizes using media queries */
 
+/* For screens with a width between 769px and 124px (adjust as needed) */
+/* @media (min-width: 769px) and (max-width: 1024px) {
+
+  .item {
+    height: 200px;
+  }
+
+  .thumbnail-container {
+    margin-right: 0;
+  }
+
+  .thumbnail-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .selected-image {
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .hollow-tab {
+    padding: 10px 50px;
+    margin-top: 50px;
+    margin-left: 0;
+  }
+
+  .options {
+    left: 0;
+    width: 100%;
+    max-height: none;
+    overflow-y: initial;
+  }
+
+  .options a {
+    padding: 10px;
+  }
+
+  .optionspc {
+    left: 0;
+    width: 100%;
+    max-height: none;
+    overflow-y: initial;
+  }
+
+  .optionspc a {
+    padding: 10px;
+  }
+} */
+
+/* For screens with a width of 768px or less (adjust as needed) */
+/* @media (max-width: 768px) {
 
 
-/* For screens with a width between 769px and 1024px (adjust as needed) */
-@media (min-width: 769px) and (max-width: 1024px) {
 
-  /* Define your responsive styles here */
-}
+  .item {
+    height: auto;
+  }
 
-/* Add more media queries as needed for other screen sizes */
+  .thumbnail-container {
+    margin-right: 0;
+  }
 
+  .thumbnail-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .selected-image {
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .hollow-tab {
+    padding: 10px 50px;
+    margin-top: 50px;
+    margin-left: 0;
+  }
+
+  .options {
+    left: 0;
+    width: 100%;
+    max-height: none;
+    overflow-y: initial;
+  }
+
+  .options a {
+    padding: 10px;
+  }
+
+  .optionspc {
+    left: 0;
+    width: 100%;
+    max-height: none;
+    overflow-y: initial;
+  }
+
+  .optionspc a {
+    padding: 10px;
+  }
+} */
 
 /* Your existing CSS styles here */
 
@@ -38,8 +129,7 @@
 .dropdown-content{
   /* width:50% ; */
   /* height: 80%; */
-  /* background-color: #1b412f; */
- /* display:flex */
+  /* background-color: #1b412f; */ /* display:flex */
 
  width: 300px; 
  border:5px solid white;
@@ -126,7 +216,7 @@ display: flex;
   /* position: relative; */
   /* height:200px;
   width: 200px; */
-  margin-left: 150px;
+  margin-left: 100px;
   /* margin-right: 500px; */
   justify-content: center;
   align-items: center;
@@ -141,7 +231,7 @@ display: flex;
   /* position: relative; */
   /* height:200px;
   width: 200px; */
-  margin-left: 20px;
+  margin-left: -200px;
   /* margin-right: 500px; */
   justify-content: center;
   align-items: center;
@@ -154,125 +244,46 @@ display: flex;
 .Tabs{
 }
 
-@media (max-width: 768px)  {
- 
-  .centered-items {
-    flex-direction: column;
-     /* Stack items vertically on small screens */
-    text-align: center; /* Center text within items */
-  }
-  .App1{
-      flex-direction: row; /* Stack items vertically on small screens */
-      /* text-align: center;   */
-  }
-  
-  .item {
-    margin: 5px; /* Reduce margin on small screens */
-    min-width: 100px;
-    height: 200px; /* Full width on small screens */
-  }
-
-}
-
-
-
-
-/*dropdown*/
-
-
-.top-image{
-  margin-top: 20px;
-  width:  500px;
-  height: 80%;
-}
-/* General styles */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-/* .container {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.specification-tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.specification-tab {
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: #4285f4;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.specification-tab:hover {
-  background-color: #2c5aa0;
-}
-
-.details {
-  display: none;
-  margin-top: 20px;
-  text-align: left;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.close-button {
-  background-color: #ccc;
-  color: #333;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  background-color: #999;
+/* .my-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin-top: 50px;
 } */
 
-.arrow-down {
-  font-size: 20px;
-  color: #fff;
+.thumbnail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
 }
 
-/* Hollow tab styles */
-.hollow-tab {
-  
-  position: relative;
+.thumbnail-image {
+  width: 110px;
+  height: 100px;
+  object-fit: cover;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 250px 110px;  
-  margin-top: 80px;
-  margin-left: 170px;
-  z-index: 0;  
+}
 
-  /* bottom: 10px; */
-  background-color:transparent;
+.selected-image {
+  max-width:  600px;
+  max-height: 600px;
+  border: 2px solid #000;
+  margin-top: 20px;
+}
+
+.hollow-tab {
+  position: relative;
+  /* cursor: pointer; */
+  /* display: flex; */
+  align-items: center;
+  padding: 200px 110px;
+  margin-top: -400px;
+  margin-left: 770px;
+  z-index: 0;
+  background-color: transparent;
   border-bottom: 2px solid #000;
 }
-
 
 .hollow-tab img {
   width: 100px;
@@ -283,30 +294,25 @@ h1 {
   margin-right: 10px;
 }
 
-
 .hollow-tabpc {
-  
   position: relative;
   cursor: pointer;
-  display: flex;
+  /* display: flex; */
   align-items: center;
-  padding: 250px 110px;  
-  margin-top: -1px;
-  margin-left: 70px;
-  z-index: 0;  
-
-  /* bottom: 10px; */
-  background-color:transparent;
+  padding: 250px 110px;
+  margin-top: -400px;
+  margin-left: 770px;
+  z-index: 0;
+  background-color: transparent;
   border-bottom: 2px solid #000;
 }
 
 .options {
   display: none;
   position: absolute;
-  top: 20px;
-  /* margin-top: 70%; */
-  left: -160px;
-  width:800px;
+  top: -200px;
+  left: 210px;
+  width: 800px;
   max-height: 400px;
   overflow-y: auto;
   background-color: #fff;
@@ -315,7 +321,8 @@ h1 {
   z-index: 0;
   padding: 10px;
 }
- .options a {
+
+.options a {
   display: block;
   padding: 15px;
   color: #000;
@@ -324,10 +331,10 @@ h1 {
   font-size: 16px;
 }
 
-/* .options a:hover {
+.options a:hover {
   background-color: #000;
   color: white;
-}  */
+}
 
 .options img {
   max-width: 100%;
@@ -337,16 +344,15 @@ h1 {
 
 .hollow-tab .options {
   display: block;
-  /* transition: display 0.3s; */
+  transition: display 0.3s;
 }
 
 .optionspc {
   display: none;
   position: absolute;
-  top: 80px;
-  /* margin-top: 70%; */
+  top: -80px;
   left: -160px;
-  width:800px;
+  width: 800px;
   max-height: 400px;
   overflow-y: auto;
   background-color: #fff;
@@ -365,10 +371,10 @@ h1 {
   font-size: 16px;
 }
 
-/* .options a:hover {
+.optionspc a:hover {
   background-color: #000;
   color: white;
-}  */
+}
 
 .optionspc img {
   max-width: 100%;
@@ -378,38 +384,12 @@ h1 {
 
 .hollow-tabpc .optionspc {
   display: block;
-  /* transition: display 0.3s; */
+  transition: display 0.3s;
 }
-/* #dropdown{ */
-  /* position:relative; */
-  /* width: 100%; */
-  /* max-height: 100%; */
-  /* justify-content: center; */
-  /* background-color: transparent; */
-  /* margin-top: 10%; */
-/* } */
+
 .app-container {
   display: flex;
   align-items: center;
-  /* left: -10px; */
-
-}
-
-.thumbnail-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.thumbnail-image {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.selected-image {
-  max-width: 400px;
-  max-height: 400px;
+ /* height: 300px; */
+  left: -10px;
 }

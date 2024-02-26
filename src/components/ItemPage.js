@@ -913,7 +913,7 @@ const ItemPage = (props) => {
                 }}
               >
                 <button
-                  style={{ width: "800px", display: "flex" }}
+                  style={{ width: "2000px", display: "flex" }}
                   onClick={() => toggleDropdown(index)}
                   className="dropbtn"
                 >
@@ -1030,7 +1030,7 @@ const ItemPage = (props) => {
     }
   };
   return (
-    <div className="App">
+    <div className="AppIP">
       {/* <Toolbar sx={{ backgroundColor: "black" }}> */}
 
       {props.setcheck1(true)}

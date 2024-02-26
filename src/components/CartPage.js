@@ -230,7 +230,7 @@ const updateJsonColumn = async (itemId, newQuantity) => {
   };
 
   return (
-    <div className="App">
+    <div className="AppIP">
           
            {/* {cartitems1()} */}
            {/* {props.setcheck(true)} */}

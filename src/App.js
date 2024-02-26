@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-
+import "./components/CartPage.css"
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -40,7 +40,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CallIcon from '@mui/icons-material/Call';
 import LoginIcon from '@mui/icons-material/Login';
-
+import SearchIcon from '@mui/icons-material/Search';
 
 import Login from "./components/Login";
 import Ecom from "./components/Ecom";
@@ -164,6 +164,8 @@ function App(props) {
   const toggleDashboard = () => {
     setShowDashboard(!showDashboard);
   };
+  const [searchbox,setSearchBox]=useState("")
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("sel", JSON.stringify(Sel));
@@ -358,7 +360,120 @@ function App(props) {
 
     fetchData();
   }, [props.log]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  useEffect(() => {
+    // Function to handle click event
+    function handleClick() {
+      setIsModalOpen(false); // Toggle the state
+    }
 
+    // Adding event listener to the entire document
+    document.addEventListener('click', handleClick);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []); // Empty dependency array to run the effect only once on mount
+
+  const Modal = ({ isOpen, onClose, children }) => {
+    if (!isOpen) return null;
+  
+
+    return (
+      <div className="modal-overlaySER">
+        <div className="modalSER">
+          <button
+            style={{ color: "black" }}
+            className="modal-closeSER"
+            onClick={onClose}
+          >
+            Close
+          </button>
+       <div  style={{ height: '900px', overflowY: 'auto', border: '1px solid #ccc', padding: '10px' }}> 
+         {children}</div>
+        </div>
+      </div>
+    );
+  };
+  
+  // <div className="cart-container">
+  // <h2 className="cart-title">Your Shopping Cart</h2>
+  
+  // {cartItems.length === 0 ? (
+  //   <p className="empty-cart-message">Your cart is empty</p>
+  // ) : (
+  //   <>
+  //     <div className="cart-items-container">
+  const ModalTemp=()=> {
+    console.log("open")
+    // if (b != 0) {
+      const closeModal=()=> {
+        setIsModalOpen(false);
+      };
+      const itemLap = []; //array of buttons
+      const itemPC = [];
+      var j = searchbox.length;
+      if(searchbox!=""){
+    for (let i = 0; i < lapData.length; i++) {
+      if (
+        lapData[i].name.slice(0, j).toLowerCase() === searchbox.toLowerCase()
+      ){           
+
+      itemLap.push(
+      <div>  <a href={"/IPage/" + i}>
+
+        <div className="cart-item">
+
+            <img   className="cart-item-image"
+                         src={lapData[i].img[0]} />
+          <p className="cart-item-price" >₹{lapData[i].price}</p>
+          <p className="cart-item-name" >{ lapData[i].name}</p>
+          
+        </div></a></div>
+      );          
+}
+    }
+     //array of buttons
+    for (let i = 0; i < pcData.length; i++) {
+      if (
+        pcData[i].name.slice(0, j).toLowerCase() === searchbox.toLowerCase()
+      ){
+      itemPC.push(
+        <div>  <a href={"/IPage/" + i}>
+
+        <div className="cart-item">
+           <a href={"/IPage/" + i}>
+            <img   className="cart-item-image"
+                         src={pcData[i].img[0]} />
+          </a>
+          <p className="cart-item-price">₹{pcData[i].price}</p>
+          <p className="cart-item-name">{ pcData[i].name}</p>
+         
+        </div></a></div>
+      );}
+    } 
+    // var bs = 20;
+      return (
+        <div>
+          {/* <button onClick={openModal}>Open Modal</button> */}
+          <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {/* <div className="cart-container"> */}
+        <h1 className="cart-title">Laptops found</h1>
+          <div className='cart-items-container'>   {itemLap}</div>
+          <h1 className="cart-title">Pre Build PCs found</h1>
+
+          <div className='cart-items-container'>   {itemPC}</div>
+
+          {/* </div> */}
+          </Modal>
+        </div>
+      );}
+    // }
+  };
   // useEffect(()=>{
   //   async function getUserData() {
   //   await supabase.auth.getUser().then((value)=>{
@@ -489,16 +604,31 @@ function App(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
+           <Typography
               component="h1"
               variant="h4"
-
+               
               color="red"
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              ORGPC
+              <a href='/' style={{color:'red'}}> ORGPC</a>
             </Typography>
+           <input placeholder='Search' style={{fontSize:30,height:'50px',width:'1000px'}}
+            //  checked={isChecked}
+            // onClick={openModal}
+            onDoubleClick={openModal}
+             onChange={(e)=>{ openModal();
+              setSearchBox(e.target.value);
+              }}
+           />
+            <SearchIcon style={{height:'50px',width:'50px'}}
+            />
+            
+             {ModalTemp()}
+            <h2 style={{color:'transparent'}}
+            >-----------------------------------------</h2>
+              {/* {openModal} */}
             <IconButton color="inherit">
               <Badge badgeContent={33} color="secondary">
                 {/* <NotificationsIcon /> */}
@@ -596,20 +726,24 @@ function App(props) {
   </React.Fragment>
           </List>
         </Drawer>
-        <Box  style={{ backgroundImage: "url('https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d')" }}
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-          }}
+        <Box  
+        // style={{ 
+        //   backgroundImage: "url('https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d')" 
+        // }}
+        component="main"
+      sx={{
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'black'
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900],
+        flexGrow: 1,
+        height: '100vh',
+        overflow: 'auto',
+        padding: '2%', // Adjust padding as needed
+      }}
         >
           <Toolbar />
-          <Container 
+          <Container  
          
           maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
 <Ecom
