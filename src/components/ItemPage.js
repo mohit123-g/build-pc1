@@ -137,64 +137,160 @@ const ItemPage = (props) => {
     if (props.lapdata && props.lapdata.length > i) {
       if (c == 0) {
         return (
-          <div style={{ textAlign: "left" }}>
-            <h3>Technology</h3>
-            <h5>{props.lapdata[i].spec.features.Technology}</h5>
-            <h3>Display</h3>
-            <h5>{props.lapdata[i].spec.features.Display}</h5>
-            <h3>Special</h3>
-            <h5>{props.lapdata[i].spec.features.Special}</h5>
-          </div>
+          <div style={{ textAlign: "left", fontWeight: "bold", fontSize:25,marginTop:"10px" }}>
+          
+           <h5 >
+  {props.lapdata[i].spec.General.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5></div>
         );
       }
       if (c == 1) {
         return (
-          <div style={{ textAlign: "left" }}>
-            <h3>Dimensions & Weight</h3>
-            <h5>{props.lapdata[i].spec.size.Dimensions}</h5>
-          </div>
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25 }}>
+            <h5 >
+  {props.lapdata[i].spec.Processor_Memeory.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5></div>
         );
       }
       if (c == 2) {
         return (
-          <div style={{ textAlign: "left" }}>
-            <h3>Bays</h3>
-            <h5>{props.lapdata[i].spec.ports.Bays}</h5>
-            <h3>USB</h3>
-            <h5>{props.lapdata[i].spec.ports.USB}</h5>
-            <h3>Ports</h3>
-            <h5>{props.lapdata[i].spec.ports.Port}</h5>
-          </div>
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+         <h5 >
+  {props.lapdata[i].spec.OS.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5></div>
         );
       }
       if (c == 3) {
         return (
-          <div style={{ textAlign: "left" }}>
-            <h3>Power & Battery</h3>
-            <h4>{props.lapdata[i].spec.power}</h4>
-          </div>
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+            <h5>
+  {props.lapdata[i].spec.Port_Slot.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5> </div>
+        );
+      }
+      if (c == 4) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25 }}>
+            <h5>
+  {props.lapdata[i].spec.Display_Audio.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5></div>
+        );
+      }
+      if (c == 5) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25}}>
+            <h5 >
+  {props.lapdata[i].spec.Connectivity.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5>
+<h5 >
+  {props.lapdata[i].spec.Warranty.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5>
+</div>
+        );
+      }
+      if (c == 6) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25}}>
+          <h5 >
+  {props.lapdata[i].spec.Dimensions.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5></div>
+        );
+      }
+      if (c == 7) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+          <h5 >
+  {props.lapdata[i].spec.AdditionalFeatures.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5>  </div>
         );
       }
     } else {
       return <div>No image available</div>;
     }
   };
-
+  const Detailpc = (c) => {
+    if (props.pcdata && props.pcdata.length > i) {
+      if (c == 0) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", fontSize:25,marginTop:"10px" }}>
+          
+           <h5 >
+  {props.pcdata[i].spec.ProcessorMemory.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px',}}>{part.trim()}</div>
+  ))}
+</h5></div>
+        );
+      }
+     
+      if (c == 1) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+         <h5 >
+  {props.pcdata[i].spec.Storage.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5></div>
+        );
+      }
+      if (c == 2) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+            <h5>
+  {props.pcdata[i].spec.GraphicsConnectivity.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5> </div>
+        );
+      }
+      if (c == 3) {
+        return (
+          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25 }}>
+            <h5>
+  {props.pcdata[i].spec.DimensionsMiscellaneous.split('`').map((part, index) => (
+    <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
+  ))}
+</h5></div>
+        );
+      }
+    
+    } else {
+      return <div>No image available</div>;
+    }
+  };
   const ChoosPC = () => {
     if (props.sel == "PC") {
       return (
         <div>
-          <pre>
+         <pre style={{ color: "white" ,fontFamily:'serif'}}>
             {" "}
-            <h1 style={{ color: "white" }}>
+            <h1>
               {props.pcdata[i].name}
-              {"$"+props.pcdata[i].price}
+
+              
             </h1>
-            {/* <h2>{props.lapdata[i].price}</h2> */}
+            <h2>₹{" "}{props.pcdata[i].price}</h2>
           </pre>
           <h2 style={{ color: "black" }}>
-            <button>Buy Now</button>{" "}
-            <button
+         <pre><button className="buy">Buy Now</button>{" "}
+            <button className="buy"
               onClick={() => {
                 props.setnewobject({
                   ...props.newobject,
@@ -209,7 +305,7 @@ const ItemPage = (props) => {
               }}
             >
               Add to Cart
-            </button>
+            </button></pre>
           </h2>
           {/* <div className="centered-container"> */}
           <div className="centered-contentpc">
@@ -424,20 +520,20 @@ const ItemPage = (props) => {
                     }}
                   >
                     <div className="centered-tabs" onClick={() => setValue(0)}>
-                      Features
+                    Processor&Memory
                     </div>
                     <div className="centered-tabs" onClick={() => setValue(1)}>
-                      Size
+                    Storage
                     </div>
                     <div className="centered-tabs" onClick={() => setValue(2)}>
-                      Ports
+                    Graphics&Connectivity
                     </div>
                     <div className="centered-tabs" onClick={() => setValue(3)}>
-                      Power
+                    Dimensions&Miscellaneous
                     </div>
                   </div>
                 </div>
-                {Detail(value)}
+                {Detailpc(value)}
                 {/* </Paper> */}
               </div>
             )}
@@ -606,17 +702,18 @@ const ItemPage = (props) => {
     } else {
       return (
         <div>
-          <pre>
+          <pre style={{ color: "white" ,fontFamily:'serif'}}>
             {" "}
-            <h1 style={{ color: "white" }}>
+            <h1>
               {props.lapdata[i].name}
-              {props.lapdata[i].price}
+
+              
             </h1>
-            {/* <h2>{props.lapdata[i].price}</h2> */}
+            <h2>₹{" "}{props.lapdata[i].price}</h2>
           </pre>
           <h2 style={{ color: "black" }}>
-            <button>Buy Now</button>{" "}
-            <button
+         <pre><button className="buy">Buy Now</button>{" "}
+            <button className="buy"
               onClick={() => {
                 props.setnewobject({
                   ...props.newobject,
@@ -631,7 +728,7 @@ const ItemPage = (props) => {
               }}
             >
               Add to Cart
-            </button>
+            </button></pre>
           </h2>
           {/* <div className="centered-container"> */}
           <div className="centered-content">
@@ -660,7 +757,7 @@ const ItemPage = (props) => {
         {selectedImageL && (
           <img
             src={selectedImageL}
-            alt="Selected Image"
+            alt="Selected-Image"
             className="selected-image"
             // style={{width:'700px'}}
           />
@@ -790,7 +887,7 @@ const ItemPage = (props) => {
             >
               ▼
             </div> */}
-            {optionsVisible && (
+            {!optionsVisible && (
               <div className="options" id="options">
                 {/* <Paper className="page-container1"> */}
                 {/* <Tabs 
@@ -827,7 +924,7 @@ const ItemPage = (props) => {
                 <div
                   style={{
                     color: "white",
-                    backgroundColor: "black",
+                    backgroundColor: "transparent",
                     height: "50px",
                   }}
                   value={value}
@@ -848,17 +945,30 @@ const ItemPage = (props) => {
                     }}
                   >
                     <div className="centered-tabs" onClick={() => setValue(0)}>
-                      Features
+                      General
                     </div>
                     <div className="centered-tabs" onClick={() => setValue(1)}>
-                      Size
+                    Processor & Memeory
                     </div>
                     <div className="centered-tabs" onClick={() => setValue(2)}>
-                      Ports
+                    Operating System
                     </div>
                     <div className="centered-tabs" onClick={() => setValue(3)}>
-                      Power
+                    Port & Slot
                     </div>
+                    <div className="centered-tabs" onClick={() => setValue(4)}>
+                    Display & Audio 
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(5)}>
+                    Connectivity & Warranty 
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(6)}>
+                    Dimensions 
+                    </div>
+                    <div className="centered-tabs" onClick={() => setValue(7)}>
+                    Additional Features 
+                    </div>
+                    
                   </div>
                 </div>
                 {Detail(value)}
@@ -902,7 +1012,7 @@ const ItemPage = (props) => {
           </div>
         )}
       </div> */}
-          <div>
+          {/* <div>
             <h2 style={{ color: "white" }}>Build</h2>
             {dropdowns.map((dropdown, index) => (
               <div
@@ -1020,7 +1130,7 @@ const ItemPage = (props) => {
                 )}
               </div>
             ))}
-          </div>
+          </div> */}
           <br />
           <br />
           <br />

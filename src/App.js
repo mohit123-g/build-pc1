@@ -310,6 +310,8 @@ function App(props) {
         const laptopDataResult = await supabase.from("Laptop").select();
         const cartDataResult = await supabase.from("Cart").select().eq('uid',localStorage.getItem('userid') );
         const userProfileResult = await supabase.from("Users1").select().eq('id',localStorage.getItem('userid') );
+        //     const cartDataResult = await supabase.from("Cart").select().eq ('3250' );
+        // const userProfileResult = await supabase.from("Users1").select().eq('3250'  );
 
         if (
           pcDataResult.error ||
@@ -367,7 +369,9 @@ function App(props) {
   useEffect(() => {
     // Function to handle click event
     function handleClick() {
-      setIsModalOpen(false); // Toggle the state
+      setIsModalOpen(false); 
+    //  setOpen(!open);  
+      // Toggle the state
     }
 
     // Adding event listener to the entire document
@@ -427,12 +431,12 @@ function App(props) {
       <div>  <a href={"/IPage/" + i}>
 
         <div className="cart-item">
-
-            <img   className="cart-item-image"
+    <img   className="cart-item-image"
                          src={lapData[i].img[0]} />
-          <p className="cart-item-price" >₹{lapData[i].price}</p>
+            <pre><p className="cart-item-price" >₹{lapData[i].price}</p>
           <p className="cart-item-name" >{ lapData[i].name}</p>
-          
+          </pre>
+
         </div></a></div>
       );          
 }
@@ -450,9 +454,9 @@ function App(props) {
             <img   className="cart-item-image"
                          src={pcData[i].img[0]} />
           </a>
-          <p className="cart-item-price">₹{pcData[i].price}</p>
+        <pre>  <p className="cart-item-price">₹{pcData[i].price}</p>{" "}
           <p className="cart-item-name">{ pcData[i].name}</p>
-         
+          </pre>
         </div></a></div>
       );}
     } 
@@ -626,18 +630,28 @@ function App(props) {
             />
             
              {ModalTemp()}
-            <h2 style={{color:'transparent'}}
+            <h2 style={{color:'transparent' ,cursor:'default'}}
             >-----------------------------------------</h2>
               {/* {openModal} */}
             <IconButton color="inherit">
-              <Badge badgeContent={33} color="secondary">
+            {props.userprofile2.name}
+
+              <Badge 
+              // badgeContent={33} 
+              color="secondary">
                 {/* <NotificationsIcon /> */}
-                {props.userprofile2.name}
-                 <img  
-              src={props.userprofile2.pimg}
-              alt="Icon"
-              style={{ width: '35px', height: '35px',color:'white' ,marginLeft:'10px' }}
-              />
+                             <img
+    src={props.userprofile2.pimg}
+    alt="Icon"
+    style={{
+        width: '40px',
+        height: '40px',
+        borderRadius: '50%', // Making it a circle
+        marginLeft: '10px',
+        backgroundColor: 'white', // Adding a background color
+    }}
+/>
+
               </Badge>
             </IconButton>
           </Toolbar>
@@ -659,31 +673,31 @@ function App(props) {
           <List component="nav">
             
           <React.Fragment>
-    <ListItemButton>
-    <a href="/">
+          <a href="/"> <ListItemButton>
+  
 
       <ListItemIcon>
         <HomeIcon />
-      </ListItemIcon></a>
+      </ListItemIcon>
       <ListItemText primary="Home" />
-    </ListItemButton>
-    <ListItemButton>
-    <a href="/cart">
+    </ListItemButton></a>
+    <a href="/cart"> <ListItemButton>
+   
       <ListItemIcon>
         <ShoppingCartIcon />
-      </ListItemIcon></a>
+      </ListItemIcon>
       <ListItemText primary="Cart" />
-    </ListItemButton>
-    <ListItemButton>
-    <a href="/Account">
+    </ListItemButton></a>
+    <a href="/Account">  <ListItemButton>
+   
       <ListItemIcon>
    <CallIcon  />
 
       </ListItemIcon>
-      </a>
+      
       <ListItemText primary="Contact us
       " />
-    </ListItemButton>
+    </ListItemButton></a>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />

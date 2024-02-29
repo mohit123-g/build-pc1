@@ -19,7 +19,7 @@ const CartPage = (props) => {
   const [value, setValue] = useState(2);
   const [i, setI] = useState(useParams()["id"]);
 
-  const [cartItems, setCartItems] = useState([ ]);
+  const [cartItems, setCartItems] = useState([]);
  let t=Number(props.userid1);
   // const [rowNo,setRowNo]=useState(-1);
   
@@ -62,8 +62,8 @@ useEffect(() => {
  
           for (let j = 0; j < props.cartdata[0].citem.length; j++) {
       console.log(j);
-      var cidtemp = Number(props.cartdata[0].citem[j].itemid);
-      
+      let cidtemp = Number(props.cartdata[0].citem[j].itemid);
+      console.log(cidtemp);
       for(let k=0;k<props.pcdata.length;k++){
       if (cidtemp === props.pcdata[k].id) {
         console.log(k);
@@ -76,9 +76,11 @@ useEffect(() => {
           image: props.pcdata[k].img[0],
           details: props.pcdata[k].desc,
         });
-      }
+      }}
+      for(let k=0;k<props.lapdata.length;k++){
+
       if (cidtemp === props.lapdata[k].id) {
-        console.log(k);
+        console.log("lap"+k);
         console.log("-------");
         updatedCartItems.push({ 
           id: props.lapdata[k].id,
@@ -88,13 +90,14 @@ useEffect(() => {
           image: props.lapdata[k].img[0],
           details: props.lapdata[k].desc,
         });
-      }
-    }
+      }}
+    
     }
  
   setCartItems(updatedCartItems);
   console.log('Cart items updated for user with UID:', props.cartdata[0].uid);
-}, [props.cartdata, props.pcdata]);
+  console.log(props.cartdata[0].citem)
+}, [props.cartdata, props.pcdata, props.lapdata]);
   
   
 const deleteJsonObject = async (itemIdToDelete) => {
@@ -215,7 +218,6 @@ const updateJsonColumn = async (itemId, newQuantity) => {
         : item
     );
     setCartItems(updatedCart);
-
   };
 
   const calculateTotal = () => {

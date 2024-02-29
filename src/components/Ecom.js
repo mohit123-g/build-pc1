@@ -169,12 +169,11 @@ const Ecom = (props) => {
     for (let i = 0; i < props.lapdata.length; i++) {
       item.push(
         <div className="my-grid-item">
-          <h7 style={{ color: "white" }}>{props.lapdata[i].name}  </h7>
+          <h7 style={{ color: "white" }}>{props.lapdata[i].name}  </h7><br></br>
           <h7 style={{ color: "white" }}>₹{props.lapdata[i].price}</h7>
-          <h7><br/>
-            <button className="buy">Buy Now</button>
-            <button
-              className="buy"
+          <h7><br/><pre>
+            <button className="buy" role="button">Buy Now</button>  <button
+              className="buy" role="button"
               onClick={() => {
                 props.setnewobject({
                   ...props.newobject,
@@ -190,7 +189,7 @@ const Ecom = (props) => {
               }}
             >
               Add to Cart
-            </button>
+            </button></pre>
           </h7><br/><br/>
           <a href={"/IPage/" + i}>
             <img id="but2" src={props.lapdata[i].img[0]} />
@@ -209,11 +208,10 @@ const Ecom = (props) => {
       if (props.pcdata[i].price < budget) {
         item.push(
           <div className="my-grid-item">
-            <h7 style={{ color: "white" }}>{props.pcdata[i].name}  </h7>
+            <h7 style={{ color: "white" }}>{props.pcdata[i].name}  </h7><br/>
             <h7 style={{ color: "white" }}>₹{props.pcdata[i].price}</h7>
             <h7><br/>
-              <button className="buy">Buy Now</button>
-              <button
+            <pre>  <button className="buy">Buy Now</button>  <button
                 className="buy"
                 onClick={() => {
                   props.setnewobject({
@@ -229,7 +227,7 @@ const Ecom = (props) => {
                 }}
               >
                 Add to Cart
-              </button>
+              </button></pre>
             </h7><br/><br/>
             <div>
               <a href={"/IPage/" + i}>
@@ -403,7 +401,7 @@ const Ecom = (props) => {
         <div>
             <SliderComponent/>
           <div className="App1">
-            <h3 style={{ color: "white" }}>Select What You Want To See</h3>
+            <h2 style={{ color: "white" }}>Select What You Want To See</h2><br/>
           </div>
           <div className="page-container ">
             <div className="centered-items">

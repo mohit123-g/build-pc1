@@ -93,7 +93,7 @@ const Login = (props) => {
     if (!Log) {
       return (
         <div className="log-Container">
-          <Auth
+          <Auth 
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
             theme="dark"
