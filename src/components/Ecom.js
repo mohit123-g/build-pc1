@@ -170,9 +170,24 @@ const Ecom = (props) => {
       item.push(
         <div className="my-grid-item">
           <h7 style={{ color: "white" }}>{props.lapdata[i].name}  </h7><br></br>
-          <h7 style={{ color: "white" }}>₹{props.lapdata[i].price}</h7>
+          <h7 style={{ color: "white" }}>₹{parseFloat(props.lapdata[i].price).toLocaleString('en-IN')}</h7>
           <h7><br/><pre>
-            <button className="buy" role="button">Buy Now</button>  <button
+          {/* <a href="PaymentPage"><button 
+                 onClick={() => {
+                  props.setnewobject({
+                    ...props.newobject,
+                    itemid: Number(props.lapdata[i].id), // Assuming you want to update the 'itemid' in newObject
+                  });
+                  console.log(props.newobject);
+  
+                  insertJsonObject(
+                    props.cartdata,
+                    props.newobject,
+                    props.existingdata
+                  );
+                }}
+          className="buy" role="button">Buy Now</button></a>   */}
+          <button 
               className="buy" role="button"
               onClick={() => {
                 props.setnewobject({
@@ -190,10 +205,10 @@ const Ecom = (props) => {
             >
               Add to Cart
             </button></pre>
-          </h7><br/><br/>
+          </h7><br/>
           <a href={"/IPage/" + i}>
             <img id="but2" src={props.lapdata[i].img[0]} />
-            <h6 style={{ color: "white" }}>{props.lapdata[i].desc}</h6>
+            <h5 style={{ color: "white" }}>{props.lapdata[i].desc}</h5>
           </a>
         </div>
       );
@@ -209,9 +224,24 @@ const Ecom = (props) => {
         item.push(
           <div className="my-grid-item">
             <h7 style={{ color: "white" }}>{props.pcdata[i].name}  </h7><br/>
-            <h7 style={{ color: "white" }}>₹{props.pcdata[i].price}</h7>
+            <h7 style={{ color: "white" }}>₹{parseFloat(props.pcdata[i].price).toLocaleString('en-IN')}</h7>
             <h7><br/>
-            <pre>  <button className="buy">Buy Now</button>  <button
+            <pre> 
+               {/* <a href="PaymentPage"><button  
+             onClick={() => {
+              props.setnewobject({
+                ...props.newobject,
+                itemid: Number(props.pcdata[i].id), // Assuming you want to update the 'itemid' in newObject
+              });
+              console.log(props.newobject);
+              insertJsonObject(
+                props.cartdata,
+                props.newobject,
+                props.existingdata
+              );
+            }}
+            className="buy">Buy Now</button></a>   */}
+            <button
                 className="buy"
                 onClick={() => {
                   props.setnewobject({
@@ -228,12 +258,12 @@ const Ecom = (props) => {
               >
                 Add to Cart
               </button></pre>
-            </h7><br/><br/>
+            </h7><br/>
             <div>
               <a href={"/IPage/" + i}>
                 {" "}
                 <img id="but2" src={props.pcdata[i].img[0]} />
-                <h6 style={{ color: "white" }}>{props.pcdata[i].desc}</h6>
+                <h5 style={{ color: "white" }}>{props.pcdata[i].desc}</h5>
               </a>
             </div>
           </div>

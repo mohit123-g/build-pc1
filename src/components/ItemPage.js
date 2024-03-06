@@ -286,10 +286,11 @@ const ItemPage = (props) => {
 
               
             </h1>
-            <h2>₹{" "}{props.pcdata[i].price}</h2>
+            <h2>₹{" "}{parseFloat(props.pcdata[i].price).toLocaleString('en-IN')}</h2>
           </pre>
           <h2 style={{ color: "black" }}>
-         <pre><button className="buy">Buy Now</button>{" "}
+         <pre>
+          {/* <button className="buy">Buy Now</button>{" "} */}
             <button className="buy"
               onClick={() => {
                 props.setnewobject({
@@ -709,10 +710,10 @@ const ItemPage = (props) => {
 
               
             </h1>
-            <h2>₹{" "}{props.lapdata[i].price}</h2>
+            <h2>₹{" "}{parseFloat(props.lapdata[i].price).toLocaleString('en-IN')}</h2>
           </pre>
           <h2 style={{ color: "black" }}>
-         <pre><button className="buy">Buy Now</button>{" "}
+         <pre>
             <button className="buy"
               onClick={() => {
                 props.setnewobject({

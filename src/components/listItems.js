@@ -17,7 +17,7 @@ import Login from './Login';
 import Ecom from "./Ecom";
 import ItemPage from "./ItemPage";
 import CartPage from "./CartPage";
-import Account from  "./Account";
+import Account from  "./ContactUs";
 
 
 
