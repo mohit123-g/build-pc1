@@ -1,0 +1,41 @@
+
+.modal-overlayCUS {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Container */
+  .modalCUS {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    /* height: ; */
+    max-width: auto;
+    width: 80%;
+    margin-left: 3%;
+    margin-top: 1%;
+    position: relative;
+    border-radius: 4px;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+    /* text-align: center; */
+  }
+  
+  /* Close Button */
+  .modal-closeCUS {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+  }
+  

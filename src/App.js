@@ -44,7 +44,8 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import Login from "./components/Login";
 import Ecom from "./components/Ecom";
-import ItemPage from "./components/ItemPage";
+import LapPage from "./components/lapPage";
+import PCPage from "./components/pcPage";
 import CartPage from "./components/CartPage";
 import ContactUs from "./components/ContactUs";
 import Custum from "./components/Custum";
@@ -145,6 +146,11 @@ function App(props) {
   const [cartData, setCartData] = useState(
     JSON.parse(localStorage.getItem("cartData")) || []
   );
+  const [Comp,setComp]=useState(
+    JSON.parse(localStorage.getItem("Comp")) || {CPU:[],GPU:[],RAM:[],
+    CPU_Cooler:[],CabCooler:[],Cabinat:[],Mboard:[],PowerS:[],
+    SoundC:[],Storage:[]
+});
 
   const [userId1, setUserId1] = useState(0);
   const [userProfile, setUserProfile] = useState(
@@ -189,7 +195,9 @@ function App(props) {
     setUserId1(props.userid);
     // }
   }, [props.userid]);
-
+  useEffect(() => {
+    localStorage.setItem("Comp", JSON.stringify(Comp));
+  }, [Comp]);
   useEffect(() => {
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
   }, [userProfile]);
@@ -305,6 +313,17 @@ function App(props) {
       try {
         const pcDataResult = await supabase.from("PC").select();
         const laptopDataResult = await supabase.from("Laptop").select();
+        const conpDataResult1= await supabase.from("CPU").select();
+        const conpDataResult2= await supabase.from("GPU").select();
+        const conpDataResult3= await supabase.from("RAM").select();
+        const conpDataResult4= await supabase.from("Mboard").select();
+        const conpDataResult5= await supabase.from("PowerS").select();
+        const conpDataResult6= await supabase.from("Storage").select();
+        const conpDataResult7= await supabase.from("Cabinat").select();
+        const conpDataResult8= await supabase.from("CPU_Cooler").select();
+        const conpDataResult9= await supabase.from("CabCooler").select();
+        const conpDataResult10= await supabase.from("SoundC").select();
+
         const cartDataResult = await supabase
           .from("Cart")
           .select()
@@ -320,31 +339,77 @@ function App(props) {
           pcDataResult.error ||
           laptopDataResult.error ||
           cartDataResult.error ||
-          userProfileResult.error
+          userProfileResult.error ||
+          conpDataResult1.error ||
+          conpDataResult2.error ||
+          conpDataResult3.error ||
+          conpDataResult4.error ||
+          conpDataResult5.error ||
+          conpDataResult6.error ||
+          conpDataResult7.error ||
+          conpDataResult8.error ||
+          conpDataResult9.error ||
+          conpDataResult10.error 
         ) {
           let errorMessage = "";
           if (pcDataResult.error) errorMessage += "Error in PC Fetch\n";
           if (laptopDataResult.error) errorMessage += "Error in Laptop Fetch\n";
           if (cartDataResult.error) errorMessage += "Error in Cart Fetch\n";
-          if (userProfileResult.error)
-            errorMessage += "Error in userProfile Fetch\n";
+          if (userProfileResult.error) errorMessage += "Error in userProfile Fetch\n";
+          if (conpDataResult1.error ) errorMessage += "Error in Components1 Fetch\n";
+          if (conpDataResult2.error ) errorMessage += "Error in Components2 Fetch\n";
+          if (conpDataResult3.error ) errorMessage += "Error in Components3 Fetch\n";
+          if (conpDataResult4.error ) errorMessage += "Error in Components4 Fetch\n";
+          if (conpDataResult5.error ) errorMessage += "Error in Components5 Fetch\n";
+          if (conpDataResult6.error ) errorMessage += "Error in Components6 Fetch\n";
+          if (conpDataResult7.error ) errorMessage += "Error in Components7 Fetch\n";
+          if (conpDataResult8.error ) errorMessage += "Error in Components8 Fetch\n";
+          if (conpDataResult9.error ) errorMessage += "Error in Components9 Fetch\n";
+          if (conpDataResult10.error ) errorMessage += "Error in Components10 Fetch\n";
+     
+
           setFetchError(errorMessage);
           setPcData(null);
           setLapData(null);
           setCartData(null);
           setUserProfile(null);
-
+           setComp(null)
           console.error(
             pcDataResult.error ||
               laptopDataResult.error ||
               cartDataResult.error ||
-              userProfileResult.error
+              userProfileResult.error ||
+              conpDataResult1.error ||
+              conpDataResult2.error ||
+              conpDataResult3.error ||
+              conpDataResult4.error ||
+              conpDataResult5.error ||
+              conpDataResult6.error ||
+              conpDataResult7.error ||
+              conpDataResult8.error ||
+              conpDataResult9.error ||
+              conpDataResult10.error 
           );
         } else {
           setPcData(pcDataResult.data || null);
           setLapData(laptopDataResult.data || null);
           setCartData(cartDataResult.data || null);
           setUserProfile(userProfileResult.data || null);
+          setComp({
+            ...Comp,
+            CPU: conpDataResult1.data,
+            GPU: conpDataResult2.data,
+            RAM: conpDataResult3.data,
+            Mboard: conpDataResult4.data,
+            PowerS: conpDataResult5.data,
+            Storage: conpDataResult6.data,
+            Cabinat: conpDataResult7.data,
+            CPU_Cooler: conpDataResult8.data,
+            CabCooler: conpDataResult9.data,
+            SoundC: conpDataResult10.data
+          });
+          
+
           setFetchError(null);
 
           if (cartDataResult.data && cartDataResult.data.length > 0) {
@@ -352,7 +417,7 @@ function App(props) {
             console.log(cartDataResult.data[0].citem);
             console.log(typeof Number(userId1));
             console.log(typeof localStorage.getItem("userid"));
-
+            // console.log(Comp.CPU[0].img);
             console.log("check first", typeof t, t);
           }
         }
@@ -362,6 +427,7 @@ function App(props) {
         setLapData(null);
         setCartData(null);
         setUserProfile(null);
+        setComp(null)
         console.error(error);
       }
     };
@@ -440,9 +506,11 @@ function App(props) {
           lapData[i].name.slice(0, j).toLowerCase() === searchbox.toLowerCase()
         ) {
           itemLap.push(
-            <div>
+            <div 
+            // onClick={setSel("L")}
+            >
               {" "}
-              <a href={"/IPage/" + i}>
+              <a href={"/lapPage/" + i}>
                 <div className="cart-item">
                   <img className="cart-item-image" src={lapData[i].img[0]} />
                   <pre>
@@ -461,9 +529,11 @@ function App(props) {
           pcData[i].name.slice(0, j).toLowerCase() === searchbox.toLowerCase()
         ) {
           itemPC.push(
-            <div>
+            <div 
+            // onClick={setSel("PC")}
+            >
               {" "}
-              <a href={"/IPage/" + i}>
+              <a href={"/pcPage/" + i}>
                 <div className="cart-item">
                   {/* <a href={"/IPage/" + i}> */}
                     <img className="cart-item-image" src={pcData[i].img[0]} />
@@ -901,10 +971,10 @@ function App(props) {
                 ></Route>
 
                 <Route
-                  path="/IPage/:id"
+                  path="/lapPage/:id"
                   index
                   element={
-                    <ItemPage
+                    <LapPage
                       check={Check}
                       setcheck={setCheck}
                       sel={Sel}
@@ -928,7 +998,34 @@ function App(props) {
                     />
                   }
                 ></Route>
-
+                <Route
+                  path="/pcPage/:id"
+                  index
+                  element={
+                    <PCPage
+                      check={Check}
+                      setcheck={setCheck}
+                      sel={Sel}
+                      setsel={setSel}
+                      check1={Check1}
+                      setcheck1={setCheck}
+                      pcdata={pcData}
+                      setpcdata={setPcData}
+                      lapdata={lapData}
+                      setlapdata={setLapData}
+                      selitem={Selitem}
+                      setselitem={setSelitem}
+                      cartdata={cartData}
+                      setcartdata={setCartData}
+                      userid1={userId1}
+                      setuserid1={setUserId1}
+                      newobject={newObject}
+                      setnewobject={setNewObject}
+                      existingdata={existingData}
+                      setexistingdata={setExistingData}
+                    />
+                  }
+                ></Route>
                 <Route
                   path="/cart"
                   index
@@ -1015,6 +1112,8 @@ function App(props) {
                       setnewobject={setNewObject}
                       existingdata={existingData}
                       setexistingdata={setExistingData}
+                      comp={Comp}
+                      setcomp={setComp}
                     />
                   }
                 ></Route>

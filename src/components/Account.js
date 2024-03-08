@@ -18,7 +18,7 @@ import supabase from "../SupabaseClient";
 import { daDK } from "rsuite/esm/locales";
 
 import { Resend } from "resend";
-import { Alarm } from "@mui/icons-material";
+import { Add, Alarm } from "@mui/icons-material";
 const Account = (props) => {
   const [value, setValue] = useState(2);
   const [i, setI] = useState(useParams()["id"]);
@@ -83,22 +83,26 @@ const Account = (props) => {
         <br />
         <h1 style={{ color: "white" }}>Account</h1>
         <img
-          src={props.userprofile[0].img}
-          alt="Icon"
-          style={{
-            width: "300px",
-            height: "300px",
-            borderRadius: "50%", // Making it a circle
-            marginLeft: "10px",
-            backgroundColor: "white", // Adding a background color
-          }}
-        />
+  src={props.userprofile[0].img}
+  alt="Icon"
+  style={{
+    width: "300px",
+    height: "300px",
+    borderRadius: "50%", // Making it a circle
+    marginLeft: "10px",
+    padding: "3px", // Setting padding for all sides
+    border: "10px solid black", // Border added separately
+    backgroundColor: "white", // Adding a background color
+  }}
+/>
+
       <pre
   style={{
     color: "white",
-    fontSize: 24,
+    fontSize: 28,
     margin: "50px",
     fontWeight: "bold",
+    fontFamily:"serif"
   }}
 >
   <lable>User Name:</lable>{"     "}
@@ -144,26 +148,44 @@ const Account = (props) => {
   />
   <br />
   <lable>User Phone No:</lable>{" "}
-  <input
-    type="text"
-    onChange={(e) => {
-      setPhoneNo(e.target.value);
-    }}
-    style={{
-      fontSize: 24,
-      marginTop: "20px",
-      width: "500px",
-      color: "black",
-    }}
-    value={PhoneNo}
-  />
+<input
+  type="number"
+  onChange={(e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length <= 10) {
+      setPhoneNo(inputValue);
+    }
+  }}
+  style={{
+    fontSize: 24,
+    marginTop: "20px",
+    width: "500px",
+    color: "black",
+  }}
+  value={PhoneNo}
+/>
+
+
   <br />
   <br />
   <button
-    style={{ height: "50px", width: "150px" }}
+    style={{ height: "50px", width: "200px",fontSize:28 }}
     onClick={() => {
-      UpdateUserInfo(PhoneNo, Address);
-    }}
+      if (PhoneNo === "" || Address === "") {
+        alert("Address or Phone No can't be empty");
+      } else {
+        if (Address.length < 30 && Address !== "") {
+          alert("Address can't be less than 30 characters");
+        } else if (PhoneNo.length !== 10 && PhoneNo!=="" ) {
+          alert("Phone No must be 10 digits");
+        } 
+        // else if(Address.length<30 && PhoneNo.length<10){
+        //   alert("Address can't be less than 30 characters and Phone No must be 10 digits");
+        // }
+        else {
+          UpdateUserInfo(PhoneNo, Address);
+        }
+      }}}
   >
     Save Changes
   </button>

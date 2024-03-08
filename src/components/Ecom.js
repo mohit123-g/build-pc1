@@ -4,7 +4,7 @@ import "./Ecom.css";
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import ItemPage from "./ItemPage";
+import ItemPage from "./lapPage";
 import { checkboxClasses } from "@mui/material";
 import supabase from "../SupabaseClient";
 import { json } from "react-router-dom";
@@ -206,7 +206,7 @@ const Ecom = (props) => {
               Add to Cart
             </button></pre>
           </h7><br/>
-          <a href={"/IPage/" + i}>
+          <a href={"/lapPage/" + i}>
             <img id="but2" src={props.lapdata[i].img[0]} />
             <h5 style={{ color: "white" }}>{props.lapdata[i].desc}</h5>
           </a>
@@ -260,7 +260,7 @@ const Ecom = (props) => {
               </button></pre>
             </h7><br/>
             <div>
-              <a href={"/IPage/" + i}>
+              <a href={"/pcPage/" + i}>
                 {" "}
                 <img id="but2" src={props.pcdata[i].img[0]} />
                 <h5 style={{ color: "white" }}>{props.pcdata[i].desc}</h5>

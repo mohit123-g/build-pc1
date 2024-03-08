@@ -15,7 +15,7 @@ import LoginIcon from '@mui/icons-material/Login';
 
 import Login from './Login';
 import Ecom from "./Ecom";
-import ItemPage from "./ItemPage";
+import ItemPage from "./lapPage";
 import CartPage from "./CartPage";
 import Account from  "./ContactUs";
 
