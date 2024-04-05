@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@clerk/clerk-react": "^4.30.7",
     "@emailjs/browser": "^4.2.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
@@ -22,10 +24,13 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
+    "caniuse-lite": "^1.0.30001597",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "formik": "^2.4.5",
     "jwt-decode": "^4.0.0",
+    "mdb-react-ui-kit": "^7.2.0",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",
     "os": "^0.1.2",
@@ -66,6 +71,9 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "autoprefixer": "^10.4.18",
+    "concurrently": "^8.2.0",
+    "postcss": "^8.4.35"
   }
 }

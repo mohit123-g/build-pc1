@@ -147,7 +147,7 @@ const CartPage = (props) => {
             price: props.pcdata[k].price,
             quantity: props.cartdata[0].citem[j].q,
             image: props.pcdata[k].img[0],
-            details: props.pcdata[k].desc,
+            details: props.pcdata[k].desc
           });
         }
       }
@@ -161,9 +161,21 @@ const CartPage = (props) => {
             price: props.lapdata[k].price,
             quantity: props.cartdata[0].citem[j].q,
             image: props.lapdata[k].img[0],
-            details: props.lapdata[k].desc,
+            details: props.lapdata[k].desc
           });
         }
+      }
+      if (cidtemp === props.custumfinal.id) {
+        // console.log("cus" + k);
+        console.log("-------");
+        updatedCartItems.push({
+          id: props.custumfinal.id,
+          name: props.custumfinal.component.Cname,
+          price: props.custumfinal.Tprice,
+          quantity: props.cartdata[0].citem[j].q,
+          image: props.custumfinal.component.Cabinat.img,
+          details:props.custumfinal.component
+        });
       }
     }
 
@@ -322,13 +334,20 @@ const CartPage = (props) => {
           <>
             <div className="cart-items-container">
               {cartItems.map((item) => (
+             
                 <div key={item.id} className="cart-item">
+               {   item.id===props.custumfinal.id ? 
+                            (
+                     <div class="tag">
+                     customized              </div>):null}
+
                   <img
                     src={item.image}
                     alt={item.name}
                     className="cart-item-image"
                   />
                   <div className="cart-item-details">
+                  {/* <h1>hbbubu</h1> */}
                     <p className="cart-item-name">{item.name}</p>
                     <p className="cart-item-price">
                       Price: ₹{parseFloat(item.price).toLocaleString("en-IN")}
@@ -369,7 +388,78 @@ const CartPage = (props) => {
                     </button>
                     {selectedProductId === item.id && (
                       <div className="cart-item-more-details">
-                        <p>{item.details}</p>
+                        {
+                         
+                            item.id===props.custumfinal.id ? 
+                            (
+                            // <p style={{fontSize:18,textAlign:'left'}}>
+                            // CPU:{item.details.CPU.name}<br/>
+                            // GPU:{item.details.GPU.name}<br/>
+                            // RAM{item.details.RAM.name}<br/>
+                            // Motherboard:{item.details.Mboard.name}<br/>
+                            // Cabinat:{item.details.Cabinat.name}<br/>
+                            // Storage:{item.details.Storage.name}<br/>
+                            // Power Supply:{item.details.PowerS.name}<br/>
+                            // CPU Cooler:{item.details.CPU_Cooler.name}<br/>
+                            // Cabinat Cooler:{item.details.CabCooler.name}<br/>
+                            // Sound Card:{item.details.SoundC.name}
+                            // </p>
+                            <table  style={{marginLeft:'1rem',width:'70rem'}}>
+                              <thead>
+                                <tr >
+                                  <th style={{textAlign:'left'}}>Components</th>
+                                  <th style={{textAlign:'center'}}>Product name</th>
+                                </tr>
+                              </thead>
+                              <tbody >
+                                  <tr >
+                                    <td style={{color:'black',textAlign:'left'}}>CPU</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.CPU.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>GPU</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.GPU.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>RAM</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.RAM.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>Motherboard</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.Mboard.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>Cabinat</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.Cabinat.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>Storage</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.Storage.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>Power Supply</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.PowerS.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>CPU Cooler</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.CPU_Cooler.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>Cabinat Cooler</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.CabCooler.name}</td>
+                                    </tr>
+                                    <tr>
+                                    <td style={{color:'black',textAlign:'left'}}>Sound Card</td>
+                                    <td style={{color:'black',textAlign:'left'}}>{item.details.SoundC.name}</td>
+                                   
+
+                                  </tr>
+                              </tbody>
+                            </table>
+                            // null
+                            ):( <p>{item.details}</p>)
+                        }
+                        {/* <p>{item.details}</p> */}
                       </div>
                     )}
                     <button
@@ -391,8 +481,8 @@ const CartPage = (props) => {
                 Total: ₹{parseFloat(calculateTotal()).toLocaleString("en-IN")}
               </h3>
 
-              {props.userprofile[0].address === "" ||
-              props.userprofile[0].phone === "" ? (
+              {props.userprofile[0].addres ===null||
+              props.userprofile[0].phone ===null ? (
              <a href="/Account"> <button onClick={()=>{alert("Complete Your Info Process")}} className="cart-checkout">
                   Checkout
                 </button></a>
@@ -407,6 +497,9 @@ const CartPage = (props) => {
         )}
       </div>
       {/* {Budget()} */}
+      <div style={{          paddingBottom: "15rem", // Adjust the value to increase or decrease space at the bottom
+}}>
+      </div>
     </div>
   );
 };

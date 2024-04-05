@@ -11,7 +11,6 @@ import { json } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 export const insertJsonObject = async (
   cartdataex,
   newobjectex,
@@ -53,6 +52,8 @@ export const insertJsonObject = async (
       }
 
       console.log("New object added to JSON:", newobjectex);
+      alert("Item is Added to Cart");
+
       window.location.reload();
 
       // Perform any actions after successful insertion
@@ -169,8 +170,11 @@ const Ecom = (props) => {
     for (let i = 0; i < props.lapdata.length; i++) {
       item.push(
         <div className="my-grid-item">
-          <h7 style={{ color: "white" }}>{props.lapdata[i].name}  </h7><br></br>
-          <h7 style={{ color: "white" }}>₹{parseFloat(props.lapdata[i].price).toLocaleString('en-IN')}</h7>
+          <h7 style={{ color: "black",fontWeight:'bolder',fontSize:17}}>{props.lapdata[i].name}  </h7><br></br>
+          <h7 id="pricetext" 
+          // style={{ color: "white"}}
+          >₹{parseFloat(props.lapdata[i].price).toLocaleString('en-IN')}</h7>
+
           <h7><br/><pre>
           {/* <a href="PaymentPage"><button 
                  onClick={() => {
@@ -206,10 +210,13 @@ const Ecom = (props) => {
               Add to Cart
             </button></pre>
           </h7><br/>
-          <a href={"/lapPage/" + i}>
+          <div>
+
+          <a href={"/lapPage/" + i}  style={{textDecoration: "none"}}>
             <img id="but2" src={props.lapdata[i].img[0]} />
-            <h5 style={{ color: "white" }}>{props.lapdata[i].desc}</h5>
+            <h5  style={{ color: "black",fontWeight:'bold',fontSize:15 }}>{props.lapdata[i].desc}</h5>
           </a>
+          </div>
         </div>
       );
     }
@@ -220,11 +227,13 @@ const Ecom = (props) => {
   const itemsPC = () => {
     const item = []; //array of buttons
     for (let i = 0; i < props.pcdata.length; i++) {
-      if (props.pcdata[i].price < budget) {
+      if ( parseFloat(props.pcdata[i].price) < budget) {
         item.push(
           <div className="my-grid-item">
-            <h7 style={{ color: "white" }}>{props.pcdata[i].name}  </h7><br/>
-            <h7 style={{ color: "white" }}>₹{parseFloat(props.pcdata[i].price).toLocaleString('en-IN')}</h7>
+            <h7   style={{color: "black"}}>{props.pcdata[i].name}  </h7><br/>
+            <h7 id="pricetext"
+            // style={{ color: "white" }}
+            >₹{parseFloat(props.pcdata[i].price).toLocaleString('en-IN')}</h7>
             <h7><br/>
             <pre> 
                {/* <a href="PaymentPage"><button  
@@ -254,16 +263,18 @@ const Ecom = (props) => {
                     props.newobject,
                     props.existingdata
                   );
+                  // alert("Item is Added to Cart");
+
                 }}
               >
                 Add to Cart
               </button></pre>
             </h7><br/>
-            <div>
-              <a href={"/pcPage/" + i}>
+            <div >
+              <a href={"/pcPage/" + i}style={{textDecoration: "none"}}>
                 {" "}
                 <img id="but2" src={props.pcdata[i].img[0]} />
-                <h5 style={{ color: "white" }}>{props.pcdata[i].desc}</h5>
+                <h5 style={{ color: "black",fontWeight:'bold',fontSize:15 }}>{props.pcdata[i].desc}</h5>
               </a>
             </div>
           </div>
@@ -390,11 +401,18 @@ const Ecom = (props) => {
                   For Which Work You are Buying PC :
                 </label>
                 <br />
-                <input
+                {/* <input
                   type="text"
                   //   value={inputValue}
                   //   onChange={handleInputChange}
-                />
+                /> */}
+                <select>
+                  <option selected>Office</option>
+                  <option selected>Coding</option>
+                  <option selected>Gaming</option>
+                  <option selected>Editing</option>
+
+                </select>
                 <br />
                 <br />
                 <button
@@ -431,7 +449,7 @@ const Ecom = (props) => {
         <div>
             <SliderComponent/>
           <div className="App1">
-            <h2 style={{ color: "white" }}>Select What You Want To See</h2><br/>
+            <h2 >Select What You Want To See</h2><br/>
           </div>
           <div className="page-container ">
             <div className="centered-items">
@@ -452,7 +470,7 @@ const Ecom = (props) => {
                 </button>
               </div>
               <div className="item">
-                <h4 style={{ color: "black" }}>Custum PC</h4>
+                <h4 style={{ color: "black" }}>Custom PC</h4>
                 <a href="/Custum">
                   {" "}
                   <button
@@ -507,6 +525,7 @@ const Ecom = (props) => {
       <div>{Choos()}</div>
 
       <div className="my-grid-container">{select()}</div>
+      
     </div>
     // </div>
   );

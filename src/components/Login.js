@@ -64,7 +64,33 @@ const Login = (props) => {
       setFetchError("Error fetching data");
     }
   };
-
+  const customTheme = {
+    default: {
+      colors: {
+        brand: 'hsl(153 60.0% 53.0%)',
+        brandAccent: 'hsl(154 54.8% 45.1%)',
+        brandButtonText: 'white',
+        // ..
+      },
+    },
+    dark: {
+      colors: {
+        brandButtonText: 'red',
+        defaultButtonBackground: '#2e2e2e',
+        defaultButtonBackgroundHover: '#3e3e3e',
+        //..
+      },
+    },
+    // You can also add more theme variations with different names.
+    evenDarker: {
+      colors: {
+        brandButtonText: 'white',
+        defaultButtonBackground: '#1e1e1e',
+        defaultButtonBackgroundHover: '#2e2e2e',
+        //..
+      },
+    },
+  }
   const cartinsert = () => {
     console.log("userDate length:", userDate.length);
     for (let i = 0; i < userDate.length; i++) {
@@ -79,6 +105,9 @@ const Login = (props) => {
           uid: userDate[i].id,
           citem: [{ q: 1, itemid: 0 }],
         });
+        insertNewRow("CustumPC", {
+          id: userDate[i].id,
+          });
 
         setFlag(true);
 
@@ -93,10 +122,20 @@ const Login = (props) => {
     if (!Log) {
       return (
         <div className="log-Container">
-          <Auth 
+          <Auth
+          // "button", "container", "anchor", "divider", "label", "input", "loader", "message" 
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
-            theme="dark"
+            // appearance={{
+            //   style: {
+            //     button: { background: 'red', color: 'white' },
+            //     anchor: { color: 'black' },
+                
+            //   },
+            // }}
+        
+
+            // theme="dark"
             providers={["google"]}
           />
         </div>

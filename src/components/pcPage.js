@@ -279,14 +279,14 @@ const PCPage = (props) => {
     // if (props.sel == "PC") {
       return (
         <div>
-         <pre style={{ color: "white" ,fontFamily:'serif'}}>
+         <pre style={{ fontFamily:'serif'}}>
             {" "}
             <h1>
               {props.pcdata[i].name}
 
               
             </h1>
-            <h2>₹{" "}{parseFloat(props.pcdata[i].price).toLocaleString('en-IN')}</h2>
+            <h2 id="pricetext" style={{fontSize:26}}>₹{" "}{parseFloat(props.pcdata[i].price).toLocaleString('en-IN')}</h2>
           </pre>
           <h2 style={{ color: "black" }}>
          <pre>
@@ -448,7 +448,8 @@ const PCPage = (props) => {
               }}
             /> */}
             <h2
-              style={{ color: "white" ,marginTop:'-410px'}}
+              // style={{ marginTop:'-410px'}}
+              className="spec"
               onClick={() => {
                 setOptionsVisible(!optionsVisible);
               }}
@@ -500,8 +501,8 @@ const PCPage = (props) => {
                 <div
                   style={{
                     color: "white",
-                    backgroundColor: "black",
-                    height: "50px",
+                    // backgroundColor: "black",
+                    height: "6rem",
                   }}
                   value={value}
                   indicatorColor="primary"
@@ -518,6 +519,7 @@ const PCPage = (props) => {
                       display: "flex",
                       justifycontent: "center",
                       fontSize: 30,
+                      overflow:'auto'
                     }}
                   >
                     <div className="centered-tabs" onClick={() => setValue(0)}>

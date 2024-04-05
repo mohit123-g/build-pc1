@@ -1,16 +1,4 @@
-/* .gridc{
 
-    display: "grid";
-    grid-template-columns: "1fr 1fr 1fr" ;
-    gap: "10px";
-  
-
-}
-.gridi{
-  height: 100px;
-  width: 100px;
-  background-color: white;
-} */
 
 .gridc{
   display: flex;
@@ -21,8 +9,8 @@
 
 .gridi {
   margin: 10px;
-  min-width:  200px; /* Minimum width for the items */
-  min-height: 200px; /* Minimum height for the items */
+  min-width:  200px; 
+  min-height: 200px; 
   background-color: #eee;
   
   transition: transform 0.3s ease, box-shadow 0.3s ease;

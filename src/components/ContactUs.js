@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -22,8 +22,10 @@ const ContactUs = (props) => {
   const [value, setValue] = useState(2);
   const [i, setI] = useState(useParams()["id"]);
   
+
   
   return (
+    
     <div className="AppIP">
       {/* {props.setcheck(true)} */}
       {/* {props.setselitem(i)} */}
@@ -32,8 +34,8 @@ const ContactUs = (props) => {
       {/* {ChoosPC()} */}
       <div>
         {" "}<br/>
-        <h1 style={{ color: "white" }}>Contact Us</h1>
-        <hr />
+        <h1>Contact Us</h1>
+         <hr />
         <div className="gridc">
           <div className="gridi">
             {/* <img src="https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/61QpAaHilBL._AC_UY218_.jpg"/> */}
@@ -44,7 +46,7 @@ const ContactUs = (props) => {
           <div className="gridi">
             <CallIcon style={{ width: "80px", height: "80px" }} />
             <br />
-            <h3>orgpc@gmail.com</h3>
+            <h3>atlasbuildpc@gmail.com</h3>
             {/* <img src="https://m.media-amazon.com/images/W/MEDIAX_849526-T1/images/I/61QpAaHilBL._AC_UY218_.jpg"/> */}
           </div>
           <div className="gridi">
@@ -58,6 +60,9 @@ const ContactUs = (props) => {
       </div>
       {/* re_g5ofAofJ_7Gj5FbqmEZqDtGBHMggzKm3B */}
           {/* <button onClick={()=>GET()}>sent</button> */}
+    <div style={{          paddingBottom: "15rem", // Adjust the value to increase or decrease space at the bottom
+}}>
+      </div>
     </div>
   );
 };

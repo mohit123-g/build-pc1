@@ -1,77 +1,165 @@
 import { useState, useEffect } from "react";
 import "./Custum.css";
 
-const Custum = (props) => {
-  const [Custum, setCustom] = useState(
-    JSON.parse(localStorage.getItem("Custum")) || {
-      CPU: {},
-      GPU: {},
-      RAM: {},
-      CPU_Cooler: {},
-      CabCooler: {},
-      Cabinat: {},
-      Mboard: {},
-      PowerS: {},
-      SoundC: {},
-      Storage: {},
-    }
-  );
-  const [choosComp,setChoosComp]=useState("");
+import { Card, CardBody, ChakraProvider, Stack } from "@chakra-ui/react";
+import supabase from "../SupabaseClient";
+import "../App.css";
+import { insertJsonObject } from "./Ecom";
 
-  useEffect(() => {
-    localStorage.setItem("Custum", JSON.stringify(Custum));
-  }, [Custum]);
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Button,
+  Divider,
+  FormLabel,
+  Grid,
+  GridItem,
+  Img,
+  RadioGroup,
+  Text,
+  
+} from "@chakra-ui/react";
+import Alert from '@mui/material/Alert';
+
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { borderColor } from "@mui/system";
+
+const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlayCUS">
+      <div className="modalCUS">
+        <button
+          style={{ color:'red' ,fontSize:22,fontWeight:'bold'}}
+          className="modal-closeCUS"
+          onClick={onClose}
+        >
+          Close
+        </button>
+        <div
+        // style={{
+        //   height: "290px",
+        //   overflowY: "auto",
+        //   border: "1px solid #ccc",
+        //   padding: "10px",
+        // }}
+        >
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+const CustumPage = (props) => {
+  // const [Custum, props.setcustum] = useState(
+  //   JSON.parse(localStorage.getItem("Custum")) || {
+  //     CPU: {},
+  //     Mboard: {},
+  //     RAM: {},
+  //     GPU: {},
+  //     Storage: {},
+  //     Cabinat: {},
+  //     PowerS: {},
+  //     CabCooler: {},
+  //     CPU_Cooler: {},
+  //     SoundC: {},
+  //     Cname:""
+  //   }
+  // );
+
+  const CalTotal = () => {
+    let total = 0;
+    if (Object.keys(props.custum.CPU).length !== 0) {
+      total += parseFloat(props.custum.CPU.price);
+    }
+    if (Object.keys(props.custum.GPU).length !== 0) {
+      total += parseFloat(props.custum.GPU.price);
+    }
+    if (Object.keys(props.custum.RAM).length !== 0) {
+      total += parseFloat(props.custum.RAM.price);
+    }
+    if (Object.keys(props.custum.Storage).length !== 0) {
+      total += parseFloat(props.custum.Storage.price);
+    }
+    if (Object.keys(props.custum.Cabinat).length !== 0) {
+      total += parseFloat(props.custum.Cabinat.price);
+    }
+    if (Object.keys(props.custum.PowerS).length !== 0) {
+      total += parseFloat(props.custum.PowerS.price);
+    }
+    if (Object.keys(props.custum.Mboard).length !== 0) {
+      total += parseFloat(props.custum.Mboard.price);
+    }
+    if (Object.keys(props.custum.CabCooler).length !== 0) {
+      total += parseFloat(props.custum.CabCooler.price);
+    }
+    if (Object.keys(props.custum.CPU_Cooler).length !== 0) {
+      total += parseFloat(props.custum.CPU_Cooler.price);
+    }
+    if (Object.keys(props.custum.SoundC).length !== 0) {
+      total += parseFloat(props.custum.SoundC.price);
+    }
+    return total;
+  };
+  const [choosComp, setChoosComp] = useState("");
+  const [Total, setTotal] = useState(0);
+  // useEffect(() => {
+  //   localStorage.setItem("Custum", JSON.stringify(Custum));
+  // }, [Custum]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
   };
-  // useEffect(() => {
-  //   // Function to handle click event
-  //   function handleClick() {
-  //     setIsModalOpen(false);
-  //     //  setOpen(!open);
-  //     // Toggle the state
-  //   }
-
-  //   // Adding event listener to the entire document
-  //   document.addEventListener("click", handleClick);
-
-  //   // Cleanup function to remove event listener when component unmounts
-  //   return () => {
-  //     document.removeEventListener("click", handleClick);
-  //   };
-  // }, []);
-  // Empty dependency array to run the effect only once on mount
-
-  const Modal = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null;
-
-    return (
-      <div className="modal-overlayCUS">
-        <div className="modalCUS">
-          <button
-            style={{ color: "black" }}
-            className="modal-closeCUS"
-            onClick={onClose}
-          >
-            Close
-          </button>
-          <div
-            style={{
-              height: "990px",
-              overflowY: "auto",
-              border: "1px solid #ccc",
-              padding: "10px",
-            }}
-          >
-            {children}
-          </div>
-        </div>
-      </div>
-    );
+  const UpdateCustumPC = async () => {
+    try {
+      // Validate the Custum object and localStorage item
+      if (!props.custum|| !localStorage.getItem("userid")) {
+        throw new Error("Invalid data or user ID.");
+      }
+  
+      // Update the Supabase table with the modified JSON data
+      const { data, error } = await supabase
+        .from("CustumPC")
+        .update({
+          component: {
+            CPU: props.custum.CPU,
+            Mboard: props.custum.Mboard,
+            RAM: props.custum.RAM,
+            GPU: props.custum.GPU,
+            Storage: props.custum.Storage,
+            Cabinat: props.custum.Cabinat,
+            PowerS: props.custum.PowerS,
+            CabCooler: props.custum.CabCooler,
+            CPU_Cooler: props.custum.CPU_Cooler,
+            SoundC: props.custum.SoundC,
+            Cname: props.custum.Cname,
+          },
+          Tprice:CalTotal()
+        })
+        .eq("id", localStorage.getItem("userid"));
+  
+      if (error) {
+        throw error;
+      }
+  
+      // Check if the update was successful
+      if (data) {
+        alert("User information updated successfully.");
+      } else {
+        throw new Error("Update operation failed.");
+      }
+    } catch (error) {
+      console.error("Error updating user information:", error.message);
+      // Notify the user about the error
+      // alert("Your PC is Added to Cart");
+    }
   };
-
   // <div className="cart-container">
   // <h2 className="cart-title">Your Shopping Cart</h2>
 
@@ -96,551 +184,1064 @@ const Custum = (props) => {
     const itemSCard = [];
     const itemPsupply = [];
     const itemStorage = [];
-    
 
     // var j = searchbox.length;
     // if (searchbox != "") {
-    for (let i = 0; i < props.comp.CPU.length; i++) {
-      // if (
-      //   lapData[i].name.slice(0, j).toLowerCase() === searchbox.toLowerCase()
-      // ) {
-      itemCPU.push(
-        <div
-          style={{ textAlign: "left" }}
-          // onClick={setSel("L")}
-        >
-          <div className="cart-item">
-            <img className="cart-item-image" src={props.comp.CPU[i].img} />
-            <pre>
-              <p className="cart-item-price">₹{props.comp.CPU[i].price}</p>
-              <p className="cart-item-name">{props.comp.CPU[i].name}</p>
-              <p className="cart-item-name">
-                Brand:{props.comp.CPU[i].spec.Brand}
-                {"  "}Cores:{props.comp.CPU[i].spec.Cores}
-                {"  "}Speed:{props.comp.CPU[i].spec.Speed}
-                <br />
-                Model:{props.comp.CPU[i].spec.Model}
-                <br />
-                Socket Type:{props.comp.CPU[i].spec.SocketType}
-              </p>{"                                                        "}
-              <a href={Custum.CPU.link} target="_blank">
-              <button style={{ fontSize: 25, width: "200px" }}>
-                View On Amazon
-              </button>{" "}</a>
-              <button
-                onClick={() => {
-                  setCustom({ ...Custum, CPU: props.comp.CPU[i] });
-                  closeModal();
-                }}
-                style={{ fontSize: 25, width: "200px" }}
-              >
-                Add
-              </button>
-            </pre>
-          </div>
-        </div>
-      );
-      // }
-    }
-    for (let i = 0; i < props.comp.GPU.length; i++) {
-      // if (
-      //   lapData[i].name.slice(0, j).toLowerCase() === searchbox.toLowerCase()
-      // ) {
-      itemGPU.push(
-        <div
-          style={{ textAlign: "left" }}
-          // onClick={setSel("L")}
-        >
-          <div className="cart-item">
-            <img className="cart-item-image" src={props.comp.GPU[i].img} />
-            <pre>
-              <p className="cart-item-price">₹{props.comp.GPU[i].price}</p>
-              <p className="cart-item-name">{props.comp.GPU[i].name}</p>
-              <p className="cart-item-name">
-                Brand:{props.comp.GPU[i].spec.Brand}
-                {"  "}Memory:{props.comp.GPU[i].spec.Memory}
-                {"  "}Chipset:{props.comp.GPU[i].spec.Chipset}
-                <br />
-                Model:{props.comp.GPU[i].spec.Model}
-                <br />
-                Interface:{props.comp.GPU[i].spec.Interface}
-                ClockSpeed:{props.comp.GPU[i].spec.ClockSpeed}
-              </p>{"                                                        "}
-              <a href={Custum.GPU.link} target="_blank">
-              <button style={{ fontSize: 25, width: "200px" }}>
-                View On Amazon
-              </button>{" "}</a>
-              <button
-                onClick={() => {
-                  setCustom({ ...Custum, GPU: props.comp.GPU[i] });
-                  closeModal();
-                }}
-                style={{ fontSize: 25, width: "200px" }}
-              >
-                Add
-              </button>
-            </pre>
-          </div>
-        </div>
-      );
-      // }
-    }
 
-   
-    //array of buttons
-    // for (let i = 0; i < pcData.length; i++) {
-    //   // if (
-    //   //   pcData[i].name.slice(0, j).toLowerCase() === searchbox.toLowerCase()
-    //   // ) {
-    //     itemPC.push(
-    //       <div
-    //       // onClick={setSel("PC")}
-    //       >
-    //         {" "}
+ 
 
-    //           <div className="cart-item">
-    //             {/* <a href={"/IPage/" + i}> */}
-    //               <img className="cart-item-image" src={pcData[i].img[0]} />
-    //             {/* </a> */}
-    //             <pre>
-    //               <p className="cart-item-price">₹{pcData[i].price}</p>
-    //               <p className="cart-item-name">{pcData[i].name}</p>
-    //             </pre>
-    //           </div>
-    //       </div>
-    //     );
-    //   // }
-    // }
-    // var bs = 20;
+    let modalContent;
+switch (choosComp) {
+  case "CPU":
+    modalContent = (
+  
+        <div>
+        <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+          More Info
+        </h2>
+        {props.comp.CPU
+          .filter((select) => select.name === props.custum.CPU.name)
+          .map((select, index) => (
+            <div key={index}>
+              <h2
+                style={{
+                  fontSize: 24,
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  margin: 0,
+                }}
+              >
+                {select.name}
+              </h2>
+              <br />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10rem",
+                }}
+              >
+                <img
+                  style={{
+                    height: "13rem",
+                    width: "13rem",
+                    marginRight: "1rem",
+                  }}
+                  src={select.img}
+                  alt={select.name}
+                />
+                <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                  Brand: {select.spec.Brand}<br />
+                  Cores: {select.spec.Cores}<br />
+                  Speed: {select.spec.Speed}
+                  <br />
+                  Model: {select.spec.Model}
+                  <br />
+                  Socket Type: {select.spec.SocketType}
+                </p>
+              </div>
+            </div>
+          ))}
+      </div>
+      
+    );
+    break;
+  case "GPU":
+    modalContent = (
+      
+        <div>
+        <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+          More Info
+        </h2>
+        {props.comp.GPU
+          .filter((select) => select.name === props.custum.GPU.name)
+          .map((select, index) => (
+            <div key={index}>
+              <h2
+                style={{
+                  fontSize: 24,
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  margin: 0,
+                }}
+              >
+                {select.name}
+              </h2>
+              <br />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10rem",
+                }}
+              >
+                <img
+                  style={{
+                    height: "13rem",
+                    width: "13rem",
+                    marginRight: "1rem",
+                  }}
+                  src={select.img}
+                  alt={select.name}
+                />
+                  <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                Brand: {select.spec.Brand}<br />
+                Memory: {select.spec.Memory}<br />
+                Chipset: {select.spec.Chipset}
+                <br />
+                Model: {select.spec.Model}
+                <br />
+                Interface: {select.spec.Interface}
+                <br />
+                ClockSpeed: {select.spec.ClockSpeed}
+              </p>
+              </div>
+            </div>
+          ))}
+      </div>
+      
+    );
+    break;
+  case "RAM":
+    modalContent = (
+      
+      <div>
+      <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+        More Info
+      </h2>
+      {props.comp.RAM
+        .filter((select) => select.name === props.custum.RAM.name)
+        .map((select, index) => (
+          <div key={index}>
+            <h2
+              style={{
+                fontSize: 24,
+                textAlign: "center",
+                fontWeight: "bold",
+                margin: 0,
+              }}
+            >
+              {select.name}
+            </h2>
+            <br />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10rem",
+              }}
+            >
+              <img
+                style={{
+                  height: "13rem",
+                  width: "13rem",
+                  marginRight: "1rem",
+                }}
+                src={select.img}
+                alt={select.name}
+              />
+              <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+              Brand:{select.spec.Brand}<br/>
+              RAM Size:{select.spec.RAMSize}<br/>
+              RAM Type:{select.spec.RAMType}
+                <br />
+                Model:{select.spec.Model}
+                <br />
+                Quantity:{select.spec.Quantity}
+              </p>
+            </div>
+          </div>
+        ))}
+    </div>
+    
+  );
+    break;
+    case "Mboard":
+    modalContent = (
+      
+      <div>
+      <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+        More Info
+      </h2>
+      {props.comp.Mboard
+        .filter((select) => select.name === props.custum.Mboard.name)
+        .map((select, index) => (
+          <div key={index}>
+            <h2
+              style={{
+                fontSize: 24,
+                textAlign: "center",
+                fontWeight: "bold",
+                margin: 0,
+              }}
+            >
+              {select.name}
+            </h2>
+            <br />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10rem",
+              }}
+            >
+              <img
+                style={{
+                  height: "13rem",
+                  width: "13rem",
+                  marginRight: "1rem",
+                }}
+                src={select.img}
+                alt={select.name}
+              />
+              <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+              Brand:{select.spec.Brand}<br/>
+              Form Factor:{select.spec.FormFactor}<br/>
+              Chipset:{select.spec.Chipset}
+                <br />
+                Model:{select.spec.Model}
+                <br />
+                Memory Slot:{select.spec.MemorySlot}<br/>
+                Socket Type:{select.spec.SocketType}
+              </p>
+            </div>
+          </div>
+        ))}
+    </div>
+    
+  );
+    break;
+    case "Cabinat":
+      modalContent = (
+        
+        <div>
+        <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+          More Info
+        </h2>
+        {props.comp.Cabinat
+          .filter((select) => select.name === props.custum.Cabinat.name)
+          .map((select, index) => (
+            <div key={index}>
+              <h2
+                style={{
+                  fontSize: 24,
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  margin: 0,
+                }}
+              >
+                {select.name}
+              </h2>
+              <br />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10rem",
+                }}
+              >
+                <img
+                  style={{
+                    height: "13rem",
+                    width: "13rem",
+                    marginRight: "1rem",
+                  }}
+                  src={select.img}
+                  alt={select.name}
+                />
+                <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                Brand:{select.spec.Brand}<br/>
+                Color:{select.spec.Color}<br/>
+                Side Panel:{select.spec.SidePanel}
+                <br />
+                Model:{select.spec.Model}
+                <br />
+                Cabinet Type:{select.spec.CabinetType}
+                </p>
+              </div>
+            </div>
+          ))}
+      </div>
+      
+    );
+      break;
+      case "PowerS":
+      modalContent = (
+        
+        <div>
+        <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+          More Info
+        </h2>
+        {props.comp.PowerS
+          .filter((select) => select.name === props.custum.PowerS.name)
+          .map((select, index) => (
+            <div key={index}>
+              <h2
+                style={{
+                  fontSize: 24,
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  margin: 0,
+                }}
+              >
+                {select.name}
+              </h2>
+              <br />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10rem",
+                }}
+              >
+                <img
+                  style={{
+                    height: "13rem",
+                    width: "13rem",
+                    marginRight: "1rem",
+                  }}
+                  src={select.img}
+                  alt={select.name}
+                />
+                <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                Brand:{select.spec.Brand}<br/>
+                Color:{select.spec.Color}<br/>
+                Power:{select.spec.Power}
+                <br />
+                Model:{select.spec.Model}
+                <br />
+                Efficiency:{select.spec.Efficiency}
+                </p>
+              </div>
+            </div>
+          ))}
+      </div>
+      
+    );
+      break;
+      case "Storage":
+        modalContent = (
+          
+          <div>
+          <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+            More Info
+          </h2>
+          {props.comp.Storage
+            .filter((select) => select.name === props.custum.Storage.name)
+            .map((select, index) => (
+              <div key={index}>
+                <h2
+                  style={{
+                    fontSize: 24,
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    margin: 0,
+                  }}
+                >
+                  {select.name}
+                </h2>
+                <br />
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10rem",
+                  }}
+                >
+                  <img
+                    style={{
+                      height: "13rem",
+                      width: "13rem",
+                      marginRight: "1rem",
+                    }}
+                    src={select.img}
+                    alt={select.name}
+                  />
+                  <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                  Brand:{select.spec.Brand}<br/>
+                Type:{select.spec.Type}<br/>
+                RPM:{select.spec.RPM}
+                <br />
+                Model:{select.spec.Model}
+                <br />
+                Interface:{select.spec.Interface}<br/>
+                CashMemory:{select.spec.CacheMemory}
+                  </p>
+                </div>
+              </div>
+            ))}
+        </div>
+        
+      );
+        break;
+        case "CPU_Cooler":
+          modalContent = (
+            
+            <div>
+            <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+              More Info
+            </h2>
+            {props.comp.CPU_Cooler
+              .filter((select) => select.name === props.custum.CPU_Cooler.name)
+              .map((select, index) => (
+                <div key={index}>
+                  <h2
+                    style={{
+                      fontSize: 24,
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      margin: 0,
+                    }}
+                  >
+                    {select.name}
+                  </h2>
+                  <br />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10rem",
+                    }}
+                  >
+                    <img
+                      style={{
+                        height: "13rem",
+                        width: "13rem",
+                        marginRight: "1rem",
+                      }}
+                      src={select.img}
+                      alt={select.name}
+                    />
+                    <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                    Brand:{select.spec.Brand}<br/>
+                  Color:{select.spec.Color}<br/>
+                FanRPM:{select.spec.FanRPM}
+                  <br />
+                  Model:{select.spec.Model}
+                  <br />
+                  NoiseLevel:{select.spec.NoiseLevel}
+                       </p>
+                  </div>
+                </div>
+              ))}
+          </div>
+          
+        );
+          break;
+          case "CabCooler":
+            modalContent = (
+              
+              <div>
+              <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+                More Info
+              </h2>
+              {props.comp. CabCooler
+                .filter((select) => select.name === props.custum.CabCooler.name)
+                .map((select, index) => (
+                  <div key={index}>
+                    <h2
+                      style={{
+                        fontSize: 24,
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        margin: 0,
+                      }}
+                    >
+                      {select.name}
+                    </h2>
+                    <br />
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10rem",
+                      }}
+                    >
+                      <img
+                        style={{
+                          height: "13rem",
+                          width: "13rem",
+                          marginRight: "1rem",
+                        }}
+                        src={select.img}
+                        alt={select.name}
+                      />
+                      <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                      Brand:{select.spec.Brand}<br/>
+                  Air Flow:{select.spec.Airflow}<br/>
+                FanRPM:{select.spec.FanRPM}
+                  <br />
+                  Model:{select.spec.Model}
+                  <br />
+                  NoiseLevel:{select.spec.NoiseLevel}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            
+          );
+            break;
+            case "SoundC":
+              modalContent = (
+                
+                <div>
+                <h2 style={{ textAlign: "left", fontSize: 25, fontWeight: "bold" }}>
+                  More Info
+                </h2>
+                {props.comp.SoundC
+                  .filter((select) => select.name === props.custum.SoundC.name)
+                  .map((select, index) => (
+                    <div key={index}>
+                      <h2
+                        style={{
+                          fontSize: 24,
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          margin: 0,
+                        }}
+                      >
+                        {select.name}
+                      </h2>
+                      <br />
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10rem",
+                        }}
+                      >
+                        <img
+                          style={{
+                            height: "13rem",
+                            width: "13rem",
+                            marginRight: "1rem",
+                          }}
+                          src={select.img}
+                          alt={select.name}
+                        />
+                        <p style={{ textAlign: "left", fontSize: 22, fontWeight: "bold" }}>
+                        Brand:{select.spec.Brand}<br/>
+                    SNR:{select.spec.SNR}<br/>
+                  Interface:{select.spec.Interface}
+                    <br />
+                    Model:{select.spec.Model}
+                    <br />
+                    CabinetType:{select.spec.CabinetType}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              
+            );
+              break;
+  // Add cases for other components here
+  default:
+    modalContent = null;
+}
     return (
       <div>
         {/* <button onClick={openModal}>Open Modal</button> */}
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          {/* <div className="cart-container"> */}
-          {/* <h1 className="cart-title">Laptops found</h1>
-          <div className="cart-items-container"> {itemLap}</div>
-          <h1 className="cart-title">Pre Build PCs found</h1>
-
-          <div className="cart-items-container"> {itemPC}</div> */}
-
-          {/* </div> */}
-          {choosComp === "CPU" ? (
-    <div>
-        <h2>Choose CPU</h2>
-        <div className="cart-items-container">{itemCPU}</div>
-    </div>
-) : null}
-
-{choosComp === "GPU" ? (
-    <div>
-        <h2>Choose GPU</h2>
-        <div className="cart-items-container">{itemGPU}</div>
-    </div>
-) : null}
-
+        {modalContent}
         </Modal>
       </div>
     );
     // }
     // }
   };
+  const [msg, setMsg] = useState("");
+  const [components,setComponents] =useState ([
+    {
+      id: 1,
+      type: "Processor",
+      Scat: "Intel",
+      cat:["Intel","AMD"]
+    },
+    {
+      id: 2,
+      type: "Motherboard",
+      Scat: "MSI",
+      cat:["MSI","ASUS","ASRock","Gigabyte"],
+    },
+    {
+      id: 3,
+      type: "RAM",
+      Scat: "Corsair",
+      cat:["Corsair","G.Skill","HyperX","ADATA"]
+    },
+    {
+      id: 4,
+      type: "Graphic Card",
+      Scat: "Gigabyte",
+      cat:["PNY","Gigabyte","MSI","VisionTek","ZOTAC",
+      ,"Sapphire Technology","ASUS","XFX","Intel"]
+    },
+    {
+      id: 5,
+      type: "Storage",
+      Scat: "Samsung",
+      cat:["Samsung","Seagate","Western Digital","Crucial","Corsair","ADATA"]
+    },
+    {
+      id: 6,
+      type: "Cabinet",
+      Scat: "NZXT",
+      cat:["NZXT","Fractal Design","Corsair","AeroCool","ASUS","Gigabyte","Thermaltake"]
+    },
+    {
+      id: 7,
+      type: "Power Supply",
+      Scat: "Corsair",
+      cat:["Corsair","EVGA","Cooler Master","Thermaltake","Seasonic","ASUS","Antec","XPG","SilverStone Technology"]
+    },
+    {
+      id: 8,
+      type: "Cabinet Cooler",
+      Scat: "Cooler Master",
+      cat:["Cooler Master","NZXT","Corsair","Noctua","be quiet!","DEEPCOOL","Antec","Thermaltake"]
+    },
+    {
+      id: 9,
+      type: "CPU Cooler",
+      Scat: "Cooler Master",
+      cat:["Cooler Master","Corsair","Noctua","Thermaltake","ASUS","Scythe","Rosewill"]
+    },
+    {
+      id: 10,
+      type: "Sound Card",
+      Scat: "ASUS",
+      cat:["Creative","ASUS","EVGA","HT OMEGA"]
+    },
+  ])
+// const  [Products,setProduct]=useState({
+  
+// })
+  
+// Make a copy of the components array
+const updatedComponents = [...components];
+
 
   return (
     <div className="AppIP">
+      {ModalTemp()}
       {props.setcheck(1)}
       <br />
-      <br />
-      <br />
-      <h2 style={{ color: "white" }}>Custum Your PC</h2>
-      {ModalTemp()}
-      <table
+
+      <h1
         style={{
-          width: "1700px",
-          marginLeft: "50px",
-          //   marginTop:'500px',
-          backgroundColor: "white",
-          textAlign: "center",
-          borderCollapse: "collapse", // Ensure borders collapse properly
-          border: "2px solid white", // Set border to white
+          
+          fontSize: "2vmax",
+          fontWeight: "bold",
+          fontFamily: "initial",
         }}
       >
-        <thead>
-          <tr>
-            <th
-              style={{
-                color: "white",
-                border: "1px solid black",
-                width: "200px",
-              }}
-            >
-              Component
-            </th>
-            <th style={{ color: "white", border: "1px solid black" }}>
-              Product
-            </th>
-            <th style={{ color: "white", border: "1px solid black" }}>Title</th>
-            <th style={{ color: "white", border: "1px solid black" }}>
-              Specification
-            </th>
-            <th style={{ color: "white", border: "1px solid black" }}>Price</th>
-            <th style={{ color: "white", border: "1px solid black" }}>
-              Product Link
-            </th>
-            <th style={{ color: "white", border: "1px solid black" }}>
-              Remove
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style={{ height: "100px" }}>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              {" "}
-              <h2>Processor</h2>
-              {/* {item.name} */}
-            </td>
+        Customize Your PC
+      </h1>
+      <br />
+      <Text style={{  fontSize: 24 }}>
+        Total Amount:{" "}
+        <strong 
+        className="neontext"
+        // style={{ color: "greenyellow" }}
+        >
+          ₹{CalTotal().toLocaleString("en-IN")}
+        </strong>
+      </Text>
 
-            {Object.keys(Custum.CPU).length === 0 ? (
-               <td
-               style={{
-                 color: "black",
-                 fontWeight: "bold",
-                 border: "1px solid black",
-               }}
-             >
-              <button
-                onClick={() => {
-                  openModal();
-                  setChoosComp("CPU");
-                  // setCustom({...Custum, CPU: props.comp.CPU[0]});
-                }}
-                style={{
-                  backgroundColor: "gray",
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 28,
-                  // marginTop: "40px",
-                  // marginLeft: "-80px",
-                }}
-              >
-                + Add Component
-              </button></td>
-            ) : (
-              <>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <img style={{ height: "100px" }} src={Custum.CPU.img} />
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <h3>{Custum.CPU.name}</h3>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                    textAlign: "left",
-                  }}
-                >
-                  <h5 style={{ marginBottom: "-20px", marginTop: "10px" }}>
-                    Brand:{Custum.CPU.spec.Brand}
-                  </h5>
-                  <h5 style={{ marginBottom: "-20px" }}>
-                    Cores:{Custum.CPU.spec.Cores}
-                  </h5>
-                  <h5 style={{ marginBottom: "-20px" }}>
-                    Model:{Custum.CPU.spec.Model}
-                  </h5>
-                  <h5 style={{ marginBottom: "-20px" }}>
-                    Speed:{Custum.CPU.spec.Speed}
-                  </h5>
-                  <h5 style={{ marginBottom: "-10px" }}>
-                    Type: {Custum.CPU.spec.SocketType}
-                  </h5>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <h3>{Custum.CPU.price}</h3>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <a href={Custum.CPU.link} target="_blank">
-                    <h3>
-                      <button>View on Amazon</button>
-                    </h3>
-                  </a>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <h3>
-                    <button onClick={() => setCustom({ ...Custum, CPU: {} })}>
-                      Remove
-                    </button>
-                  </h3>
-                </td>
-              </>
-            )}
-          </tr>
-          {/* {
-  "Brand": "AMD",
-  "Cores": "64",
-  "Model": "Ryzen Threadripper 3990X",
-  "Speed": "4.3 GHz",
-  "Socket Type": "sTRX4"
-} */}
+      <Button
+  borderRadius={0}
+  // isLoading={isSubmitting}
+  // type='submit'
+  mt={3}
+  py={4}
+  className="buy"
+  onClick={() => {
+    let falg=true
+    Object.keys(props.custum).forEach((key) => {
+      if(Object.keys(props.custum[key]).length === 0){falg = false;}
+    });
+    if(falg===true){
+   
+    props.setnewobject({
+      ...props.newobject,
+      itemid: Number(props.custumfinal.id)
 
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>Motherboard</h2>
-              {/* {item.name} */}
-            </td>
-          
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>Cabinet</h2>
-              {/* {item.name} */}
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>RAM</h2>
-              {/* {item.name} */}
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>Storage</h2>
-              {/* {item.name} */}
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>Graphics Card</h2>
-              {/* {item.name} */}
-            </td>
-            {Object.keys(Custum.GPU).length === 0 ? (
-               <td
-               style={{
-                 color: "black",
-                 fontWeight: "bold",
-                 border: "1px solid black",
-               }}
-             >
-              <button
-                onClick={() => {
-                  setChoosComp("GPU");
-                  openModal();
-                  // setCustom({...Custum, CPU: props.comp.CPU[0]});
-                }}
+      // localStorage.getItem("userid")
+       // Assuming you want to update the 'itemid' in newObject
+    });
+    console.log(props.newobject);
+    insertJsonObject(
+      props.cartdata,
+      props.newobject,
+      props.existingdata
+    );
+    UpdateCustumPC();
+  }
+    else{alert('Please Choose All Components')};
+  }}
+>
+  Add to Cart
+</Button>
+
+      <ChakraProvider>
+        <box
+          // backgroundImage="url('/components/bgimge.jpg')"
+          backgroundPosition="center"
+          backgroundRepeat="no-repeat"
+        />
+        <Formik
+          initialValues={{
+            Processor: "",
+            Motherboard: "",
+            RAM: "",
+            Storage: "",
+            Cabinet: "",
+            Graphics: "",
+          }}
+        >
+          <Box
+            maxW="155rem"
+            mx="auto"
+            pt="0.5rem"
+            pb="4rem"
+            px={{ base: "1rem", md: "2rem" }}
+          >
+            <Grid templateColumns="repeat(6, 1fr)" gap={20} py={8}>
+              <GridItem
+                colSpan={{ base: 6, lg: 4 }}
                 style={{
-                  backgroundColor: "gray",
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 28,
-                  // marginTop: "40px",
-                  // marginLeft: "-80px",
+                  // overflowY: "scroll",
+                  // scrollbarWidth: "0.1px",
+                  // scrollbarColor: "black",
+                  // height: "79rem",
                 }}
-              >
-                + Add Component
-              </button></td>
-            ) : (
-              <>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <img style={{ height: "100px" }} src={Custum.GPU.img} />
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <h3>{Custum.GPU.name}</h3>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                    textAlign: "left",
-                  }}
-                >
-                  <h5 style={{ marginBottom: "-20px", marginTop: "10px" }}>
-                    Brand:{Custum.GPU.spec.Brand}
-                  </h5>
-                  <h5 style={{ marginBottom: "-20px" }}>
-                    Cores:{Custum.GPU.spec.Memory}
-                  </h5>
-                  <h5 style={{ marginBottom: "-20px" }}>
-                    Model:{Custum.GPU.spec.Model}
-                  </h5>
-                  <h5 style={{ marginBottom: "-20px" }}>
-                    Speed:{Custum.GPU.spec.ClockSpeed}
-                  </h5>
-                  <h5 style={{ marginBottom: "-10px" }}>
-                    Type: {Custum.GPU.spec.Interface}
-                  </h5>
-                  <h5 style={{ marginBottom: "-10px" }}>
-                    Type: {Custum.GPU.spec.Chipset}
-                  </h5>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <h3>{Custum.GPU.price}</h3>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <a href={Custum.GPU.link} target="_blank">
-                    <h3>
-                      <button>View on Amazon</button>
-                    </h3>
-                  </a>
-                </td>
-                <td
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                >
-                  <h3>
-                    <button onClick={() => setCustom({ ...Custum, GPU: {} })}>
-                      Remove
-                    </button>
-                  </h3>
-                </td>
-              </>
-            )}
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>Power Supply</h2>
-              {/* {item.name} */}
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>Cabinet Cooler</h2>
-              {/* {item.name} */}
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>CPU Cooler</h2>
-              {/* {item.name} */}
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={{
-                color: "black",
-                fontWeight: "bold",
-                border: "1px solid black",
-              }}
-            >
-              <h2>Sound Card</h2>
-              {/* {item.name} */}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              >           <p>
+	<span class="input">
+		<input type="text" value={props.custum.Cname} 
+  onChange={(e) => {
+  
+      props.setcustum({
+        ...props.custum, Cname: e.target.value,
+      });
+    
+  }}    placeholder="Enter Your Custom PC Name"/>
+		<span></span>	
+	</span>
+</p>
+                <Form>
+                  <Accordion alllowToggle>
+                    {/* {components.map((item) => {
+                return ( */}
+                    {Object.keys(props.custum).map((key, index) => (
+                    key ==="Cname" ? null:(
+                      <AccordionItem ml={"1rem"}>
+                        <h2>
+                          <AccordionButton
+                            _focus={{ boxShadow: "none" }}
+                            bgGradient={"linear(to-l, #3e1cad, #2575e6)"}
+                            _hover={{ bg: "blue.900" }}
+                            py={3}
+                            color="white"
+                          >
+                            <Box flex="1" textAlign="left">
+                              {index <= 9 ? components[index].type : null}
+                            </Box>
+                           
+
+                            <AccordionIcon />
+                          </AccordionButton>
+                        </h2>
+                   
+
+                        <AccordionPanel pb={4}>
+                        <select 
+  onChange={(event) => { 
+    if (index <= 9) {
+      updatedComponents[index] = { ...updatedComponents[index], Scat: event.target.value};
+
+      // setComponents({...components[index], Scat: event.target.value});
+      setComponents(updatedComponents);
+
+    }
+  }}
+>
+  {index <= 9 && components[index].cat.map((category, catIndex) => (
+    <option key={catIndex} value={category}>{category}</option>
+  ))}
+</select>
+
+{/* <select onChange={(event) => setComponents(components[index], { Scat: event.target.value })}>
+  {index <= 9 && components[index].cat.map((category, catIndex) => (
+    <option key={catIndex} value={category}>{category}</option>
+  ))}
+</select> */}
+
+                          <RadioGroup
+                            display="flex"
+                            flexWrap="wrap"
+                            justifyContent="space-evenly"
+                            color="red"
+                            overflowY="scroll"
+                            h={"45rem"}
+                            backgroundColor={'#E5E6E4'}
+                          >
+                            
+                            {props.comp[key].map((component) => {
+                              if (!component) return null; // Skip rendering if component is undefined
+                              // if((index <= 9 ? components[index].Scat : null)===component.spec.Brand){
+                                // if (key === "Mboard") {
+                                //   for(let i=0;i<props.custum.CPU.mboard.length;i++){
+                                  // if (props.custum.CPU.mboard[i]==13) {
+                                  //   console.log(component.id);
+                                  //   console.log(component.name);
+                                  // } else {
+                                    // console.log("-----------");
+                                  // }
+                                  // console.log(props.custum.CPU.mboard[i]);
+                                
+                                // }
+                                // }
+                                // if (key === "Mboard") {
+                                //   if (props.custum.CPU.mboard.includes(Number(component.id))) {
+                                //     console.log(component.id);
+                                //     console.log(component.name);
+                                //   }
+                                // }
+                                
+                                
+                                // console.log (props.custum.CPU.mboard[2])
+                                // console.log(typeof Number(component.id),"sec")
+                              return (
+                                <Card
+                                  onClick={() => {
+                                    console.log("Clicked");
+                                    if (key && component) {
+                                      props.setcustum({
+                                        ...props.custum,
+                                        [key]: component,
+                                      });
+                                    }
+                                  }}
+                                  key={component.id}
+                                  mt={3}
+                                  mr={3}
+                                  w={"21rem"}
+                                  direction={{ base: "column", sm: "row" }}
+                                  overflow="hidden"
+                                  // style={{overflow:"scrol"}}
+
+                                  variant={"filled"}
+                                  bg={"white"}
+                                  borderWidth={"4px"}
+                                  // borderColor={'blue'}
+                                  borderColor={
+                                    props.custum[key]?.name === component.name &&
+                                    props.custum[key] &&
+                                    Object.keys(props.custum[key]).length !== 0
+                                      ? "#FFD700"
+                                      : "white"
+                                  }
+                                >
+                                  <CardBody h={"25rem"}>
+                                    <div style={{ height: "20.5rem" }}>
+                                      <Img
+                                        style={{
+                                          height: "12rem",
+                                          width: "15rem",
+                                        }}
+                                        objectFit="cover"
+                                        ml="2rem"
+                                        src={component.img}
+                                      />
+                                      <Text
+                                        fontSize="0.8rem"
+                                        mt={"1rem"}
+                                        fontWeight="medium"
+                                        textAlign="left"
+                                        color={"black"}
+                                        letterSpacing="1px"
+                                      >
+                                        {component.name}
+                                      </Text>
+                                    </div>
+                                    {/* <Stack mt='4' spacing='3'> */}
+                                    <div
+                                      style={{
+                                        backgroundColor: "#D2D2D2",
+                                        width: "20rem",
+
+                                        marginLeft: "-1rem",
+                                        // marginBottom:'-20rem'
+                                      }}
+                                    >
+                                      <Text className="neontext"
+                                        style={{
+                                          fontSize: 19,
+                                          fontWeight: "bolder",
+                                        }}
+                                        // color={"#FFD700"}
+                                      >
+                                        ₹
+                                        {parseFloat(
+                                          component.price
+                                        ).toLocaleString("en-IN")}
+                                      </Text>
+                                      <button
+                                        onClick={() => {
+                                          openModal();
+                                          setChoosComp(key);
+                                        }}
+                                        // ml={"18rem"}
+                                        // color={"black"}
+                                        // fontWeight={"bold"}
+                                        // fontSize={2}
+                                        style={{
+                                          marginLeft: "15rem",
+                                          color: "black",
+                                          fontWeight: "bold",
+                                          fontSize: 16,
+                                        }}
+                                      >
+                                        more info
+                                      </button>
+                                    </div>
+
+                                    {/* </Stack> */}
+                                  </CardBody>
+                                </Card>
+                              );
+                            // }
+                            })}
+                            {/* <h8 style={{ display: "none" }}>{i++}</h8> */}
+                          </RadioGroup>
+                        </AccordionPanel>
+                      </AccordionItem>)
+                    ))}
+                    {/* // )}
+                // )} */}
+                  </Accordion>
+
+                  <Box my={3}></Box>
+                  {msg && (
+                    <Text color="green.500" fontWeight="semibold">
+                      {msg}
+                    </Text>
+                  )}
+                </Form>
+              </GridItem>
+              <GridItem
+                colSpan={{ base: 6, lg: 2 }}
+                style={{ marginRight: "-2rem" }}
+              >              <button   onClick={()=>{localStorage.removeItem("Custum");
+              window.location.reload();
+            }}
+              style={{marginTop:'1rem', display: "flex", alignItems: "center"}}
+              className="button-70">Clear All</button>
+
+                <Box bg={"#D2D2D2"} border="1px solid gray" py={0} px={3}>
+                  <Box mb={6}>
+                    <Text fontWeight="semibold" fontSize="20" color={"black"}>
+                      Components
+                    </Text>
+                    
+                  </Box>
+
+                  {Object.keys(props.custum).map((key, index) => (
+                                      key ==="Cname" ? null:(
+
+                    <>
+                      <Box mb={3}>
+                        
+                        <Text fontWeight="semibold" color=" #2575e6"
+                        >
+                          {index <= 9 ? components[index].type : null}
+                          
+                        </Text>
+
+                        {props.custum[key] &&
+                        Object.keys(props.custum[key]).length !== 0 ? (
+                          <>
+                         
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <img
+                                style={{
+                                  height: "5rem",
+                                  width: "5rem",
+                                  marginRight: "1rem",
+                                }}
+                                src={props.custum[key].img}
+                                alt={props.custum[key].name}
+                              />
+                              <h2
+                                style={{
+                                  fontSize: 13,
+                                  color: "black",
+                                  textAlign: "left",
+                                  margin: 0,
+                                }}
+                              >
+                                {props.custum[key].name}
+                              </h2>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "left",
+                                marginLeft: "0.4rem",
+                              }}
+                            >
+                                <Text className="neontext"
+                                        style={{
+                                          fontSize: 18,
+                                          fontWeight: "bold",
+                                        }}
+                                        // color={"#FFD700"}
+                                      >
+                                        ₹
+                                        {parseFloat(
+                                          props.custum[key].price
+                                        ).toLocaleString("en-IN")}
+                                      </Text>
+                            
+                            
+                            </div>
+                         
+                            <div style={{marginTop:'-2rem'}}>  <button
+                            className="button-70"
+                            onClick={() =>
+                              props.setcustum({ ...props.custum, [key]: {} })
+                            }
+                          >
+                            Remove
+                          </button>{" "}</div>
+
+                         
+                          </>
+                          
+                        ) : (
+                          <Text fontSize="sm" color={"black"} my={0}>
+                            N/A
+                          </Text>
+                        )}
+                        <Divider />
+                      </Box>
+                      {/* <h8 style={{ display: "none" }}>{i2++}</h8> */}
+                    </>)
+                  ))}
+                </Box>
+              </GridItem>
+            </Grid>
+          </Box>
+        </Formik>
+      </ChakraProvider>
+      <div style={{          paddingBottom: "15rem", // Adjust the value to increase or decrease space at the bottom
+}}>
+      </div>
     </div>
   );
 };
-export default Custum;
+export default CustumPage;

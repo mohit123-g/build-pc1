@@ -1,102 +1,73 @@
 
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+
+.searchInput{
+  font-size: 2rem;
+   max-height: 3rem;
+  max-width:80rem;
+}
+.logo{
+  /* width: 180px; */
+  height: 65px;
+  /* color: #ff0000; */
+}
+.Profileimg {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 5rem;
+    margin-left: 1rem;
+  background-color: 'white'; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* .AppBar
+{background-color:black;
+} */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+.App{
+  background-image: url("./components/whitebackground.webp"); 
+  /* background-image: url("https://images.pexels.com/photos/5185159/pexels-photo-5185159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 "); */
+  /* background-image: url("https://wallpapercave.com/wp/wp10054796.jpg"); */
+/* margin-top: -45rem; */
+  /* background-color: white; */
+/* width: 142rem; */
 
-.App-link {
-  color: #61dafb;
-}
+/* margin-left:1rem ; */
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}  */
-#drop{background-color: black;}
-
-#DropItem {font-weight: 300; background-color: black;
-
-}
-
-
-
-
-
-.App{ 
-  background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
-  /* background-color: gray; */
-  margin-top: -740px;
-  /* display: flex; */
-  /* flex: 1; */
-width: 2280px;
-/* height: auto; */
-margin-left:-560px ;
 text-align: center;
-overflow: hidden;/*exp*/
-/* display: grid; */
-/* grid-template-columns: 1fr;
-grid-template-rows: 1fr; */
+overflow: hidden;
+
 place-items: center;
-/* z-index: 2; */
+
+justify-content: center;
+align-items: center;
 }
+
 
 .AppIP {
-  background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
-  /* background-color: gray; */
-  margin-top: 620px;
-  width: 2280px;
-  height: auto;
-  margin-left:-560px ;
+  /* background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d"); */
+ background-color: whitesmoke;
+ background-image: url("https://images.pexels.com/photos/5185159/pexels-photo-5185159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 ");
+
+  /* margin-top: 620px; */
+  /* width: 142rem; */
+  /* height: 100rem; */
+  /* margin-left:-560px ; */
   text-align: center;
-  overflow: hidden;
-  
+  /* overflow: hidden; */
+  justify-content: center;
+  align-items: center;
   /*exp*/
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr; */
   place-items: center;
   z-index: 2;
 }
 
-/* @media (max-width: 768px) {
-  .AppIP {
-    margin-top: 500px;
-  }
-}
 
-@media (max-width: 480px) {
-  .AppIP {
-    margin-top: 300px;
-  }
-}
 
-@media (max-width: 320px) {
-  .AppIP {
-    margin-top: 100px;
-  }
-} */
 
 .but1{
   align-items: center;
@@ -107,13 +78,12 @@ place-items: center;
 }
 #but2{
   align-content: center;
-  height: 240px;
-  width: 240px;
+  height: 15rem;
+  width: 15rem;
 }
 body {
-  /* background-color: #e5e5e5; */
-  background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
-
+  /* background-image: url("https://images.pexels.com/photos/5185159/pexels-photo-5185159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 "); */
+background-color: white;
 }
 
 #title{color:white;}
@@ -127,15 +97,16 @@ body {
 .my-grid-container {
   background-color: transparent;
  position: relative;
- /* margin-top: 1px; */
+ 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); /* Responsive grid with 200px columns */
-  grid-gap: 16px; /* Adjust the gap between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
+  grid-gap: 16px;
 }
 
 .my-grid-item {
-  background-color: transparent;
-  padding: 10px;
+  background-color: white;
+  padding: 10px ;
+  font-size: 1rem;
   height: auto;
   width: auto;
   text-align: center;
@@ -147,18 +118,7 @@ body {
   }
 
 
-/* .buy{color: black;
-  
-  border-radius: 10%;
-  background-color: #57c517;
-  margin-left: 10px;
-  align-content: center;
-} */
-/* 
-<!-- HTML !-->
-<button class="button-85" role="button">Button 85</button> */
 
-/* CSS */
 .buy {
   padding: 0.6em 2em;
   border: none;
@@ -229,12 +189,10 @@ body {
 .AppBar{
 position: absolute;
 z-index: 1;
-
+/* wid */
 }
 
 
-/*dashboard*/
-/* Dashboard.css */
 .dashboard-container {
   position: relative;
   height: 100vh;
@@ -248,7 +206,7 @@ margin-top: 120%;
 margin-left: 250px;
   width: 300px;
   min-height: 40vh;
-  max-height: 40vh; /* Ensure the dashboard doesn't exceed screen height */
+  max-height: 40vh; 
   background-color: black;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
@@ -259,7 +217,6 @@ margin-left: 250px;
 
 }
 .dashboard.active {
-  /* left: 0;Slide the dashboard in when 'active' class is present */
   transform: translateX(0);
 
 }
@@ -278,23 +235,37 @@ margin-left: 250px;
   z-index: 1000;
 }
 
-/* Modal Container */
 .modalSER {
   background: white;
   border: 1px solid #ccc;
   padding: 20px;
   /* height: ; */
-  max-width: 1000px;
-  width: 100%;
+  max-width: auto;
+  width: 53%;
   margin-left: 3%;
-  margin-top: -3%;
+
+  /* width: 35vmax;
+ margin-left: -5vmin;
+ margin-right: -130vmin;
+  margin-top: -20vmin; */
+
+
+  /* margin-top: 1%; */
   position: relative;
   border-radius: 4px;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
-  /* text-align: center; */
+
+  /* border: 1px solid #ccc;
+  padding: 20px;
+  max-width: auto;
+  width: 53%;
+  margin-left: 3%;
+
+  margin-top: 1%;
+  position: relative;
+  border-radius: 4px; */
+
 }
 
-/* Close Button */
 .modal-closeSER {
   position: absolute;
   top: 10px;
@@ -305,84 +276,731 @@ margin-left: 250px;
   color: #555;
 }
 
+.cart-containerSER {
+  
+    height: 900px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
 
-/* Default styles */
-/* Add your default styles here */
+.cart-titleSER {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: black;
+  text-align: center;
+}
 
-/* Mobile Devices (up to 767px) */
-/* @media (max-width: 768px) {
- 
-  .App {
-    background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
-    text-align: center;
-    overflow: hidden;
-    z-index: 2;
-    width: 100%;
+.cart-items-containerSER {
+  display: grid;
+  gap: 20px;
+}
+
+.cart-itemSER {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #007bff;
+  border-radius: 15px;
+  /* width: 31.5vmax; */
+  overflow: hidden;
+  padding: 1px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-itemSER:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.cart-item-imageSER {
+  width: 150px;
+  height: 150px;
+
+  
+  margin-right: 20px;
+}
+
+
+
+.cart-item-nameSER {
+  
+  font-size: 25px;
+  margin-bottom: 8px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-weight: bold;
+ text-decoration: none;
+  color: #333;
+}
+
+.cart-item-priceSER {
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-weight: bold;
+ text-decoration: none;
+  color: #28a745;
+}
+
+/* @media (min-width: 1842px) {
+
+
+  .searchInput{
+    font-size: 1.5rem;
+    height: 2rem;
+    width:28rem;
+  }
+  .logo{
+    font-size: 1.9rem;
+    color: #eaa912;
   }
 
+  .Profileimg {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5rem;
+      margin-left: 1rem;
+    background-color: 'white'; 
+  }
+  .Profilename{
+    font-size: 1.4rem;
+  }
   .my-grid-container{
-    margin-top: 75%;
-  }
-  .but1 {
-    align-items: center;
-    height: 30%;
-    width: 80%;
-    padding: 5%;
-  }
+    grid-template-columns: repeat(auto-fill, minmax(26.8rem, 1fr)); 
 
-  #but2 {
-    align-content: center;
-    height: 100px;
-    width: 100px;
   }
-
-}
-
-@media (min-width: 769px) and (max-width: 1200px) {
-  .App {
-    background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
+  .my-grid-item{
+    font-size:1rem;
+  }
+ 
+  .modalSER{
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 1000px;
+    width: 100%;
+    margin-left: 50rem;
+    margin-top: -9rem;
+    position: relative;
+    border-radius: 4px;
+  
+  }
+  .AppIP{
+    margin-top: 620px;
+    width: 142rem;
+    height: auto;
+    margin-left:-560px ;
     text-align: center;
     overflow: hidden;
-    z-index: 2;
-    width: 100%;
+    
+    
   }
-
-  .but1 {
-    align-items: center;
-    height: 40%;
-    width: 60%;
-    padding: 3%;
-  }
-
-  #but2 {
-    align-content: center;
-    height: 120px;
-    width: 120px;
-  }
-
 }
 
-  @media (min-width: 1025px) {
-    .App {
-      background-image: url("https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d");
-      text-align: center;
-      overflow: hidden;
-      z-index: 2;
-      width: 100%;
-    }
-
-  .but1 {
-    align-items: center;
-    height: 50%;
-    width: 50%;
-    padding: 2%;
+@media (max-width: 1842px) {
+  .App{
+    width:110rem;
+    margin-left: -19rem;
   }
 
-  #but2 {
-    align-content: center;
-    height: 140px;
-    width: 140px;
+  .searchInput{
+    font-size: 1.5rem;
+    height: 2rem;
+    width:28rem;
+  }
+  .logo{
+    font-size: 1.9rem;
+    color: #9f8df9;
   }
 
+  .Profileimg {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5rem;
+      margin-left: 1rem;
+    background-color: 'white'; 
+  }
+  .Profilename{
+    font-size: 1.4rem;
+  }
+  .my-grid-container{
+    grid-template-columns: repeat(auto-fill, minmax(26.8rem, 1fr)); 
+
+  }
+  .my-grid-item{
+    font-size:1rem;
+  }
+ 
+  .modalSER{
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+ 
+    margin-left: 50rem;
+    margin-top: -36rem;
+    border-radius: 1rem;
+   
+  }
+  .AppIP{
+    margin-top: 40rem;
+    width: 109rem;
+    margin-left:-18rem ;
+    overflow: hidden;
+    
+
+  }
 }
  */
+
+@media (max-width: 1536px) {
+  /* .App{
+    width:90rem;
+    margin-left: -9rem;
+  } */
+
+  .searchInput{
+    font-size: 1.5rem;
+    height: 2rem;
+    width:28rem;
+  }
+  .logo{
+    font-size: 1.9rem;
+    color: #28b815;
+  }
+
+  .Profileimg {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5rem;
+      margin-left: 1rem;
+    background-color: 'white'; 
+  }
+  .Profilename{
+    font-size: 1.4rem;
+  }
+  .my-grid-container{
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr)); 
+
+  }
+  .my-grid-item{
+    font-size:1rem;
+  }
+  
+  .modalSER{
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 60rem;
+    margin-left: 44vmin;
+    margin-top: -32vmax;
+ 
+    border-radius: 1em;
+    font-size: 1vmax;
+  }
+
+  .cart-itemSER{
+    width: 44em;
+    height: 8rem;
+  }
+  /* .AppIP{
+    margin-top: 40rem;
+    width: 90rem;
+    margin-left:-9rem ;
+  
+    overflow: hidden;
+    font-size: 1rem;
+
+  } */
+}
+
+
+@media (max-width: 1280px) {
+  /* .App{
+    width:75rem;
+    margin-left: -3rem;  } */
+
+    .searchInput{
+      font-size: 1.1rem;
+      height: 2rem;
+      width:25rem;
+    }
+    .logo{
+      font-size: 1.9rem;
+      color: #ff0000;
+    }
+  
+    .Profileimg {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 5rem;
+        margin-left: 1rem;
+      background-color: 'white'; 
+    }
+    .Profilename{
+      font-size: 1.4rem;
+    }
+    .my-grid-container{
+      grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    }  
+    .my-grid-item{
+      font-size:0.8rem;
+    }
+    #but2{
+    height: 12rem;
+    width: 12rem;}
+  
+    .modalSER{
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+       max-width: 760px; 
+      margin-left: 28rem;
+      margin-top: -9rem;
+      border-radius: 1rem;
+   
+    }
+    .cart-containerSER{
+      height: 700px;
+    }
+    .cart-itemSER{
+      width: 45rem;
+      height: 7rem;
+    }
+   .cart-item-nameSER{
+    font-size: 1.2rem;
+   }
+   /* .AppIP{
+    margin-top: 40rem;
+    width: 74.8rem;
+    margin-left:-2.8rem ;
+    overflow: hidden;
+    
+
+  } */
+}
+
+
+@media (max-width: 1024px) {
+  /* .App{
+    width:59rem;
+    margin-left: -2.5rem;  } */
+    .searchInput{
+      font-size: 1rem;
+      height: 2rem;
+      width:25rem;
+    }
+    .logo{
+      font-size: 1.3rem;
+      color: #ff0000;
+      margin-left: 1rem;
+    }
+  
+    .Profileimg {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 5rem;
+        margin-left: 1rem;
+      background-color: 'white'; 
+    }
+    .Profilename{
+      font-size: 1rem;
+    }
+    .my-grid-container{
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    }
+    
+    .my-grid-item{
+      font-size:0.7rem;
+    }
+    #but2{
+    height: 10rem;
+    width: 10rem;}
+      .modalSER{
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+       max-width: 620px; 
+      margin-left: 21rem;
+      margin-top: -5rem;
+     
+      border-radius: 1rem;
+    
+    }
+    .cart-containerSER{
+      height: 600px;
+    }
+    .cart-itemSER{
+      width: 35.5rem;
+      height: 7rem;
+    }
+   .cart-item-nameSER{
+    font-size: 1rem;
+   }
+   /* .AppIP{
+    margin-top: 40rem;
+    width: 58.8rem;
+    margin-left:-2.4rem ;
+    overflow: hidden;
+    
+  
+  } */
+}
+
+
+@media (max-width: 768px) {
+  /* .App{
+    width:44rem;
+    margin-left: -2.5rem;  } */
+
+    .searchInput{
+      font-size: 1rem;
+      height: 1.5rem;
+      width:20rem;
+    }
+    .logo{
+      font-size: 1.3rem;
+      color: #ff0000;
+    }
+  
+    .Profileimg {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 5rem;
+        margin-left: 1rem;
+      background-color: 'white'; 
+    }
+    .Profilename{
+      font-size: 1rem;
+    }
+    .my-grid-container{
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    }
+    .my-grid-item{
+      font-size:0.6rem;
+    }
+    #but2{
+    height: 8rem;
+    width: 8rem;}
+    .buy{
+      font-size: 0.6rem;
+    }
+    .modalSER{
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+       max-width: 530px; 
+      margin-left: 11rem;
+      margin-top: -8rem;
+      border-radius: 1rem;
+    
+    }
+    .cart-containerSER{
+      height: 550px;
+    }
+    .cart-itemSER{
+      width: 31rem;
+      height: 6rem;
+    }
+   .cart-item-nameSER{
+    font-size: 0.8rem;
+   }
+   .cart-item-priceSER{
+    font-size: 1rem;
+   }
+   /* .AppIP{
+    margin-top: 40rem;
+    width: 43.7rem;
+    margin-left:-2.4rem ;
+    overflow: hidden;
+
+  } */
+}
+
+
+@media (max-width: 640px) {
+  /* .App{
+    width:36rem;
+    margin-left: -2.5rem;  } */
+
+    .searchInput{
+      font-size: 0.8rem;
+      height: 1.2rem;
+      width:16rem;
+    }
+    .logo{
+      font-size: 1.3rem;
+      color: #ff0000;
+    }
+  
+    .Profileimg {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 5rem;
+        margin-left: 0.8rem;
+      background-color: 'white'; 
+    }
+    .Profilename{
+      font-size: 1rem;
+    }
+    .my-grid-container{
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); 
+    }
+    .my-grid-item{
+      font-size:0.6rem;
+    }
+    #but2{
+    height: 7rem;
+    width: 7rem;}
+    .buy{
+      font-size: 0.5rem;
+    }
+    .modalSER{
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+       max-width: 490px; 
+      margin-left: 7rem;
+      margin-top: -8rem;
+      border-radius: 1rem;
+ 
+    }
+    .cart-containerSER{
+      height: 550px;
+    }
+    .cart-itemSER{
+      width: 28rem;
+      height: 6rem;
+    }
+   .cart-item-nameSER{
+    font-size: 0.7rem;
+   }
+   .cart-item-priceSER{
+    font-size: 0.9rem;
+   }
+   /* .AppIP{
+    margin-top: 40rem;
+    width: 35rem;
+    margin-left:-2rem ;
+    font-size: 0.8rem;
+
+    overflow: hidden;
+    
+   } */
+}
+
+
+@media (max-width: 475px) {
+  .App{
+    width:22rem;
+    margin-left: -1.2rem;  }
+
+    .searchInput{
+      font-size: 0.6rem;
+      height: 1.1rem;
+      width:10rem;
+    }
+    .logo{
+      font-size: 0.8rem;
+      color: #ff0000;
+      margin-left: 0.2rem;
+    }
+  
+    .Profileimg {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 5rem;
+        margin-right: -2rem;
+      background-color: 'white'; 
+    }
+    .Profilename{
+      font-size: 0.8rem;
+    }
+    .my-grid-container{
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); 
+    }
+    .my-grid-item{
+      font-size:0.4.4rem;
+    }
+    #but2{
+    height: 7rem;
+    width: 7rem;}
+    .buy{
+      
+      font-size: 0.4.2rem;
+    }
+    .modalSER{
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      
+       max-width: 391px; 
+      
+      margin-left: 0.1rem;
+      margin-top: -15rem;
+      border-radius: 1rem;
+    
+    }
+    .cart-containerSER{
+      height: 550px;
+    }
+    .cart-itemSER{
+      width: 22.5rem;
+      height: 6rem;
+      
+    }
+   .cart-item-nameSER{
+    font-size: 0.7rem;
+   }
+   .cart-item-priceSER{
+    font-size: 0.8rem;
+   }
+   .cart-item-imageSER{
+    max-width: 80px;
+    max-height: 80px;
+    margin-right: 0.2rem;
+   }
+   .AppIP{
+    font-size:xx-small;
+    margin-top: 40rem;
+    width: 22rem;
+    margin-left:-1.4rem ;
+    
+    overflow: hidden;
+    
+
+  }
+}
+
+
+@media screen and (min-width: 200px) and (max-width: 400px) {
+
+}
+
+@media screen and (min-width: 401px) and (max-width: 600px) {
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 800px) {
+
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+
+}
+
+
+
+/* Home section */
+@media screen and (min-width: 1000px) {
+
+}
+
+@media screen and (min-width: 200px) and (max-width: 400px) {
+  
+}
+
+@media screen and (min-width: 401px) and (max-width: 600px) {
+  
+}
+
+@media screen and (min-width: 601px) and (max-width: 800px) {
+
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+
+
+
+}
+
+/* about section */
+
+
+
+@media screen and (min-width: 800px) {
+}
+
+/* @media screen and (min-width: 200px) and (max-width: 400px) {
+
+}
+
+@media screen and (min-width: 401px) and (max-width: 600px) {
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 800px) {
+ 
+} */
+
+
+
+@media screen and (min-width: 200px) and (max-width: 400px) {
+
+
+ 
+}
+
+@media screen and (min-width: 401px) and (max-width: 600px) {
+
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 800px) {
+
+
+
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+
+
+}
+
+
+@media screen and (min-width: 200px) and (max-width: 299px) {
+
+}
+
+@media screen and (min-width: 300px) and (max-width: 500px) {
+  
+}
+
+@media screen and (min-width: 501px) and (max-width: 700px) {
+ 
+}
+
+@media screen and (min-width: 701px) and (max-width: 900px) {
+
+}
+
+@media screen and (min-width: 901px) and (max-width: 1100px) {
+  /* .App{
+    width:48rem;
+  margin-left: 1.5rem;  
+} */
+/* .AppBar{} */
+  /* .searchInput{
+    font-size: 1rem;
+    height: 2rem;
+
+    width:20rem;
+    margin-left: -1rem;
+  }
+  .logo{
+    font-size: 1.3rem;
+    color: #ff0000;
+    margin-left: 1rem;
+  }
+
+  .Profileimg {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5rem;
+      margin-left: 1rem;
+    background-color: 'white'; 
+  }
+  .Profilename{
+    font-size: 1rem;
+  } */
+
+ 
+}

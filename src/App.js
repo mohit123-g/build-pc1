@@ -19,10 +19,8 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./components/listItems";
-// import Chart from './Chart';
-// import Deposits from './Deposits';
-// import Orders from './Orders';
+// import { mainListItems, secondaryListItems } from "./components/listItems";
+
 import HistoryIcon from "@mui/icons-material/History";
 import InventoryIcon from "@mui/icons-material/Inventory";
 
@@ -41,6 +39,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CallIcon from "@mui/icons-material/Call";
 import LoginIcon from "@mui/icons-material/Login";
 import SearchIcon from "@mui/icons-material/Search";
+import {
+  MDBFooter,
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBIcon,
+  MDBBtn
+} from 'mdb-react-ui-kit';
 
 import Login from "./components/Login";
 import Ecom from "./components/Ecom";
@@ -48,26 +54,35 @@ import LapPage from "./components/lapPage";
 import PCPage from "./components/pcPage";
 import CartPage from "./components/CartPage";
 import ContactUs from "./components/ContactUs";
-import Custum from "./components/Custum";
+import CustumPage from "./components/Custum";
 import PaymentPage from "./components/PaymentPage";
 import OrderHistory from "./components/OrderHistory";
 import OrderPage from "./components/OrderPage";
 import Account from "./components/Account";
+import Chatbot from "./Chatbot";
 import { useState, useEffect } from "react";
 import { blue } from "@mui/material/colors";
 import supabase from "./SupabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
+import logo from "./components/logo2.png";
+import profile from "./components/avatar.png"
+import { LocalParking, LocalSee } from "@mui/icons-material";
+import { Avatar } from "@chakra-ui/react";
+
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="red" align="center" {...props}>
-      {"Copyright © "}
+     
+         {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Mohit Gupta
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
+      
     </Typography>
+    
   );
 }
 
@@ -147,10 +162,29 @@ function App(props) {
     JSON.parse(localStorage.getItem("cartData")) || []
   );
   const [Comp,setComp]=useState(
-    JSON.parse(localStorage.getItem("Comp")) || {CPU:[],GPU:[],RAM:[],
-    CPU_Cooler:[],CabCooler:[],Cabinat:[],Mboard:[],PowerS:[],
+    JSON.parse(localStorage.getItem("Comp")) || {CPU:[],Mboard:[],RAM:[],GPU:[],
+    CPU_Cooler:[],CabCooler:[],Cabinat:[],PowerS:[],
     SoundC:[],Storage:[]
 });
+const [Custum, setCustum] = useState(
+  JSON.parse(localStorage.getItem("Custum")) || {
+    CPU: {},
+    Mboard: {},
+    RAM: {},
+    GPU: {},
+    Storage: {},
+    Cabinat: {},
+    PowerS: {},
+    CabCooler: {},
+    CPU_Cooler: {},
+    SoundC: {},
+    Cname:""
+  }
+);
+const [Custumfinal, setCustumfinal] = useState(
+  JSON.parse(localStorage.getItem("CustumFinal")) || {}
+
+);
 
   const [userId1, setUserId1] = useState(0);
   const [userProfile, setUserProfile] = useState(
@@ -199,120 +233,56 @@ function App(props) {
     localStorage.setItem("Comp", JSON.stringify(Comp));
   }, [Comp]);
   useEffect(() => {
+    localStorage.setItem("Custum", JSON.stringify(Custum));
+  }, [Custum]);
+  useEffect(() => {
+    localStorage.setItem("CustumFinal", JSON.stringify(Custumfinal));
+  }, [Custumfinal]);
+  useEffect(() => {
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
   }, [userProfile]);
+  // const script = document.createElement('script');
 
+  // useEffect(() => {
+  //   const script = document.createElement('script');
+  //   script.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js';
+  //   script.async = true;
+  //   script.onload = () => {
+  //     window.botpressWebChat.init({
+  //       "composerPlaceholder": "Chat with bot",
+  //       "botConversationDescription": "This chatbot was built surprisingly fast with Botpress",
+  //       "botId": "6f14a0dd-8596-4fde-9dc4-1a177054f266",
+  //       "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+  //       "messagingUrl": "https://messaging.botpress.cloud",
+  //       "clientId": "6f14a0dd-8596-4fde-9dc4-1a177054f266",
+  //       "webhookId": "184e3447-d3df-4a4a-92bd-4f2c7c488abb",
+  //       "lazySocket": true,
+  //       "themeName": "prism",
+  //       "frontendVersion": "v1",
+  //       "showPoweredBy": true,
+  //       "theme": "prism",
+  //       "themeColor": "#2563eb"
+  //     });
+  //   };
+  //   document.body.appendChild(script);
+  
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
   let t = Number(userId1);
 
-  //  console.log(SelectData)
-  // const axiosFatchData=async (processing)=>{
-  // //    const options={
-  // //     id:id,
-  // //     name:name,
-  // //     price:price,
-  // //     img:img,
-  // //     desc:desc
-  // //    }
-
-  //     await axios.get('ITEMS')
-  //    .then(res=>{
-  //     if (processing){
-  //     setSelectData(res.data)}
-  // })
-  //    .then(err=>console.log(err))
-  //    .catch(error => {
-  //     console.error('Axios Error:', error);
-  //   });
-  //  }
-
-  //  useEffect(()=>{
-  //     let processing=true
-  //     axiosFatchData(processing)
-  //     return ()=>{
-  //         processing=false
-  //     }
-
-  // },[]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const { data, error } = await supabase
-  //         .from('PC')
-  //         .select();
-
-  //       if (error) {
-  //         setFatchError("Error in Fetch");
-  //         setPcData(null);
-  //         console.error(error);
-  //       }
-
-  //       if (data) {
-  //         setPcData(data);
-  //         setFatchError(null);
-  //       }
-  //     } finally {
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const { data, error } = await supabase
-  //         .from('Laptop')
-  //         .select();
-
-  //       if (error) {
-  //         setFatchError("Error in Fetch");
-  //         setLapData(null);
-  //         console.error(error);
-  //       }
-
-  //       if (data) {
-  //         setLapData(data);
-  //         setFatchError(null);
-  //       }
-  //     } finally {
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const { data, error } = await supabase
-  //         .from('Cart')
-  //         .select();
-
-  //       if (error) {
-  //         setFatchError("Error in Fetch");
-  //         setCartData(null);
-  //         console.error(error);
-  //       }
-
-  //       if (data) {
-  //         setCartData(data);
-  //         setFatchError(null);
-  //         console.log(cartData[0].id);
-  //         console.log(cartData[0].itemid);
-  //       }
-  //     } finally {
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const pcDataResult = await supabase.from("PC").select();
         const laptopDataResult = await supabase.from("Laptop").select();
+        const customDataResult= await supabase
+        .from("CustumPC")
+        .select()
+        .eq("id", localStorage.getItem("userid"));
+
         const conpDataResult1= await supabase.from("CPU").select();
         const conpDataResult2= await supabase.from("GPU").select();
         const conpDataResult3= await supabase.from("RAM").select();
@@ -338,6 +308,7 @@ function App(props) {
         if (
           pcDataResult.error ||
           laptopDataResult.error ||
+          customDataResult.error ||
           cartDataResult.error ||
           userProfileResult.error ||
           conpDataResult1.error ||
@@ -355,6 +326,8 @@ function App(props) {
           if (pcDataResult.error) errorMessage += "Error in PC Fetch\n";
           if (laptopDataResult.error) errorMessage += "Error in Laptop Fetch\n";
           if (cartDataResult.error) errorMessage += "Error in Cart Fetch\n";
+          if (customDataResult.error) errorMessage += "Error in Custum  Builder Fetch\n";
+
           if (userProfileResult.error) errorMessage += "Error in userProfile Fetch\n";
           if (conpDataResult1.error ) errorMessage += "Error in Components1 Fetch\n";
           if (conpDataResult2.error ) errorMessage += "Error in Components2 Fetch\n";
@@ -373,12 +346,14 @@ function App(props) {
           setLapData(null);
           setCartData(null);
           setUserProfile(null);
+          setCustumfinal(null)
            setComp(null)
           console.error(
             pcDataResult.error ||
               laptopDataResult.error ||
               cartDataResult.error ||
               userProfileResult.error ||
+              customDataResult.error||
               conpDataResult1.error ||
               conpDataResult2.error ||
               conpDataResult3.error ||
@@ -395,6 +370,7 @@ function App(props) {
           setLapData(laptopDataResult.data || null);
           setCartData(cartDataResult.data || null);
           setUserProfile(userProfileResult.data || null);
+          setCustumfinal(customDataResult.data[0] || null);
           setComp({
             ...Comp,
             CPU: conpDataResult1.data,
@@ -408,7 +384,7 @@ function App(props) {
             CabCooler: conpDataResult9.data,
             SoundC: conpDataResult10.data
           });
-          
+         
 
           setFetchError(null);
 
@@ -418,8 +394,9 @@ function App(props) {
             console.log(typeof Number(userId1));
             console.log(typeof localStorage.getItem("userid"));
             // console.log(Comp.CPU[0].img);
-            console.log("check first", typeof t, t);
+           
           }
+          console.log(Custumfinal.id);
         }
       } catch (error) {
         setFetchError("Error in fetching data");
@@ -427,6 +404,7 @@ function App(props) {
         setLapData(null);
         setCartData(null);
         setUserProfile(null);
+        setCustumfinal(null)
         setComp(null)
         console.error(error);
       }
@@ -469,12 +447,8 @@ function App(props) {
             Close
           </button>
           <div
-            style={{
-              height: "900px",
-              overflowY: "auto",
-              border: "1px solid #ccc",
-              padding: "10px",
-            }}
+         
+            className="cart-containerSER"
           >
             {children}
           </div>
@@ -483,14 +457,7 @@ function App(props) {
     );
   };
 
-  // <div className="cart-container">
-  // <h2 className="cart-title">Your Shopping Cart</h2>
 
-  // {cartItems.length === 0 ? (
-  //   <p className="empty-cart-message">Your cart is empty</p>
-  // ) : (
-  //   <>
-  //     <div className="cart-items-container">
   const ModalTemp = () => {
     console.log("open");
     // if (b != 0) {
@@ -507,15 +474,14 @@ function App(props) {
         ) {
           itemLap.push(
             <div 
-            // onClick={setSel("L")}
             >
               {" "}
               <a href={"/lapPage/" + i}>
-                <div className="cart-item">
-                  <img className="cart-item-image" src={lapData[i].img[0]} />
+                <div className="cart-itemSER">
+                  <img className="cart-item-imageSER" src={lapData[i].img[0]} />
                   <pre>
-                    <p className="cart-item-price">₹{lapData[i].price}</p>
-                    <p className="cart-item-name">{lapData[i].name}</p>
+                    <p className="cart-item-priceSER">₹{lapData[i].price}</p>
+                    <p className="cart-item-nameSER">{lapData[i].name}</p>
                   </pre>
                 </div>
               </a>
@@ -534,13 +500,13 @@ function App(props) {
             >
               {" "}
               <a href={"/pcPage/" + i}>
-                <div className="cart-item">
+                <div className="cart-itemSER">
                   {/* <a href={"/IPage/" + i}> */}
-                    <img className="cart-item-image" src={pcData[i].img[0]} />
+                    <img className="cart-item-imageSER" src={pcData[i].img[0]} />
                   {/* </a> */}
                   <pre>                    
-                    <p className="cart-item-price">₹{pcData[i].price}</p>
-                    <p className="cart-item-name">{pcData[i].name}</p>
+                    <p className="cart-item-priceSER">₹{pcData[i].price}</p>
+                    <p className="cart-item-nameSER">{pcData[i].name}</p>
                   </pre>
                 </div>
               </a>
@@ -554,11 +520,11 @@ function App(props) {
           {/* <button onClick={openModal}>Open Modal</button> */}
           <Modal isOpen={isModalOpen} onClose={closeModal}>
             {/* <div className="cart-container"> */}
-            <h1 className="cart-title">Laptops found</h1>
-            <div className="cart-items-container"> {itemLap}</div>
-            <h1 className="cart-title">Pre Build PCs found</h1>
+            <h1 className="cart-titleSER">Laptops found</h1>
+            <div className="cart-items-containerSER"> {itemLap}</div>
+            <h1 className="cart-titleSER">Pre Build PCs found</h1>
 
-            <div className="cart-items-container"> {itemPC}</div>
+            <div className="cart-items-containerSER"> {itemPC}</div>
 
             {/* </div> */}
           </Modal>
@@ -567,15 +533,7 @@ function App(props) {
     }
     // }
   };
-  // useEffect(()=>{
-  //   async function getUserData() {
-  //   await supabase.auth.getUser().then((value)=>{
-  //     if(value.data?.user){
-  //       console.log(value.data.user);
-  //     }
-  //   })}
-  //   getUserData();
-  // },[])
+
 
   async function signOutUser() {
     // props.setlog(false);
@@ -584,103 +542,28 @@ function App(props) {
     //   // Assuming setlog is a prop passed to the component
     // props.setlog(false);
     // } else {
+   
+      localStorage.clear();
+
     console.error("Error signing out:", error);
     // }
     // console.log(error);
   }
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-
-  //     try {
-  //       const pcDataResult = await supabase.from("PC").select();
-  //       const laptopDataResult = await supabase.from("Laptop").select();
-  //       const cartDataResult = await supabase.from("Cart").select().eq('uid',localStorage.getItem('userid') );
-  //       const userProfileResult = await supabase.from("Users1").select().eq('id',localStorage.getItem('userid') );
-
-  //       if (
-  //         pcDataResult.error ||
-  //         laptopDataResult.error ||
-  //         cartDataResult.error ||
-  //         userProfileResult.error
-  //       ) {
-  //         let errorMessage = "";
-  //         if (pcDataResult.error) errorMessage += "Error in PC Fetch\n";
-  //         if (laptopDataResult.error) errorMessage += "Error in Laptop Fetch\n";
-  //         if (cartDataResult.error) errorMessage += "Error in Cart Fetch\n";
-  //         if (userProfileResult.error) errorMessage += "Error in userProfile Fetch\n";
-  //         setFetchError(errorMessage);
-  //         setPcData(null);
-  //         setLapData(null);
-  //         setCartData(null);
-  //         setUserProfile(null);
-
-  //         console.error(
-  //           pcDataResult.error || laptopDataResult.error || cartDataResult.error ||userProfileResult.error
-  //         );
-  //       } else {
-  //         setPcData(pcDataResult.data || null);
-  //         setLapData(laptopDataResult.data || null);
-  //         setCartData(cartDataResult.data || null);
-  //         setUserProfile( userProfileResult.data||null);
-  //         setFetchError(null);
-
-  //         if (cartDataResult.data && cartDataResult.data.length > 0) {
-  //           console.log(cartDataResult.data[0].uid);
-  //           console.log(cartDataResult.data[0].citem);
-  //           console.log(typeof Number(userId1));
-  //           console.log(typeof localStorage.getItem('userid'));
-
-  //           console.log("check first",typeof t,t)
-  //         }
-  //       }
-  //     } catch (error) {
-  //       setFetchError("Error in fetching data");
-  //       setPcData(null);
-  //       setLapData(null);
-  //       setCartData(null);
-  //       setUserProfile(null);
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  //   useEffect(()=>{
-  //     async function getUserData() {
-  //     await supabase.auth.getUser().then((value)=>{
-  //       if(value.data?.user){
-  //         console.log(value.data.user);
-  //       }
-  //     })}
-  //     getUserData();
-  //   },[])
-
-  //   async function signOutUser(){
-  //     // props.setlog(false);
-  //   const{error}= await supabase.auth.signOut();
-  //   // if (!error) {
-  //   //   // Assuming setlog is a prop passed to the component
-  //     // props.setlog(false);
-  //   // } else {
-  //     console.error('Error signing out:', error);
-  //   // }
-  //   // console.log(error);
-  // }
-
-  return (
-    <ThemeProvider theme={defaultTheme}>
+ 
+  return (   <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
           style={{ backgroundColor: "black" }}
+          className="AppBar"
           position="absolute"
+          // backgroundColor="black"
           open={open}
         >
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: "35px", // keep right padding when drawer closed
             }}
           >
             <IconButton
@@ -689,7 +572,7 @@ function App(props) {
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{
-                marginRight: "36px",
+                marginRight: "16px",
                 ...(open && { display: "none" }),
               }}
             >
@@ -697,19 +580,20 @@ function App(props) {
             </IconButton>
             <Typography
               component="h1"
-              variant="h4"
+              variant="h5"
               color="red"
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              <a href="/" style={{ color: "red" }}>
-                {" "}
-                ORGPC
+              <a href="/" >
+                <img className="logo" src={logo}/>
+                {/* ORGPC */}
               </a>
             </Typography>
             <input
               placeholder="Search"
-              style={{ fontSize: 30, height: "50px", width: "1000px" }}
+              // style={{ fontSize: 30, height: "50px", width: "1000px" }}
+              className="searchInput"
               //  checked={isChecked}
               // onClick={openModal}
               onDoubleClick={openModal}
@@ -718,31 +602,24 @@ function App(props) {
                 setSearchBox(e.target.value);
               }}
             />
-            <SearchIcon style={{ height: "50px", width: "50px" }} />
+            <SearchIcon />
 
             {ModalTemp()}
-            <h2 style={{ color: "transparent", cursor: "default" }}>
-              -----------------------------------------
-            </h2>
+           
             {/* {openModal} */}
           <a style={{color:'white'}} href="/Account"> <IconButton color="inherit">
-              {props.userprofile2.name}
-
+           <label className="Profilename"> {props.userprofile2.name !== undefined ? props.userprofile2.name:"User"}</label> 
+ 
               <Badge
                 // badgeContent={33}
                 color="secondary"
               >
                 {/* <NotificationsIcon /> */}
                 <img
-    src={props.userprofile2.pimg}
+src={props.userprofile2.pimg !== undefined ? props.userprofile2.pimg : profile}
+// {props.userprofile2.pimg}
     alt="Icon"
-    style={{
-        width: '40px',
-        height: '40px',
-        borderRadius: '50%', // Making it a circle
-        marginLeft: '10px',
-        backgroundColor: 'white', // Adding a background color
-    }}
+   className="Profileimg"
 />
               </Badge>
             </IconButton></a> 
@@ -809,12 +686,12 @@ function App(props) {
                   />
                 </ListItemButton>
               </a>
-              <ListItemButton>
+              {/* <ListItemButton>
                 <ListItemIcon>
                   <BarChartIcon />
                 </ListItemIcon>
                 <ListItemText primary="Reports" />
-              </ListItemButton>
+              </ListItemButton> */}
             </React.Fragment>
 
             <Divider sx={{ my: 1 }} />
@@ -853,10 +730,10 @@ function App(props) {
                   />
                 </ListItemButton>
               </a>
-              <a href="/OrderHistory" style={{ textDecoration: "none" }}>
+              
+              {/* <a href="/OrderHistory" style={{ textDecoration: "none" }}>
                 <ListItemButton>
                   <ListItemIcon>
-                    {/* <AssignmentIcon /> */}
                     <HistoryIcon />
                   </ListItemIcon>
                   <ListItemText
@@ -867,7 +744,7 @@ function App(props) {
                     }
                   />
                 </ListItemButton>
-              </a>
+              </a> */}
               <ListItemButton>
                 <ListItemIcon>
                   <LoginIcon onClick={() => signOutUser()} />
@@ -878,9 +755,10 @@ function App(props) {
           </List>
         </Drawer>
         <Box
-          // style={{
-          //   backgroundImage: "url('https://c.wallhere.com/photos/9e/73/computer_keyboards-1150906.jpg!d')"
-          // }}
+          style={{
+            // backgroundImage: "url(https://images.pexels.com/photos/5185159/pexels-photo-5185159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1 )"
+backgroundColor:'white'
+          }}
           component="main"
           sx={{
             backgroundColor: (theme) =>
@@ -890,11 +768,14 @@ function App(props) {
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
-            padding: "2%", // Adjust padding as needed
+            // padding: "2%", // Adjust padding as needed
           }}
         >
+            {/* <Chatbot /> */}
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        
+          <Container maxWidth="200rem" sx={{ mb: 4 }}>
+            
             <Ecom
               //  litem={Litems} setlitem={setLitem}
               // pitem={Pitems} setpitem={setPitem}
@@ -924,20 +805,7 @@ function App(props) {
               <Routes>
                 <Route path="/login" index element={<Login />}></Route>
 
-                {/* <Route
-      path="/"
-      index element={<Ecom 
-      //    litem={Litems} setlitem={setLitem} 
-      // pitem={Pitems} setpitem={setPitem} 
-      check={Check} setcheck={setCheck}
-      sel={Sel} setsel={setSel}
-      check1={Check1} setcheck1={setCheck}
-      pcdata={pcData} setpcdata={setPcData}        
-      lapdata={lapData} setlapdata={setLapData}
-      selitem={Selitem}  setselitem={setSelitem}
-      cartdata={cartData} setcartdata={setCartData}
-      />}
-      ></Route> */}
+          
 
                 <Route
                   path="/Ecom"
@@ -1053,6 +921,12 @@ function App(props) {
                       setexistingdata={setExistingData}
                       userprofile={userProfile} 
                       setuserprofile={setUserProfile}
+                      comp={Comp}
+                      setcomp={setComp}
+                      custum={Custum}
+                      setcustum={setCustum}
+                      custumfinal={Custumfinal}
+                      setcustumfinal={setCustumfinal}
                       // cartitems={cartItems}
                       // setcartitems={setCartItems} 
 
@@ -1091,7 +965,7 @@ function App(props) {
                   path="/Custum"
                   index
                   element={
-                    <Custum
+                    <CustumPage
                       check={Check}
                       setcheck={setCheck}
                       sel={Sel}
@@ -1114,6 +988,10 @@ function App(props) {
                       setexistingdata={setExistingData}
                       comp={Comp}
                       setcomp={setComp}
+                      custum={Custum}
+                      setcustum={setCustum}
+                      custumfinal={Custumfinal}
+                      setcustumfinal={setCustumfinal}
                     />
                   }
                 ></Route>
@@ -1142,6 +1020,12 @@ function App(props) {
                       setnewobject={setNewObject}
                       existingdata={existingData}
                       setexistingdata={setExistingData}
+                      comp={Comp}
+                      setcomp={setComp}
+                      custum={Custum}
+                      setcustum={setCustum}
+                      custumfinal={Custumfinal}
+                      setcustumfinal={setCustumfinal}
                     />
                   }
                 ></Route>
@@ -1170,6 +1054,12 @@ function App(props) {
                       setnewobject={setNewObject}
                       existingdata={existingData}
                       setexistingdata={setExistingData}
+                      comp={Comp}
+                      setcomp={setComp}
+                      custum={Custum}
+                      setcustum={setCustum}
+                      custumfinal={Custumfinal}
+                      setcustumfinal={setCustumfinal}
                     />
                   }
                 ></Route>
@@ -1200,8 +1090,19 @@ function App(props) {
                       setexistingdata={setExistingData}
                       userprofile={userProfile} 
                       setuserprofile={setUserProfile}
+                      // comp={Comp}
+                      // setcomp={setComp}
+                      // custum={Custum}
+                      // setcustum={setCustum}
+                      comp={Comp}
+                      setcomp={setComp}
+                      custum={Custum}
+                      setcustum={setCustum}
+                      custumfinal={Custumfinal}
+                      setcustumfinal={setCustumfinal}
                       //   cartitems={cartItems}
-                      // setcartitems={setCartItems} 
+                      // setcartitems={setCartItems}
+                      
 
                     />
                   }
@@ -1233,65 +1134,27 @@ function App(props) {
                       setexistingdata={setExistingData}
                       userprofile={userProfile} 
                       setuserprofile={setUserProfile}
+                      comp={Comp}
+                      setcomp={setComp}
+                      custum={Custum}
+                      setcustum={setCustum}
                       //   cartitems={cartItems}
                       // setcartitems={setCartItems} 
 
                     />
                   }
                 ></Route>
-                {/* <Route
-      path="/Dashboard"
-      index element={<Dashboard
-        check={Check} setcheck={setCheck} 
-        sel={Sel} setsel={setSel}
-        check1={Check1} setcheck1={setCheck}
-        pcdata={pcData} setpcdata={setPcData}          
-        lapdata={lapData} setlapdata={setLapData}
-        selitem={Selitem}  setselitem={setSelitem}
-        cartdata={cartData} setcartdata={setCartData}
-      />}
-      ></Route> */}
+           
               </Routes>
             </BrowserRouter>
-            {/* <Grid container spacing={3}>
-              Chart
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              Recent Deposits
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              Recent Orders
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid> */}
-          </Container>
+            
+           </Container>
+           <Chatbot /> 
           <Copyright sx={{ pt: 4 }} />
         </Box>
       </Box>
     </ThemeProvider>
+
   );
 }
 

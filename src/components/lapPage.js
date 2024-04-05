@@ -13,7 +13,23 @@ import DropdownItem from "rsuite/esm/Dropdown/DropdownItem";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { insertJsonObject } from "./Ecom";
-
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Button,
+  Divider,
+  FormLabel,
+  Grid,
+  GridItem,
+  Img,
+  RadioGroup,
+  Text,
+  
+} from "@chakra-ui/react";
 // import { Select } from "@mui/material";
 const LapPage = (props) => {
   const [value, setValue] = useState(0);
@@ -137,7 +153,7 @@ const LapPage = (props) => {
     if (props.lapdata && props.lapdata.length > i) {
       if (c == 0) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", fontSize:25,marginTop:"10px" }}>
+          <div className="details">
           
            <h5 >
   {props.lapdata[i].spec.General.split('`').map((part, index) => (
@@ -148,7 +164,7 @@ const LapPage = (props) => {
       }
       if (c == 1) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25 }}>
+          <div className="details">
             <h5 >
   {props.lapdata[i].spec.Processor_Memeory.split('`').map((part, index) => (
     <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
@@ -158,7 +174,7 @@ const LapPage = (props) => {
       }
       if (c == 2) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+          <div className="details">
          <h5 >
   {props.lapdata[i].spec.OS.split('`').map((part, index) => (
     <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
@@ -168,7 +184,7 @@ const LapPage = (props) => {
       }
       if (c == 3) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+          <div className="details">
             <h5>
   {props.lapdata[i].spec.Port_Slot.split('`').map((part, index) => (
     <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
@@ -178,7 +194,7 @@ const LapPage = (props) => {
       }
       if (c == 4) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25 }}>
+          <div className="details">
             <h5>
   {props.lapdata[i].spec.Display_Audio.split('`').map((part, index) => (
     <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
@@ -188,7 +204,7 @@ const LapPage = (props) => {
       }
       if (c == 5) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25}}>
+          <div className="details">
             <h5 >
   {props.lapdata[i].spec.Connectivity.split('`').map((part, index) => (
     <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
@@ -204,7 +220,7 @@ const LapPage = (props) => {
       }
       if (c == 6) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px", fontSize:25}}>
+          <div className="details">
           <h5 >
   {props.lapdata[i].spec.Dimensions.split('`').map((part, index) => (
     <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
@@ -214,7 +230,7 @@ const LapPage = (props) => {
       }
       if (c == 7) {
         return (
-          <div style={{ textAlign: "left", fontWeight: "bold", marginTop:"10px" , fontSize:25}}>
+          <div className="details">
           <h5 >
   {props.lapdata[i].spec.AdditionalFeatures.split('`').map((part, index) => (
     <div key={index} style={{marginBottom:'6px'}}>{part.trim()}</div>
@@ -703,7 +719,7 @@ const LapPage = (props) => {
 //     } else {
       return (
         <div>
-          <pre style={{ color: "white" ,fontFamily:'serif'}}>
+          <pre style={{  fontFamily:'serif'}}>
             {" "}
             <h1>
               {props.lapdata[i].name}
@@ -732,6 +748,7 @@ const LapPage = (props) => {
             </button></pre>
           </h2>
           {/* <div className="centered-container"> */}
+          
           <div className="centered-content">
             {/* {props.lapdata && props.lapdata.length > i ? (
               <img
@@ -873,7 +890,7 @@ const LapPage = (props) => {
               }}
             /> */}
             <h2
-              style={{ color: "white" ,marginTop:'-520px'}}
+             className="spec"
               onClick={() => {
                 setOptionsVisible(!optionsVisible);
               }}
@@ -923,11 +940,11 @@ const LapPage = (props) => {
                   </Tabs> */}
 
                 <div
-                  style={{
-                    color: "white",
-                    backgroundColor: "transparent",
-                    height: "50px",
-                  }}
+                  // style={{
+                  //   color: "white",
+                  //   backgroundColor: "transparent",
+                  //   height: "60px",
+                  // }}
                   value={value}
                   indicatorColor="primary"
                   onChange={(event, newValue) => {
@@ -937,13 +954,8 @@ const LapPage = (props) => {
                   {/* Your custom styling */}
 
                   <div
-                    // className="centered-tabs"
-                    style={{
-                      alignitems: "center",
-                      display: "flex",
-                      justifycontent: "center",
-                      fontSize: 30,
-                    }}
+                    className="tabsContainer"
+                  
                   >
                     <div className="centered-tabs" onClick={() => setValue(0)}>
                       General
@@ -971,8 +983,10 @@ const LapPage = (props) => {
                     </div>
                     
                   </div>
-                </div>
+                </div > 
+                <div className="details">
                 {Detail(value)}
+                </div>
                 {/* </Paper> */}
               </div>
             )}

@@ -1,128 +1,10 @@
-/* Apply styles for different screen sizes using media queries */
-
-/* For screens with a width between 769px and 124px (adjust as needed) */
-/* @media (min-width: 769px) and (max-width: 1024px) {
-
-  .item {
-    height: 200px;
-  }
-
-  .thumbnail-container {
-    margin-right: 0;
-  }
-
-  .thumbnail-image {
-    width: 100px;
-    height: 100px;
-  }
-
-  .selected-image {
-    max-width: 300px;
-    max-height: 300px;
-  }
-
-  .hollow-tab {
-    padding: 10px 50px;
-    margin-top: 50px;
-    margin-left: 0;
-  }
-
-  .options {
-    left: 0;
-    width: 100%;
-    max-height: none;
-    overflow-y: initial;
-  }
-
-  .options a {
-    padding: 10px;
-  }
-
-  .optionspc {
-    left: 0;
-    width: 100%;
-    max-height: none;
-    overflow-y: initial;
-  }
-
-  .optionspc a {
-    padding: 10px;
-  }
-} */
-
-/* For screens with a width of 768px or less (adjust as needed) */
-/* @media (max-width: 768px) {
-
-
-
-  .item {
-    height: auto;
-  }
-
-  .thumbnail-container {
-    margin-right: 0;
-  }
-
-  .thumbnail-image {
-    width: 100px;
-    height: 100px;
-  }
-
-  .selected-image {
-    max-width: 300px;
-    max-height: 300px;
-  }
-
-  .hollow-tab {
-    padding: 10px 50px;
-    margin-top: 50px;
-    margin-left: 0;
-  }
-
-  .options {
-    left: 0;
-    width: 100%;
-    max-height: none;
-    overflow-y: initial;
-  }
-
-  .options a {
-    padding: 10px;
-  }
-
-  .optionspc {
-    left: 0;
-    width: 100%;
-    max-height: none;
-    overflow-y: initial;
-  }
-
-  .optionspc a {
-    padding: 10px;
-  }
-} */
-
-/* Your existing CSS styles here */
-
-/* Position the dropdown */
-/* .dropdown-container {
-  position: relative;
-  display: inline-block;
-} */
-
-/* .dashboard,.centered-content{ */
-  /* position: absolute;  */
-  /* width: auto;
-  height: auto; */
-  /* background-color: lightblue; */
-/* }  */
 
 
 #but3{
   align-content: center;
-  /* margin-top: ; */
-  height: 120px;
-  width: 120px;
+  
+  height: 9rem;
+  width: 9rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 } 
@@ -136,9 +18,7 @@
 
 
 .dropdown-content{
-  /* width:50% ; */
-  /* height: 80%; */
-  /* background-color: #1b412f; */ /* display:flex */
+
 
  width: 300px; 
  border:5px solid white;
@@ -148,26 +28,25 @@
 .bottom {
   z-index: 1;
   max-height: 30px; 
-  /* Fixed height */
 
 
-  margin-top: 93vh; /* 10% of the viewport height */
+  margin-top: 93vh; 
   position: relative;
-  top: 5vh; /* 5% of the viewport height */
-  left: 5vw; /* 5% of the viewport width */
+  top: 5vh; 
+  left: 5vw;
 }
 
 
 .clicked {
-  background-color: green; /* Change the background color when clicked */
-  color: white; /* Change the text color when clicked */
+  background-color: green;
+  color: white; 
 }
 
-.page-container {
-  /* display: flex; */
+.page-container {  
+  /* //select what you want to see */
   justify-content: center;
   align-items: center;
-  height: 26vh;
+  height: 18rem;
   background-color: transparent;
 
 }
@@ -181,31 +60,15 @@
 
 
 
-/* .item {
-  margin: 10px;
-  min-width: 100px; 
-  min-height: 100px; 
-  background-color: #eee;
-  
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.item:hover {
-  transform: scale(1.10);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-} */
 
-/* <!-- HTML !-->
-<button class="button-49" role="button">Button 49</button> */
-
-/* CSS */
 .item,
 .item:after {
-  width: 170px;
+  width: 10rem;
   height: 50px;
   line-height: 18px;
   font-size: 20px;
   font-family: 'Bebas Neue', sans-serif;
-  background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
+  background: linear-gradient(45deg, transparent 5%, #59d2ea 5%);
   border: 0;
   color: #fff;
   letter-spacing: 3px;
@@ -233,7 +96,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #0fdede 5%);
   text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
   clip-path: var(--slice-0);
 }
@@ -290,34 +153,22 @@
   }
 }
 
-/* @media (min-width: 768px) {
-  .item,
-  .item:after {
-    width: 200px;
-    height: 86px;
-    line-height: 88px;
-  }
-} */
+
+
 
 
 .centered-tabs {
-  /* margin-top:10px ; */
-  width: 400px;
-  height: 100px;
+  width: 4px;
+  height: 110px;
   font-size: 18px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   border:2px solid white;
 
-  /* align-items: center;
-display: flex;
-  justify-content: center; */
+
 
 }
-/* <!-- HTML !-->
-<button class="button-78" role="button">Button 78</button> */
 
-/* CSS */
 .centered-tabs{
   align-items: center;
   appearance: none;
@@ -332,7 +183,8 @@ display: flex;
   flex-direction: row;
   flex-shrink: 0;
   font-family: Eina01,sans-serif;
-  font-size: 16px;
+  /* font-size:  1vmax; */
+  font-size: 20px;
   font-weight: 798;
   justify-content: center;
   line-height: 14px;
@@ -355,11 +207,7 @@ display: flex;
   z-index: 0;
 }
 
-/* @media (min-width: 768px) {
-  .centered-tabs {
-    padding: 19px 32px;
-  }
-} */
+
 
 .centered-tabs:before,
 .centered-tabs:after {
@@ -370,7 +218,7 @@ display: flex;
   background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
   content: "";
   display: block;
-  height: 50%;
+  height: 55%;
   left: 0;
   overflow: hidden;
   position: absolute;
@@ -428,7 +276,23 @@ display: flex;
   opacity: .24;
 }
 
+.tabsContainer{
+  
+    /* align-items: center; */
+    display: flex;
+    /* justify-content: center; */
+    font-size: 30;
+    /* height: 9rem; */
+    overflow:auto  ;
+  }
 
+
+.details{
+  text-Align: left;
+   font-Weight: bold;
+   margin-Top:10px; 
+  font-Size:1.6rem; 
+}
 .page-container1 {
   display: block;
   justify-content: center;
@@ -436,87 +300,69 @@ display: flex;
 
     height:370px;
   width:650px;
-  /* z-index: -1; */
   background-color: transparent;
 
 }
 .centered-content {
-  /* display: flex; */
-  /* position: relative; */
-  /* height:200px;
-  width: 200px; */
-  /* width: 100px; */
-  /* height: 30px; */
-    /* overflow-y: ; */
 
-  margin-left: -530px;
-  /* margin-right: 500px; */
+  margin-left: 0.8rem;
+  /* margin-right: 1vmin; */
   justify-content: center;
   align-items: center;
-  
+  font-size: 0.6vmax;
   flex-direction: column;
   background-color: transparent;
-  /* margin: 1px; Adjust the margin as needed */
 }
 
 .centered-contentpc {
-  /* display: flex; */
-  /* position: relative; */
-  /* height:200px;
-  width: 200px; */
-  margin-left: -430px;
-  /* margin-right: 500px; */
+ 
+  margin-left: 8rem;
   justify-content: center;
   align-items: center;
-  
+  font-size: 0.7vmax;
+
   flex-direction: column;
   background-color: transparent;
-  /* margin: 1px; Adjust the margin as needed */
 }
 
-.Tabs{
-}
 
-/* .my-grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  margin-top: 50px;
-} */
 
 .thumbnail-container {
   display: flex;
   flex-direction: column;
   align-items: center;
     overflow-y: auto;
-height: 600px;
-width: 150px;
+height: 40em;
+width: 10em;
   margin-right: 20px;
 }
 
 .thumbnail-image {
-  width: 110px;
-  height: 100px;
+  width: 8em;
+  height: 8em;
   object-fit: cover;
   cursor: pointer;
+  border: #000 solid thin;
+
+
 }
 
 .selected-image {
-  width:  600px;
-  height: 600px;
+  width:  40em;
+  height: 40em;
   padding: 10px solid black;
   border: 2px solid #000;
   margin-top: 20px;
 }
-
+.spec{ color:black ;
+  margin-top: -520px;}
 .hollow-tab {
   position: relative;
-  /* cursor: pointer; */
-  /* display: flex; */
+  
   align-items: center;
-  padding: 200px 110px;
-  margin-top: -330px;
-  margin-left: 770px;
+  padding: 200px 120px;
+  margin-top: -14.5%;
+  margin-left: 32vmax;
   z-index: 0;
   background-color: transparent;
   border-bottom: 2px solid #000;
@@ -534,11 +380,10 @@ width: 150px;
 .hollow-tabpc {
   position: relative;
   cursor: pointer;
-  /* display: flex; */
   align-items: center;
   padding: 250px 110px;
-  margin-top: -480px;
-  margin-left: 770px;
+  margin-top: -18%;
+  margin-left: 43vmax;
   z-index: 0;
   background-color: transparent;
   border-bottom: 2px solid #000;
@@ -555,18 +400,20 @@ width: 150px;
   display: none;
   position: absolute;
   top: -250px;
-  left: -520px;
-  width: 1480px;
-  max-height: 800px;
-  color: white;
+  /* left: 2vmin; */
+  right: 1vmax;
+  /* width: 61vw; */
+  /* max-height: 800px; */
+  color:black;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  /* overflow-y: auto; */
-  background-color:black;
+  background-color:#D2D2D2;
   border: 2px solid #000;
   box-sizing: border-box;
   z-index: 0;
   padding: 10px;
+  
 }
+
 
 .options a {
   display: block;
@@ -596,14 +443,14 @@ width: 150px;
 .optionspc {
   display: none;
   position: absolute;
-  top: -120px;
-  left: -220px;
-  width: 900px;
-  max-height: 800px;
-  color: white;
+  top: -240px;
+  left: 15vmin;
+  right: 8vmax;
+  /* width: 61vw; */
+  /* max-height: 800px; */
+  color:black;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  /* overflow-y: auto; */
-  background-color:black;
+  background-color:#D2D2D2;
   border: 2px solid #000;
   box-sizing: border-box;
   z-index: 0;
@@ -638,6 +485,369 @@ width: 150px;
 .app-container {
   display: flex;
   align-items: center;
- /* height: 300px; */
-  left: -10px;
+  left: -30px;
 }
+/* .my-grid-containerlap {
+  background-color: transparent;
+ position: relative;
+ 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(680px, 1fr)); 
+  grid-gap: 16px;
+}
+.my-grid-itemlap {
+  background-color: transparent;
+  padding: 10px ;
+  font-size: 1rem;
+  height: auto;
+  width: auto;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  } */
+/* @media (min-width: 1842px) {
+  .item,
+  .item:after{
+    width: 10rem;
+    height: 50px;
+    font-size: 20px;
+  }
+  #but3{
+    height: 8rem;
+    width: 8rem;
+  }
+  .page-container{
+   height: 18rem;
+  }
+  .options{
+    top: -15.6rem;
+    left: -32.5rem;
+    width: 92.5;
+    max-height: 800px;
+  }
+
+   .centered-content{
+     margin-left:-1rem;
+   }
+ 
+   .hollow-tab{
+     top: 1rem;
+     left: 33rem;
+     width: 30rem;
+    
+   }
+   .hollow-tabpc{
+    left:  33rem;
+    width: 20rem;
+   }
+   .centered-contentpc{
+    margin-left: -1rem;
+   }
+}
+@media (max-width: 1842px) {
+  .item,
+  .item:after{
+    width: 10rem;
+    height: 50px;
+    font-size: 20px;
+  }
+  #but3{
+    height: 8rem;
+    width: 8rem;
+  }
+  .page-container{
+   height: 17rem;
+  }
+  .centered-content{
+    margin-left:25rem;
+  }
+  .spec{
+  margin-left: -30rem;
+  }
+  .hollow-tab{
+    top: 42rem;
+    left: -8rem;
+   width: 60rem;
+  }
+
+ 
+}
+
+@media (max-width: 1536px) {
+  .item,
+  .item:after{
+    width: 10rem;
+    height: 50px;
+    font-size: 20px;
+  }
+  #but3{
+    height: 8rem;
+    width: 8rem;
+  }
+  .page-container{
+   height: 17rem;
+  }
+  .centered-content{
+    margin-left:17rem;
+  }
+  
+  .tabsContainer{
+    width: 88.9rem;
+    overflow: auto;
+
+  }
+  .hollow-tab{
+    top: 42rem;
+    left: -15.3rem;
+    width: 57rem;
+  }
+  .options{
+    width: 90rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .item,
+  .item:after{
+    width: 9rem;
+    height: 3rem;
+    font-size: 1rem;
+  }
+  #but3{
+    height: 6.5rem;
+    width: 6.5rem;
+  }
+  .page-container{
+    height: 14rem;
+   }
+   .centered-content{
+    margin-left:10rem;
+  }
+ 
+  .tabsContainer{
+    width: 74rem;
+    overflow: auto;
+
+  }
+  .hollow-tab{
+    top: 42rem;
+    left: -15.6rem;
+    width: 40.5rem;
+  }
+  .options{
+    width: 75rem;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  .item,
+  .item:after{
+    width: 7rem;
+    height: 2.2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  #but3{
+    height: 4.8rem;
+    width: 4.8rem;
+  }
+  .page-container{
+    height: 12rem;
+   }
+   .centered-content{
+    margin-left:1rem;
+  
+  }
+
+  .tabsContainer{
+    width: 58rem;
+    overflow: auto;
+
+  }
+  .hollow-tab{
+    top: 42rem;
+    left: -15.6rem;
+    width: 24.5rem;
+  }
+  .options{
+    width: 59rem;
+  }
+  .details{
+  
+    font-Size:1.5rem; 
+  }
+}
+
+@media (max-width: 768px) {
+  .item,
+  .item:after{
+    width: 7rem;
+    height: 2.2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  #but3{
+    height: 4.8rem;
+    width: 4.8rem;
+  }
+  .page-container{
+    height: 10rem;
+   }
+   .centered-content{
+    margin-left:0.2rem;
+  
+  }
+  .selected-image{
+    height: 33rem;
+    width: 33rem;
+    margin-left: -1rem;
+  }
+  .thumbnail-container{
+    height: 33rem;
+  }
+
+  .tabsContainer{
+    width: 43rem;
+    overflow: auto;
+
+  }
+  .hollow-tab{
+    top: 42rem;
+    left: -14.8rem;
+    width: 10rem;
+  }
+  .options{
+    width: 43.8rem;
+  }
+  .details{
+  
+    font-Size:1.4rem; 
+  }
+  .spec{
+    margin-left: -35rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .item,
+  .item:after{
+    width: 5.6rem;
+    height: 2rem;
+    font-size: 0.6rem;
+    font-weight: bold;
+  }
+  #but3{
+    height: 3.8rem;
+    width: 3.8rem;
+  }
+  .page-container{
+    height: 10rem;
+   }
+   .centered-content{
+    margin-left:-0.5rem;
+  
+  }
+  .selected-image{
+    height: 26rem;
+    width: 26rem;
+    margin-left: -2rem;
+  }
+  .thumbnail-container{
+    height: 30rem;
+  }
+
+  .centered-tabs{
+    font-size: 0.9rem;
+  }
+  .tabsContainer{
+    width: 34rem;
+    overflow: auto;
+
+  }
+  .hollow-tab{
+    top: 42rem;
+    left: -15.8rem;
+    width: 10rem;
+  }
+  .options{
+    width: 35rem;
+  }
+  .details{
+  
+    font-Size:1.1rem; 
+  }
+  .spec{
+    margin-left: -42rem;
+  }
+  
+}
+
+@media (max-width: 475px) {
+  .item,
+  .item:after{
+    width: 5.6rem;
+    height: 2rem;
+    font-size: 0.6rem;
+    font-weight: bold;
+  }
+  #but3{
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+  .page-container{
+    height: 10rem;
+   }
+   .centered-content{
+    margin-left:-2rem;
+  
+  }
+  .selected-image{
+    height: 15.5rem;
+    width: 15.5rem;
+    margin-left: -3.5rem;
+    margin-top: -0.2rem;
+  }
+  .thumbnail-container{
+    height: 16.5rem;
+  }
+  .thumbnail-image{
+    height: 4rem;
+    width: 4rem;
+    border: #000 solid thin;
+  }
+
+  .centered-tabs{
+    width: 6.5rem;
+    height: 118px;
+    font-size: 0.8rem;
+    
+  }
+  .centered-tabs::before{
+    height: 58%;
+  }
+  .centered-tabs{
+    font-size: 0.6rem;
+  }
+  .tabsContainer{
+    width: 22rem;
+    overflow: auto;
+
+  }
+  .hollow-tab{
+    top: 42rem;
+    left: -15.8rem;
+    width: 10rem;
+  }
+  .options{
+    width: 23rem;
+    margin-top: -2rem;
+  }
+  .details{
+  
+    font-Size:0.8rem; 
+  }
+  .spec{
+    margin-left: -56rem;
+    
+  }
+} */

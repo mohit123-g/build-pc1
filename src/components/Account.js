@@ -16,6 +16,7 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
 import supabase from "../SupabaseClient";
 import { daDK } from "rsuite/esm/locales";
+import profile from './avatar.png'
 
 import { Resend } from "resend";
 import { Add, Alarm } from "@mui/icons-material";
@@ -24,8 +25,9 @@ const Account = (props) => {
   const [i, setI] = useState(useParams()["id"]);
   const [PhoneNo, setPhoneNo] = useState(props.userprofile[0].phone);
   const [Address, setAddress] = useState(props.userprofile[0].address);
+  const [Name, setName] = useState(props.userprofile[0].uname);
 
-  const UpdateUserInfo = async (phon, address) => {
+  const UpdateUserInfo = async (name ,phon, address) => {
     let flag = 0;
 
     //  for(let k=0;k<props.cartdata.length;k++){
@@ -47,7 +49,7 @@ const Account = (props) => {
       // Update the Supabase table with the modified JSON data
       const { error } = await supabase
         .from("Users1") // Replace with your actual table name
-        .update({ phone: phon, address: address })
+        .update({ uname: name, phone: phon, address: address })
 
         .eq("id", localStorage.getItem("userid")); // Replace 'id' with your unique identifier column and 'rowId' with the actual ID
       // .insert(
@@ -62,7 +64,8 @@ const Account = (props) => {
       }
 
       // console.log("New object added to JSON:", newobjectex);
-      // window.location.reload();
+      window.location.reload();
+
       alert("User Information Update Successfully")
       // Perform any actions after successful insertion
     } catch (error) {
@@ -78,12 +81,12 @@ const Account = (props) => {
 
       {props.setcheck(1)}
       {/* {ChoosPC()} */}
-      <div>
-        {" "}
+      <div >
+        
         <br />
-        <h1 style={{ color: "white" }}>Account</h1>
+        <h1 >Account</h1>
         <img
-  src={props.userprofile[0].img}
+  src={props.userprofile[0].img !== null ? props.userprofile[0].img : profile}
   alt="Icon"
   style={{
     width: "300px",
@@ -96,7 +99,7 @@ const Account = (props) => {
   }}
 />
 
-      <pre
+      {/* <pre
   style={{
     color: "white",
     fontSize: 28,
@@ -104,21 +107,25 @@ const Account = (props) => {
     fontWeight: "bold",
     fontFamily:"serif"
   }}
->
-  <lable>User Name:</lable>{"     "}
+> */}
+<div className="form-container"><form>
+  <lable>User Name:</lable><br/>
   <input
     type="text"
+    onChange={(e) => {
+      setName(e.target.value);
+    }}
     style={{
       fontSize: 24,
       marginTop: "20px",
       width: "500px",
       color: "black",
     }}
-    value={props.userprofile[0].uname}
-    readOnly  // Use readOnly instead of disabled to allow selection but not modification
+    value={Name}
+  readOnly={props.userprofile[0].uname !== null ? true : false}
   />
-  <br />
-  <lable>User Email:</lable>{"    "}
+  <br/>
+  <lable>User Email:</lable><br/>
   <input
     type="text"
     style={{
@@ -129,9 +136,9 @@ const Account = (props) => {
     }}
     value={props.userprofile[0].email}
     readOnly  // Use readOnly instead of disabled to allow selection but not modification
-  />
-  <br />
-  <lable>User Address:</lable>{"  "}
+  /><br/>
+  
+  <lable>User Address:</lable><br/>
   <textarea
     type="text"
     onChange={(e) => {
@@ -143,12 +150,13 @@ const Account = (props) => {
       width: "500px",
       color: "black",
       height: "100px",
+      fontFamily:'initial'
     }}
     value={Address}
-  />
-  <br />
-  <lable>User Phone No:</lable>{" "}
-<input
+  /><br/>
+  
+  <lable>User Phone No:</lable><br/>
+<input 
   type="number"
   onChange={(e) => {
     const inputValue = e.target.value;
@@ -158,40 +166,43 @@ const Account = (props) => {
   }}
   style={{
     fontSize: 24,
+    fontFamily:'initial',
     marginTop: "20px",
     width: "500px",
     color: "black",
   }}
   value={PhoneNo}
 />
-
+</form></div>
 
   <br />
   <br />
-  <button
-    style={{ height: "50px", width: "200px",fontSize:28 }}
-    onClick={() => {
-      if (PhoneNo === "" || Address === "") {
-        alert("Address or Phone No can't be empty");
-      } else {
-        if (Address.length < 30 && Address !== "") {
-          alert("Address can't be less than 30 characters");
-        } else if (PhoneNo.length !== 10 && PhoneNo!=="" ) {
-          alert("Phone No must be 10 digits");
-        } 
-        // else if(Address.length<30 && PhoneNo.length<10){
-        //   alert("Address can't be less than 30 characters and Phone No must be 10 digits");
-        // }
-        else {
-          UpdateUserInfo(PhoneNo, Address);
-        }
-      }}}
-  >
-    Save Changes
-  </button>
-</pre>
+  <input
+  type="submit"
+  value="Save Changes"
+  onClick={() => {
+    if (PhoneNo === "" || Address === "" || Name==="" ) {
+      alert("Address or Phone No can't be empty");
+    } else {
+      if (Address.length < 30 && Address !== "") {
+        alert("Address can't be less than 30 characters");
+      } else if (PhoneNo.length !== 10 && PhoneNo !== "") {
+        alert("Phone No must be 10 digits");
+      }else if (Name.length < 8 && Name !== "") {
+        alert("User Name Must be greater then 8 characters");
+      }  
+      else {
+        UpdateUserInfo(Name,PhoneNo, Address);
+      }
+    }
+  }}
+  // style={{ height: "50px", width: "200px", fontSize: 28 }}
+/>
+
+{/* </pre> */}
 
       </div>
+      <div style={{paddingBottom:'30vh'}}></div>
       {/* re_g5ofAofJ_7Gj5FbqmEZqDtGBHMggzKm3B */}
       {/* <button onClick={()=>GET()}>sent</button> */}
     </div>
